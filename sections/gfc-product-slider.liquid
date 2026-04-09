@@ -392,32 +392,60 @@
       min-height: auto;
       align-items: flex-start;
     }
+
+    /* Heading stays above everything */
+    #gfc-ps-{{ section.id }} .gfc-ps__section-heading {
+      position: relative;
+      z-index: 10;
+      font-size: 3.5rem;
+    }
+
+    /* Inner becomes a column: product-img zone → slider */
     #gfc-ps-{{ section.id }} .gfc-ps__inner {
       height: auto;
+      display: flex;
+      flex-direction: column;
     }
+
+    /* bg-shape is purely decorative background behind the image zone */
     #gfc-ps-{{ section.id }} .gfc-ps__bg-shape {
-      position: relative;
-      top: auto;
-      left: auto;
-      width: 100%;
-      height: 220px;
-      border-radius: 20px;
-    }
-    #gfc-ps-{{ section.id }} .gfc-ps__product-img {
       position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      top: 140px;
+      top: 0;
+      left: 0;
+      width: 100%;
       height: 260px;
-      width: 240px;
-      max-height: none;
+      border-radius: 20px;
+      z-index: 0;
     }
+
+    /* Product image becomes a REAL flex item — truly stacked above the card */
+    #gfc-ps-{{ section.id }} .gfc-ps__product-img {
+      position: relative;
+      left: auto;
+      top: auto;
+      transform: none;
+      width: 100%;
+      height: 260px;
+      max-height: none;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Image items fill the container; slide in horizontally */
     #gfc-ps-{{ section.id }} .gfc-ps__product-img-item {
-      transform: translateY(-50%) translateX(-60px);
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      transform: translateX(-50px);
     }
     #gfc-ps-{{ section.id }} .gfc-ps__product-img-item.is-active {
-      transform: translateY(-50%) translateX(0);
+      transform: translateX(0);
     }
+
+    /* Slider sits as the second flex item — no overlap with image */
     #gfc-ps-{{ section.id }} .gfc-ps__slider {
       position: relative;
       top: auto;
@@ -425,50 +453,71 @@
       transform: none;
       width: 100%;
       height: auto;
-      margin-top: -100px;
-      border-radius: 20px;
+      margin-top: 16px;
+      border-radius: 20px 20px 20px 20px;
     }
-    #gfc-ps-{{ section.id }} .gfc-ps__card { border-radius: 20px; align-items: flex-start; }
+
+    /* Swiper internals need height: auto on mobile */
+    #gfc-ps-{{ section.id }} .gfc-ps__slider .swiper-wrapper { height: auto; }
+    #gfc-ps-{{ section.id }} .gfc-ps__slide { height: auto; }
+
+    /* Card keeps all rounded corners, expands to content */
+    #gfc-ps-{{ section.id }} .gfc-ps__card {
+      height: auto;
+      min-height: 300px;
+      border-radius: 20px;
+      align-items: flex-start;
+    }
+
+    /* Normal content padding — no top-padding hack needed */
     #gfc-ps-{{ section.id }} .gfc-ps__content {
-      padding: 270px 40px 70px;
+      padding: 32px 36px 50px;
       text-align: center;
     }
+
     #gfc-ps-{{ section.id }} .gfc-ps__ctr { justify-content: center; }
     #gfc-ps-{{ section.id }} .gfc-ps__labels-group { justify-content: center; }
     #gfc-ps-{{ section.id }} .gfc-ps__bottom { text-align: center; }
+
+    /* Nav buttons at midpoint of the image zone */
     #gfc-ps-{{ section.id }} .gfc-ps__prev {
       left: 0;
-      top: 280px;
+      top: 130px;
       transform: translate(10%, -50%);
     }
     #gfc-ps-{{ section.id }} .gfc-ps__next {
       right: 0;
-      top: 280px;
+      top: 130px;
       transform: translate(-10%, -50%);
     }
   }
 
   @media screen and (max-width: 767px) {
+    #gfc-ps-{{ section.id }} .gfc-ps__section-heading { font-size: 2.5rem; }
     #gfc-ps-{{ section.id }} .gfc-ps__title { font-size: 24px; }
     #gfc-ps-{{ section.id }} .gfc-ps__price { font-size: 26px; }
-    #gfc-ps-{{ section.id }} .gfc-ps__content { padding: 260px 24px 60px; }
+    #gfc-ps-{{ section.id }} .gfc-ps__content { padding: 28px 20px 44px; }
     #gfc-ps-{{ section.id }} .gfc-ps__ctr { flex-wrap: wrap; }
     #gfc-ps-{{ section.id }} .gfc-ps__hr-v { display: none; }
     #gfc-ps-{{ section.id }} .gfc-ps__rating { width: 100%; margin-top: 14px; }
-    #gfc-ps-{{ section.id }} .gfc-ps__product-img { width: 180px; }
+    #gfc-ps-{{ section.id }} .gfc-ps__product-img { height: 220px; }
+    #gfc-ps-{{ section.id }} .gfc-ps__bg-shape { height: 220px; }
+    #gfc-ps-{{ section.id }} .gfc-ps__prev { top: 110px; }
+    #gfc-ps-{{ section.id }} .gfc-ps__next { top: 110px; }
   }
 
   @media screen and (max-width: 576px) {
     #gfc-ps-{{ section.id }} { padding: 30px 14px 50px; }
+    #gfc-ps-{{ section.id }} .gfc-ps__section-heading { font-size: 5rem; letter-spacing: 3px; }
     #gfc-ps-{{ section.id }} .gfc-ps__title { font-size: 20px; }
     #gfc-ps-{{ section.id }} .gfc-ps__price { font-size: 22px; }
-    #gfc-ps-{{ section.id }} .gfc-ps__content { padding: 230px 18px 50px; }
-    #gfc-ps-{{ section.id }} .gfc-ps__product-img { width: 200px; top: 100px; height: 220px; }
-    #gfc-ps-{{ section.id }} .gfc-ps__bg-shape { height: 190px; }
+    #gfc-ps-{{ section.id }} .gfc-ps__content { padding: 24px 16px 40px; }
+    #gfc-ps-{{ section.id }} .gfc-ps__product-img { height: 200px; }
+    #gfc-ps-{{ section.id }} .gfc-ps__bg-shape { height: 200px; }
     #gfc-ps-{{ section.id }} .gfc-ps__nav-btn { width: 44px; height: 44px; }
     #gfc-ps-{{ section.id }} .gfc-ps__cart-btn { width: 100%; max-width: 260px; text-align: center; }
-    #gfc-ps-{{ section.id }} .gfc-ps__prev { top: 250px; transform: translate(15%, -50%); }
-    #gfc-ps-{{ section.id }} .gfc-ps__next { top: 250px; transform: translate(-15%, -50%); }
+    #gfc-ps-{{ section.id }} .gfc-ps__prev { top: 100px; transform: translate(15%, -50%); }
+    #gfc-ps-{{ section.id }} .gfc-ps__next { top: 100px; transform: translate(-15%, -50%); }
   }
 </style>
 
