@@ -50,7 +50,7 @@
     {%- for block in section.blocks -%}
       {%- case block.type -%}
         {%- when 'product_card' -%}
-          <div class="relative p-4 rounded-lg group hover:border-brand-burgundy transition-all duration-300 flex flex-col items-center text-center gfc__product-card" {{ block.shopify_attributes }}>
+          <div class="relative p-4 rounded-lg group transition-all duration-300 flex flex-col items-center text-center gfc__product-card" style="--gfc-card-glow: {{ block.settings.glow_color }};" {{ block.shopify_attributes }}>
 
             <!-- Image -->
             <div class="relative mb-6 px-[10%] gfc__product-image-wrapper w-full">
@@ -213,6 +213,12 @@
           "id": "custom_desc",
           "label": "Custom Description (if no product)",
           "default": "Dark roast with notes of smoked cocoa, toasted oak, and morning clarity."
+        },
+        {
+          "type": "color",
+          "id": "glow_color",
+          "label": "Hover Border & Glow Color",
+          "default": "#ffffff"
         },
         {
           "type": "text",

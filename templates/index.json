@@ -138,6 +138,7 @@
             "custom_title": "MORNING MASS",
             "custom_price": "$19",
             "custom_desc": "Dark roast with notes of smoked cocoa, toasted oak, and morning clarity.",
+            "glow_color": "#1e651e",
             "badge": "",
             "badge_style": "primary"
           }
@@ -149,6 +150,7 @@
             "custom_title": "ALMOST HOLY",
             "custom_price": "$21",
             "custom_desc": "Medium roast featuring a balanced profile of honey-crisp apple and walnut.",
+            "glow_color": "#67468d",
             "badge": "",
             "badge_style": "primary"
           }
@@ -160,6 +162,7 @@
             "custom_title": "SOUL AWAKENING",
             "custom_price": "$24",
             "custom_desc": "Bright light roast with vibrant floral notes and a smooth citrus finish.",
+            "glow_color": "#7a7023",
             "badge": "",
             "badge_style": "secondary"
           }
@@ -171,6 +174,7 @@
             "custom_title": "MIDNIGHT VIGIL",
             "custom_price": "$22",
             "custom_desc": "The ultimate espresso blend. Thick crema, heavy body, and soulful depth.",
+            "glow_color": "#85185d",
             "badge": "",
             "badge_style": "danger"
           }
@@ -187,6 +191,78 @@
         "heading_accent": "COLLECTION",
         "subheading": "Our small-batch roasts are carefully curated for depth, character, and spirit.",
         "collection_link": "/collections/all"
+      }
+    },
+    "gfc_product_slider_bg_img_CYeyXL": {
+      "type": "gfc-product-slider-bg-img",
+      "blocks": {
+        "slide_3pfULF": {
+          "type": "slide",
+          "settings": {
+            "product": "the-first-called-andrew-medium-roast-brazil-mexico",
+            "slide_bg_color": "#ffffff",
+            "text_color": "#000000",
+            "cart_btn_color": "#000000",
+            "badge": "NEW",
+            "custom_title": "Ethiopia Yirgacheffe",
+            "show_rating": true,
+            "rating_value": 95,
+            "rating_color": "#000000",
+            "rating_label": "QUALITY SCORE"
+          }
+        },
+        "slide_mdmVhi": {
+          "type": "slide",
+          "settings": {
+            "product": "the-foundation-peter-dark-roast-brazil",
+            "slide_bg_color": "#ffffff",
+            "text_color": "#000000",
+            "cart_btn_color": "#000000",
+            "badge": "",
+            "custom_title": "Colombian Supremo",
+            "show_rating": true,
+            "rating_value": 85,
+            "rating_color": "#000000",
+            "rating_label": "QUALITY SCORE"
+          }
+        },
+        "slide_fVQdPa": {
+          "type": "slide",
+          "settings": {
+            "product": "the-traveler-philip-light-roast-blend-ethiopia-mexico-brazil",
+            "slide_bg_color": "#ffffff",
+            "text_color": "#000000",
+            "cart_btn_color": "#000000",
+            "badge": "BESTSELLER",
+            "custom_title": "Sumatra Dark Roast",
+            "show_rating": true,
+            "rating_value": 90,
+            "rating_color": "#000000",
+            "rating_label": "QUALITY SCORE"
+          }
+        }
+      },
+      "block_order": [
+        "slide_3pfULF",
+        "slide_mdmVhi",
+        "slide_fVQdPa"
+      ],
+      "name": "GFC Product Slider – BG Image",
+      "settings": {
+        "heading_text": "",
+        "heading_color": "#ffffff",
+        "section_heading": "Featured Products",
+        "section_bg_image": "shopify://shop_images/unnamed_25.png",
+        "overlay_color": "rgba(10,6,4,0.65)",
+        "bg_position": "center center",
+        "fallback_bg_color": "#1a1614",
+        "bg_shape_color": "#857f75",
+        "accent_color": "#121212",
+        "autoplay": true,
+        "autoplay_delay": 5000,
+        "loop": true,
+        "show_add_to_cart": true,
+        "cart_button_text": "ADD TO CART"
       }
     },
     "gfc_subscription": {
@@ -426,6 +502,7 @@
     "slideshow_KpFhy7",
     "gfc_marquee",
     "gfc_featured_products",
+    "gfc_product_slider_bg_img_CYeyXL",
     "gfc_subscription",
     "gfc_product_slider_4GfBQw",
     "gfc_our_story",
