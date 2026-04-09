@@ -1,0 +1,150 @@
+@font-face {
+  font-family: 'HVD Poster';
+  src: url('HVDPoster-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.gfc-story {
+  padding: 128px 0;
+  background-color: #2A2D2E;
+  color: #F0EDED;
+}
+
+.gfc-story__inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 48px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 80px;
+  align-items: center;
+}
+@media (min-width: 768px) {
+  .gfc-story__inner {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Image column */
+.gfc-story__image-col {}
+
+.gfc-story__image-wrap {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+/* Shadow block behind image */
+.gfc-story__image-wrap::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: #3D0B0B;
+  border-radius: 12px;
+  transform: translate(16px, 16px);
+  z-index: 0;
+  transition: transform 0.5s ease;
+}
+.gfc-story__image-wrap:hover::before {
+  transform: translate(8px, 8px);
+}
+
+.gfc-story__image {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 2px solid #B0B7BC;
+  display: block;
+}
+.gfc-story__image.gfc-placeholder-svg {
+  aspect-ratio: 4 / 5;
+  border-radius: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.gfc-story__image-deco {
+  position: absolute;
+  top: -40px;
+  left: -40px;
+  width: 160px;
+  height: 160px;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: 0;
+}
+.gfc-story__image-deco .material-symbols-outlined {
+  font-size: 160px;
+  color: #57534e;
+}
+
+/* Text column */
+.gfc-story__text-col {}
+
+.gfc-story__label {
+  display: block;
+  font-family: 'HVD Poster', 'Alfa Slab One', serif;
+  font-size: 1.125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #B91C1C;
+  margin-bottom: 16px;
+}
+
+.gfc-story__heading {
+  font-family: 'HVD Poster', 'Alfa Slab One', serif;
+  font-size: clamp(3rem, 8vw, 5.5rem);
+  text-transform: uppercase;
+  line-height: 1;
+  margin: 0 0 32px;
+  color: #F0EDED;
+}
+.gfc-story__heading--dim {
+  color: #78716c;
+}
+
+/* Body paragraphs */
+.gfc-story__body {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.gfc-story__p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.125rem;
+  color: #D4D8DB;
+  line-height: 1.75;
+  margin: 0;
+}
+.gfc-story__p--bold {
+  font-weight: 700;
+  color: #F0EDED;
+}
+
+/* Pledge row */
+.gfc-story__pledge {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.gfc-story__pledge-line {
+  height: 4px;
+  width: 96px;
+  background-color: #7f1d1d;
+  flex-shrink: 0;
+}
+
+.gfc-story__pledge-text {
+  font-family: 'HVD Poster', 'Alfa Slab One', serif;
+  font-size: 1.375rem;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  color: #F0EDED;
+}

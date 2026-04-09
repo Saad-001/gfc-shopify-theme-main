@@ -1,0 +1,114 @@
+<style>
+  .gfc-hero-wood {
+    background:
+      linear-gradient(rgba(26, 36, 38, 0.8), rgba(26, 36, 38, 0.8)),
+      url('https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=2070&auto=format&fit=crop') center / cover no-repeat;
+  }
+  .gfc-grain {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.05;
+  }
+  .gfc-torn-edge {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 48' preserveAspectRatio='none'%3E%3Cpath d='M0,48 L0,20 C50,30 100,10 150,22 C200,34 250,8 300,18 C350,28 400,6 450,16 C500,26 550,4 600,14 C650,24 700,2 750,12 C800,22 850,0 900,10 C950,20 1000,2 1050,12 C1100,22 1150,5 1200,15 L1200,48 Z'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 48' preserveAspectRatio='none'%3E%3Cpath d='M0,48 L0,20 C50,30 100,10 150,22 C200,34 250,8 300,18 C350,28 400,6 450,16 C500,26 550,4 600,14 C650,24 700,2 750,12 C800,22 850,0 900,10 C950,20 1000,2 1050,12 C1100,22 1150,5 1200,15 L1200,48 Z'/%3E%3C/svg%3E");
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+  }
+</style>
+
+<section class="relative min-h-screen flex flex-col items-center justify-center pt-24 overflow-hidden gfc-hero-wood" id="gfc-hero-{{ section.id }}">
+  <div class="gfc-grain absolute inset-0 pointer-events-none"></div>
+
+  <!-- Floating icons -->
+  <div class="absolute top-1/4 left-10 opacity-40 blur-sm rotate-12">
+    <span class="material-symbols-outlined text-6xl text-stone-600">coffee</span>
+  </div>
+  <div class="absolute bottom-1/4 right-20 opacity-30 blur-md -rotate-45">
+    <span class="material-symbols-outlined text-8xl text-stone-500">cloud</span>
+  </div>
+  <div class="absolute top-1/3 right-10 opacity-40 blur-sm -rotate-12">
+    <span class="material-symbols-outlined text-4xl text-stone-600">coffee</span>
+  </div>
+
+  <div class="relative z-10 text-center px-4 max-w-4xl">
+    {%- if section.settings.logo != blank -%}
+      <img
+        class="w-64 h-64 md:w-80 md:h-80 mx-auto mb-8 object-contain drop-shadow-[0_0_50px_rgba(61,11,11,0.5)]"
+        src="{{ section.settings.logo | image_url: width: 400 }}"
+        alt="{{ section.settings.logo.alt | default: shop.name }}"
+        width="320"
+        height="320"
+        loading="eager"
+      >
+    {%- else -%}
+      <div class="w-64 h-64 md:w-80 md:h-80 mx-auto mb-8 rounded-full bg-stone-800 flex items-center justify-center">
+        <span class="material-symbols-outlined text-8xl text-stone-500">coffee</span>
+      </div>
+    {%- endif -%}
+
+    <h1 class="text-5xl md:text-8xl font-headline mb-6 tracking-tighter leading-none text-brand-offwhite drop-shadow-lg uppercase">
+      {{ section.settings.headline_prefix }}
+      <span class="text-red-700">{{ section.settings.headline_accent }}</span>
+    </h1>
+
+    <p class="text-xl md:text-2xl font-body text-brand-silver mb-10 max-w-2xl mx-auto italic">
+      {{ section.settings.subtext }}
+    </p>
+
+    <a href="{{ section.settings.cta_link }}" class="inline-block bg-brand-burgundy hover:bg-brand-oxblood text-brand-offwhite font-headline text-2xl uppercase px-12 py-6 rounded-lg transition-all duration-300 hover:scale-105 active:scale-95 border-2 border-brand-aluminum shadow-2xl no-underline">
+      {{ section.settings.cta_label }}
+    </a>
+  </div>
+
+  <!-- Torn edge divider -->
+  <div class="gfc-torn-edge absolute bottom-0 w-full h-12 bg-brand-graphite z-10"></div>
+</section>
+
+{% schema %}
+{
+  "name": "GFC Hero",
+  "tag": "div",
+  "class": "gfc-hero-wrapper",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Hero Logo Image"
+    },
+    {
+      "type": "text",
+      "id": "headline_prefix",
+      "label": "Headline Prefix",
+      "default": "EXPERIENCE THE"
+    },
+    {
+      "type": "text",
+      "id": "headline_accent",
+      "label": "Headline Accent Word",
+      "default": "DIVINE BREW"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Subtext / Tagline",
+      "default": "\"Real Coffee for Real Souls. Hand-roasted for the believers, the dreamers, and the nocturnal spirits.\""
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA Button Label",
+      "default": "SHOP NOW"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "GFC Hero"
+    }
+  ]
+}
+{% endschema %}

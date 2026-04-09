@@ -1,0 +1,47 @@
+@font-face {
+  font-family: 'HVD Poster';
+  src: url('HVDPoster-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.gfc-marquee {
+  background-color: #1C1E1F;
+  padding: 24px 0;
+  overflow: hidden;
+  border-top: 1px solid #292524;
+  border-bottom: 1px solid #292524;
+}
+
+.gfc-marquee__track {
+  display: flex;
+  white-space: nowrap;
+  animation: gfc-marquee-scroll 30s linear infinite;
+  width: max-content;
+}
+
+.gfc-marquee__set {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  padding: 0 24px;
+}
+
+.gfc-marquee__text {
+  font-family: 'HVD Poster', 'Alfa Slab One', serif;
+  font-size: 1.875rem;
+  text-transform: uppercase;
+  color: rgba(176, 183, 188, 0.4);
+  letter-spacing: 0.05em;
+}
+
+.gfc-marquee__star {
+  color: #7f1d1d;
+  font-size: 20px;
+}
+
+@keyframes gfc-marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}

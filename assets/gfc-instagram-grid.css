@@ -1,0 +1,130 @@
+@font-face {
+  font-family: 'HVD Poster';
+  src: url('HVDPoster-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.gfc-ig {
+  padding: 96px 0;
+  background-color: #1C1E1F;
+  border-top: 1px solid #292524;
+  border-bottom: 1px solid #292524;
+  color: #F0EDED;
+}
+
+.gfc-ig__inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+/* Header */
+.gfc-ig__header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.gfc-ig__heading {
+  font-family: 'HVD Poster', 'Alfa Slab One', serif;
+  font-size: clamp(2rem, 5vw, 3.75rem);
+  text-transform: uppercase;
+  margin: 0 0 16px;
+  color: #F0EDED;
+}
+
+.gfc-ig__subheading {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.125rem;
+  color: #D4D8DB;
+  margin: 0;
+}
+
+/* Grid */
+.gfc-ig__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+@media (min-width: 768px) {
+  .gfc-ig__grid {
+    grid-template-columns: repeat(var(--cols, 4), 1fr);
+  }
+}
+
+/* Item */
+.gfc-ig__item {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.gfc-ig__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.7s ease;
+}
+.gfc-ig__item:hover .gfc-ig__img {
+  transform: scale(1.1);
+}
+.gfc-ig__img.gfc-placeholder-svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Hover overlay */
+.gfc-ig__overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(61, 11, 11, 0.45);
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s;
+}
+.gfc-ig__item:hover .gfc-ig__overlay {
+  opacity: 1;
+}
+.gfc-ig__overlay .material-symbols-outlined {
+  font-size: 40px;
+  color: #F0EDED;
+}
+
+/* Full-cover link */
+.gfc-ig__link {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
+/* Bottom CTA */
+.gfc-ig__cta-wrap {
+  text-align: center;
+  margin-top: 48px;
+}
+.gfc-ig__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #D4D8DB;
+  text-decoration: none;
+  border: 1px solid #44403c;
+  padding: 12px 28px;
+  border-radius: 9999px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.gfc-ig__cta:hover {
+  color: #F0EDED;
+  border-color: #B0B7BC;
+}
+.gfc-ig__cta .material-symbols-outlined {
+  font-size: 18px;
+}

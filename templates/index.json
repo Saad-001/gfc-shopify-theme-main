@@ -1,0 +1,435 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "gfc_header": {
+      "type": "gfc-header",
+      "blocks": {
+        "left_shop": {
+          "type": "left_link",
+          "settings": {
+            "label": "Shop",
+            "link": "/collections/all"
+          }
+        },
+        "left_story": {
+          "type": "left_link",
+          "settings": {
+            "label": "Our Story",
+            "link": "/pages/our-story"
+          }
+        },
+        "left_wholesale": {
+          "type": "left_link",
+          "settings": {
+            "label": "Wholesale",
+            "link": "/pages/wholesale"
+          }
+        },
+        "right_contact": {
+          "type": "right_link",
+          "settings": {
+            "label": "Contact",
+            "link": "/pages/contact"
+          }
+        },
+        "right_signin": {
+          "type": "right_link",
+          "settings": {
+            "label": "Sign In",
+            "link": "/account/login"
+          }
+        }
+      },
+      "block_order": [
+        "left_shop",
+        "left_story",
+        "left_wholesale",
+        "right_contact",
+        "right_signin"
+      ],
+      "disabled": true,
+      "settings": {
+        "bg_color": "#857f75",
+        "text_color": "#0a0a0a",
+        "border_color": "#2a2d2e",
+        "border_width": 3,
+        "font_size": 20,
+        "header_height": 64,
+        "logo_width": 120,
+        "show_brand_name": false,
+        "brand_name": "GODS FAVORITE",
+        "show_cart": true,
+        "cart_style": "text"
+      }
+    },
+    "gfc_hero": {
+      "type": "gfc-hero",
+      "disabled": true,
+      "settings": {
+        "headline_prefix": "EXPERIENCE THE",
+        "headline_accent": "DIVINE BREW",
+        "subtext": "\"Real Coffee for Real Souls. Hand-roasted for the believers, the dreamers, and the nocturnal spirits.\"",
+        "cta_label": "SHOP NOW",
+        "cta_link": "/collections/all"
+      }
+    },
+    "slideshow_KpFhy7": {
+      "type": "slideshow",
+      "blocks": {
+        "slide_LhtFND": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/hero-banner.png",
+            "image_overlay_opacity": 0,
+            "heading": "",
+            "heading_size": "h1",
+            "subheading": "",
+            "button_label": "",
+            "link": "",
+            "button_style_secondary": false,
+            "show_text_box": false,
+            "box_align": "middle-center",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "color_scheme": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_LhtFND"
+      ],
+      "custom_css": [
+        "/* .slideshow {margin-top: 50px;} */"
+      ],
+      "name": "t:sections.slideshow.presets.name",
+      "settings": {
+        "layout": "full_bleed",
+        "slide_height": "large",
+        "slider_visual": "counter",
+        "auto_rotate": false,
+        "change_slides_speed": 5,
+        "image_behavior": "none",
+        "show_text_below": true,
+        "accessibility_info": "Slideshow about our brand"
+      }
+    },
+    "gfc_marquee": {
+      "type": "gfc-marquee",
+      "settings": {
+        "items": "FRESHLY ROASTED,BORN IN 1994,ANALOG SOUL,DIVINE FLAVOR",
+        "speed": 30
+      }
+    },
+    "gfc_featured_products": {
+      "type": "gfc-featured-products",
+      "blocks": {
+        "card_1": {
+          "type": "product_card",
+          "settings": {
+            "product": "the-first-called-andrew-medium-roast-brazil-mexico",
+            "custom_title": "MORNING MASS",
+            "custom_price": "$19",
+            "custom_desc": "Dark roast with notes of smoked cocoa, toasted oak, and morning clarity.",
+            "badge": "BEST SELLER",
+            "badge_style": "primary"
+          }
+        },
+        "card_2": {
+          "type": "product_card",
+          "settings": {
+            "product": "the-foundation-peter-dark-roast-brazil",
+            "custom_title": "ALMOST HOLY",
+            "custom_price": "$21",
+            "custom_desc": "Medium roast featuring a balanced profile of honey-crisp apple and walnut.",
+            "badge": "",
+            "badge_style": "primary"
+          }
+        },
+        "card_3": {
+          "type": "product_card",
+          "settings": {
+            "product": "the-traveler-philip-light-roast-blend-ethiopia-mexico-brazil",
+            "custom_title": "SOUL AWAKENING",
+            "custom_price": "$24",
+            "custom_desc": "Bright light roast with vibrant floral notes and a smooth citrus finish.",
+            "badge": "NEW ARRIVAL",
+            "badge_style": "secondary"
+          }
+        },
+        "card_4": {
+          "type": "product_card",
+          "settings": {
+            "product": "the-first-called-andrew-medium-roast-brazil-mexico",
+            "custom_title": "MIDNIGHT VIGIL",
+            "custom_price": "$22",
+            "custom_desc": "The ultimate espresso blend. Thick crema, heavy body, and soulful depth.",
+            "badge": "LIMITED",
+            "badge_style": "danger"
+          }
+        }
+      },
+      "block_order": [
+        "card_1",
+        "card_2",
+        "card_3",
+        "card_4"
+      ],
+      "settings": {
+        "heading_prefix": "THE DIVINE",
+        "heading_accent": "COLLECTION",
+        "subheading": "Our small-batch roasts are carefully curated for depth, character, and spirit.",
+        "collection_link": "/collections/all"
+      }
+    },
+    "gfc_subscription": {
+      "type": "gfc-subscription",
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "title": "PICK YOUR BLESSING",
+            "description": "Choose your favorite blends and the frequency that suits your soul's rhythm."
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "title": "SET THE TEMPO",
+            "description": "Monthly, bi-weekly, or weekly. We roast it fresh and ship it immediately."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "title": "SAVE & SIP",
+            "description": "Enjoy 15% off every order plus exclusive access to experimental roasts."
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3"
+      ],
+      "settings": {
+        "heading_prefix": "NEVER RUN OUT OF",
+        "heading_accent": "GRACE",
+        "cta_label": "JOIN THE CONGREGATION",
+        "cta_link": "/collections/all",
+        "image": "shopify://shop_images/unnamed_20.png"
+      }
+    },
+    "gfc_product_slider_4GfBQw": {
+      "type": "gfc-product-slider",
+      "blocks": {
+        "slide_FMhhPm": {
+          "type": "slide",
+          "settings": {
+            "product": "the-first-called-andrew-medium-roast-brazil-mexico",
+            "slide_bg_color": "#ffffff",
+            "text_color": "#121212",
+            "cart_btn_color": "#121212",
+            "badge": "NEW",
+            "custom_title": "Ethiopia Yirgacheffe",
+            "show_rating": true,
+            "rating_value": 95,
+            "rating_color": "#121212",
+            "rating_label": "QUALITY SCORE"
+          }
+        },
+        "slide_QdFXKa": {
+          "type": "slide",
+          "settings": {
+            "product": "the-foundation-peter-dark-roast-brazil",
+            "slide_bg_color": "#ffffff",
+            "text_color": "#121212",
+            "cart_btn_color": "#121212",
+            "badge": "BEST SELLER",
+            "custom_title": "Colombian Supremo",
+            "show_rating": true,
+            "rating_value": 85,
+            "rating_color": "#121212",
+            "rating_label": "QUALITY SCORE"
+          }
+        },
+        "slide_EGEiqp": {
+          "type": "slide",
+          "settings": {
+            "product": "the-traveler-philip-light-roast-blend-ethiopia-mexico-brazil",
+            "slide_bg_color": "#ffffff",
+            "text_color": "#121212",
+            "cart_btn_color": "#121212",
+            "badge": "BESTSELLER",
+            "custom_title": "Sumatra Dark Roast",
+            "show_rating": true,
+            "rating_value": 90,
+            "rating_color": "#121212",
+            "rating_label": "QUALITY SCORE"
+          }
+        }
+      },
+      "block_order": [
+        "slide_FMhhPm",
+        "slide_QdFXKa",
+        "slide_EGEiqp"
+      ],
+      "name": "GFC Product Slider",
+      "settings": {
+        "heading_text": "Best Sellers",
+        "heading_color": "#ffffff",
+        "section_heading": "Featured Products",
+        "section_bg_color": "#1a1614",
+        "bg_shape_color": "#ffffff",
+        "accent_color": "#121212",
+        "autoplay": true,
+        "autoplay_delay": 5000,
+        "loop": true,
+        "show_add_to_cart": true,
+        "cart_button_text": "ADD TO CART"
+      }
+    },
+    "gfc_our_story": {
+      "type": "gfc-our-story",
+      "blocks": {
+        "para_1": {
+          "type": "paragraph",
+          "settings": {
+            "text": "It started in a smoke-filled basement with a vintage hi-fi system and a dream of a better cup. No pretense, just the pursuit of the divine bean.",
+            "bold": false
+          }
+        },
+        "para_2": {
+          "type": "paragraph",
+          "settings": {
+            "text": "We don't follow trends. We follow the rhythm. Every batch is roasted to the sounds of jazz, blues, and soul—infusing every bean with the spirit of the classics.",
+            "bold": false
+          }
+        },
+        "para_3": {
+          "type": "paragraph",
+          "settings": {
+            "text": "Real Coffee for Real Souls. That's the only gospel we preach.",
+            "bold": true
+          }
+        }
+      },
+      "block_order": [
+        "para_1",
+        "para_2",
+        "para_3"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/unnamed_21.png",
+        "label": "SINCE 1994",
+        "heading_prefix": "BORN OF",
+        "heading_accent": "SOUL",
+        "pledge_text": "THE FOUNDER'S PLEDGE"
+      }
+    },
+    "gfc_instagram_grid": {
+      "type": "gfc-instagram-grid",
+      "blocks": {
+        "photo_1": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/unnamed_22.png",
+            "link": ""
+          }
+        },
+        "photo_2": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/unnamed_23.png",
+            "link": ""
+          }
+        },
+        "photo_3": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/unnamed_24.png",
+            "link": ""
+          }
+        },
+        "photo_4": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/unnamed_25.png",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "photo_1",
+        "photo_2",
+        "photo_3",
+        "photo_4"
+      ],
+      "settings": {
+        "heading": "THE VIBE CHECK",
+        "subheading": "Tag @GODSFAVORITECOFFEE for a chance to be featured in the temple.",
+        "instagram_handle": "@godsfavoritecoffee",
+        "columns": 4
+      }
+    },
+    "gfc_footer": {
+      "type": "gfc-footer",
+      "blocks": {
+        "col_shop": {
+          "type": "link_column",
+          "settings": {
+            "heading": "SHOP",
+            "links": "All Collections||Whole Bean||Ground Coffee||Subscriptions||Merchandise",
+            "urls": "/collections/all||/collections/whole-bean||/collections/ground-coffee||/collections/subscriptions||/collections/merchandise"
+          }
+        },
+        "col_legacy": {
+          "type": "link_column",
+          "settings": {
+            "heading": "LEGACY",
+            "links": "Our Story||The Roast Process||Wholesale||Sustainability||Contact Us",
+            "urls": "/pages/our-story||/pages/roast-process||/pages/wholesale||/pages/sustainability||/pages/contact"
+          }
+        }
+      },
+      "block_order": [
+        "col_shop",
+        "col_legacy"
+      ],
+      "settings": {
+        "brand_name": "GODS FAVORITE",
+        "tagline": "Real Coffee for Real Souls. Est. 1994. Roasting divine beans in our temple of soul.",
+        "social_facebook": "",
+        "social_youtube": "",
+        "social_instagram": "",
+        "newsletter_heading": "THE CONGREGATION",
+        "newsletter_desc": "Join the mailing list for soulful updates and divine deals.",
+        "newsletter_placeholder": "YOUR EMAIL ADDRESS",
+        "newsletter_success": "Thank you for joining the congregation!",
+        "copyright": "© 2024 GODS FAVORITE COFFEE CO. REAL COFFEE FOR REAL SOULS.",
+        "privacy_link": "",
+        "terms_link": "",
+        "shipping_link": ""
+      }
+    }
+  },
+  "order": [
+    "gfc_header",
+    "gfc_hero",
+    "slideshow_KpFhy7",
+    "gfc_marquee",
+    "gfc_featured_products",
+    "gfc_subscription",
+    "gfc_product_slider_4GfBQw",
+    "gfc_our_story",
+    "gfc_instagram_grid",
+    "gfc_footer"
+  ]
+}

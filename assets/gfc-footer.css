@@ -1,0 +1,215 @@
+@font-face {
+  font-family: 'HVD Poster';
+  src: url('HVDPoster-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ── Footer shell ── */
+.gfc-footer {
+  background-color: #2A2D2E;
+  border-top: 8px solid #1c1917;
+  color: #F0EDED;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* ── Top section ── */
+.gfc-footer__top {
+  padding: 96px 0 80px;
+}
+
+.gfc-footer__inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 64px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+}
+@media (min-width: 768px) {
+  .gfc-footer__inner {
+    grid-template-columns: 1.4fr 1fr 1fr 1.4fr;
+    gap: 48px;
+  }
+}
+
+/* ── Brand col ── */
+.gfc-footer__logo {
+  font-family: 'HVD Poster', 'Alfa Slab One', serif;
+  font-size: 2rem;
+  text-transform: uppercase;
+  color: #B91C1C;
+  margin-bottom: 24px;
+  line-height: 1;
+}
+
+.gfc-footer__tagline {
+  font-size: 0.9375rem;
+  color: #737373;
+  line-height: 1.65;
+  margin: 0 0 32px;
+}
+
+.gfc-footer__socials {
+  display: flex;
+  gap: 16px;
+}
+
+.gfc-footer__social-link {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #44403c;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #F0EDED;
+  text-decoration: none;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+.gfc-footer__social-link:hover {
+  background-color: #3D0B0B;
+  border-color: #3D0B0B;
+}
+.gfc-footer__social-link .material-symbols-outlined {
+  font-size: 18px;
+}
+
+/* ── Link columns ── */
+.gfc-footer__col {}
+
+.gfc-footer__col-heading {
+  font-family: 'HVD Poster', 'Alfa Slab One', serif;
+  font-size: 1.0625rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #f5f5f5;
+  margin: 0 0 24px;
+}
+
+.gfc-footer__links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.gfc-footer__link {
+  font-size: 0.9375rem;
+  color: #737373;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.gfc-footer__link:hover {
+  color: #e5e5e5;
+}
+
+/* ── Newsletter col ── */
+.gfc-footer__newsletter {}
+
+.gfc-footer__newsletter-desc {
+  font-size: 0.875rem;
+  color: #737373;
+  margin: 0 0 24px;
+  line-height: 1.6;
+}
+
+.gfc-footer__newsletter-field {
+  position: relative;
+}
+
+.gfc-footer__newsletter-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid #44403c;
+  padding: 12px 40px 12px 0;
+  color: #F0EDED;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+.gfc-footer__newsletter-input::placeholder {
+  color: #737373;
+  letter-spacing: 0.05em;
+}
+.gfc-footer__newsletter-input:focus {
+  border-bottom-color: #3D0B0B;
+}
+
+.gfc-footer__newsletter-btn {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #7f1d1d;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s;
+}
+.gfc-footer__newsletter-btn:hover {
+  color: #B91C1C;
+}
+.gfc-footer__newsletter-btn .material-symbols-outlined {
+  font-size: 20px;
+}
+
+.gfc-footer__newsletter-success {
+  margin: 12px 0 0;
+  font-size: 0.8125rem;
+  color: #86efac;
+}
+
+/* ── Bottom bar ── */
+.gfc-footer__bottom {
+  border-top: 1px solid #44403c;
+  padding: 40px 0 48px;
+}
+
+.gfc-footer__bottom-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+@media (min-width: 768px) {
+  .gfc-footer__bottom-inner {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.gfc-footer__copy {
+  font-size: 0.6875rem;
+  color: #737373;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.gfc-footer__legal {
+  display: flex;
+  gap: 32px;
+}
+
+.gfc-footer__legal-link {
+  font-size: 0.6875rem;
+  color: #737373;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.gfc-footer__legal-link:hover {
+  color: #e5e5e5;
+}

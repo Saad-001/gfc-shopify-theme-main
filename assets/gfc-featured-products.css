@@ -1,0 +1,225 @@
+@font-face {
+  font-family: 'HVD Poster';
+  src: url('HVDPoster-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.gfc-fp {
+  padding: 96px 0;
+  background-color: #2A2D2E;
+  color: #F0EDED;
+}
+
+.gfc-fp__inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+/* Header row */
+.gfc-fp__header {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: flex-start;
+  margin-bottom: 64px;
+}
+@media (min-width: 768px) {
+  .gfc-fp__header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}
+
+.gfc-fp__header-left {
+  max-width: 700px;
+}
+
+.gfc-fp__heading {
+  font-family: 'HVD Poster', 'Alfa Slab One', serif;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  text-transform: uppercase;
+  line-height: 1;
+  margin: 0 0 16px;
+  color: #F0EDED;
+}
+
+.gfc-fp__heading--accent {
+  color: #7f1d1d;
+}
+
+.gfc-fp__subheading {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.125rem;
+  color: #D4D8DB;
+  margin: 0;
+}
+
+.gfc-fp__view-all {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #D4D8DB;
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.125rem;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+.gfc-fp__view-all:hover {
+  color: #DC2626;
+}
+.gfc-fp__view-all .material-symbols-outlined {
+  font-size: 20px;
+}
+
+/* Grid */
+.gfc-fp__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+@media (min-width: 640px) {
+  .gfc-fp__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .gfc-fp__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Card */
+.gfc-fp__card {
+  background-color: #1C1E1F;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid #292524;
+  transition: border-color 0.3s;
+}
+.gfc-fp__card:hover {
+  border-color: #3D0B0B;
+}
+
+.gfc-fp__card-image-wrap {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  aspect-ratio: 4 / 5;
+  margin-bottom: 24px;
+}
+
+.gfc-fp__card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+.gfc-fp__card:hover .gfc-fp__card-image {
+  transform: scale(1.1);
+}
+.gfc-fp__card-image.gfc-placeholder-svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Badge */
+.gfc-fp__badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-family: 'HVD Poster', 'Alfa Slab One', serif;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #F0EDED;
+}
+.gfc-fp__badge--primary { background-color: #3D0B0B; }
+.gfc-fp__badge--secondary { background-color: #57534e; }
+.gfc-fp__badge--danger { background-color: #7f1d1d; }
+
+/* Card body */
+.gfc-fp__card-body {}
+
+.gfc-fp__card-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.gfc-fp__card-title {
+  font-family: 'HVD Poster', 'Alfa Slab One', serif;
+  font-size: 1.375rem;
+  text-transform: uppercase;
+  color: #F0EDED;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.gfc-fp__card-price {
+  font-family: 'HVD Poster', 'Alfa Slab One', serif;
+  font-size: 1.25rem;
+  color: #D4D8DB;
+  white-space: nowrap;
+}
+
+.gfc-fp__card-desc {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.875rem;
+  color: #D4D8DB;
+  margin: 0 0 24px;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Buttons */
+.gfc-fp__card-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.gfc-fp__card-actions form {
+  margin: 0;
+}
+
+.gfc-fp__btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  font-family: 'HVD Poster', 'Alfa Slab One', serif;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.gfc-fp__btn--primary {
+  background-color: #3D0B0B;
+  color: #F0EDED;
+}
+.gfc-fp__btn--primary:hover {
+  background-color: #2A0707;
+}
+
+.gfc-fp__btn--secondary {
+  background-color: transparent;
+  color: #D4D8DB;
+  border: 1px solid #44403c;
+}
+.gfc-fp__btn--secondary:hover {
+  border-color: #B0B7BC;
+}

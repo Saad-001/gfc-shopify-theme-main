@@ -1,0 +1,273 @@
+<style>
+  #gfc-header-{{ section.id }} {
+    background-color: {{ section.settings.bg_color }};
+    border-bottom: {{ section.settings.border_width }}px solid {{ section.settings.border_color }};
+  }
+  #gfc-header-{{ section.id }} a {
+    color: {{ section.settings.text_color }};
+    text-decoration: none;
+    font-family: 'HVD Poster', serif;
+    font-size: {{ section.settings.font_size }}px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    transition: opacity 0.2s;
+  }
+  #gfc-header-{{ section.id }} a:hover {
+    opacity: 0.65;
+  }
+  #gfc-header-{{ section.id }} .gfc-header__cart-count {
+    background-color: {{ section.settings.text_color }};
+    color: {{ section.settings.bg_color }};
+    font-size: 10px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    position: absolute;
+    top: -8px;
+    right: -8px;
+  }
+</style>
+
+<header
+  id="gfc-header-{{ section.id }}"
+  class="fixed top-0 left-0 right-0 z-50 w-full"
+  role="banner"
+>
+  <div class="flex items-center justify-between px-8 md:px-12 py-4">
+
+    <!-- Left nav links -->
+    <nav class="flex items-center gap-6 md:gap-10" aria-label="Primary left navigation">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'left_link' -%}
+          <a href="{{ block.settings.link | default: '#' }}" {{ block.shopify_attributes }}>
+            {{ block.settings.label }}
+          </a>
+        {%- endif -%}
+      {%- endfor -%}
+    </nav>
+
+    <!-- Center: Logo or brand name -->
+    <div class="absolute left-1/2 -translate-x-1/2">
+      {%- if section.settings.logo != blank -%}
+        <a href="{{ routes.root_url }}">
+          <img
+            src="{{ section.settings.logo | image_url: width: 160 }}"
+            alt="{{ section.settings.logo.alt | default: shop.name }}"
+            width="{{ section.settings.logo_width }}"
+            height="auto"
+            loading="eager"
+            style="width: {{ section.settings.logo_width }}px; height: auto;"
+          >
+        </a>
+      {%- elsif section.settings.show_brand_name -%}
+        <a href="{{ routes.root_url }}" style="font-size: {{ section.settings.font_size }}px;">
+          {{ section.settings.brand_name | default: shop.name }}
+        </a>
+      {%- endif -%}
+    </div>
+
+    <!-- Right nav links + cart -->
+    <nav class="flex items-center gap-6 md:gap-10" aria-label="Primary right navigation">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'right_link' -%}
+          <a href="{{ block.settings.link | default: '#' }}" {{ block.shopify_attributes }}>
+            {{ block.settings.label }}
+          </a>
+        {%- endif -%}
+      {%- endfor -%}
+
+      {%- if section.settings.show_cart -%}
+        <a href="{{ routes.cart_url }}" class="relative" aria-label="Cart">
+          {%- if section.settings.cart_style == 'text' -%}
+            Cart
+          {%- else -%}
+            <span class="material-symbols-outlined" style="font-size: {{ section.settings.font_size }}px; vertical-align: middle;">shopping_cart</span>
+          {%- endif -%}
+          <span class="gfc-header__cart-count" id="gfc-cart-count-{{ section.id }}">
+            {{ cart.item_count }}
+          </span>
+        </a>
+      {%- endif -%}
+    </nav>
+
+  </div>
+</header>
+
+<!-- Spacer so page content starts below fixed header -->
+<div style="height: {{ section.settings.header_height }}px;"></div>
+
+{% schema %}
+{
+  "name": "GFC Header",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#857F75"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text / Link Color",
+      "default": "#0A0A0A"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border Color",
+      "default": "#2A2D2E"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "label": "Border Thickness (px)",
+      "min": 0,
+      "max": 8,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "label": "Font Size (px)",
+      "min": 12,
+      "max": 36,
+      "step": 1,
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "header_height",
+      "label": "Header Height / Spacer (px)",
+      "min": 40,
+      "max": 120,
+      "step": 4,
+      "default": 64
+    },
+    {
+      "type": "header",
+      "content": "Logo / Brand"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo Image"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "label": "Logo Width (px)",
+      "min": 40,
+      "max": 300,
+      "step": 10,
+      "default": 120
+    },
+    {
+      "type": "checkbox",
+      "id": "show_brand_name",
+      "label": "Show Brand Name (if no logo)",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "brand_name",
+      "label": "Brand Name",
+      "default": "GODS FAVORITE"
+    },
+    {
+      "type": "header",
+      "content": "Cart"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cart",
+      "label": "Show Cart",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "cart_style",
+      "label": "Cart Display Style",
+      "options": [
+        { "value": "text", "label": "Text (CART)" },
+        { "value": "icon", "label": "Icon" }
+      ],
+      "default": "text"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "left_link",
+      "name": "Left Nav Link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Link Label",
+          "default": "Shop"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link URL"
+        }
+      ]
+    },
+    {
+      "type": "right_link",
+      "name": "Right Nav Link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Link Label",
+          "default": "Contact"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "GFC Header",
+      "blocks": [
+        {
+          "type": "left_link",
+          "settings": { "label": "Shop", "link": "/collections/all" }
+        },
+        {
+          "type": "left_link",
+          "settings": { "label": "Our Story", "link": "/pages/our-story" }
+        },
+        {
+          "type": "left_link",
+          "settings": { "label": "Wholesale", "link": "/pages/wholesale" }
+        },
+        {
+          "type": "right_link",
+          "settings": { "label": "Contact", "link": "/pages/contact" }
+        },
+        {
+          "type": "right_link",
+          "settings": { "label": "Sign In", "link": "/account/login" }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

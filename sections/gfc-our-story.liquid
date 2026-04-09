@@ -1,0 +1,138 @@
+<section class="py-32 px-12 page-width mx-auto" id="gfc-story-{{ section.id }}">
+  <div class="grid md:grid-cols-2 gap-20 items-center">
+
+    <!-- Image side -->
+    <div class="relative group">
+      <div class="absolute inset-0 bg-brand-burgundy rounded-lg translate-x-4 translate-y-4 -z-10 group-hover:translate-x-2 group-hover:translate-y-2 transition-transform duration-500"></div>
+      {%- if section.settings.image != blank -%}
+        <img
+          class="rounded-lg w-full aspect-[4/5] object-cover border-2 border-brand-aluminum"
+          src="{{ section.settings.image | image_url: width: 800 }}"
+          alt="{{ section.settings.image.alt | default: 'Our Story' }}"
+          width="800"
+          height="1000"
+          loading="lazy"
+        >
+      {%- else -%}
+        <div class="rounded-lg w-full aspect-[4/5] bg-stone-800 border-2 border-brand-aluminum flex items-center justify-center">
+          <span class="material-symbols-outlined text-8xl text-stone-600">coffee</span>
+        </div>
+      {%- endif -%}
+      <div class="absolute -top-10 -left-10 w-40 h-40 opacity-20" aria-hidden="true">
+        <span class="material-symbols-outlined text-[160px] text-stone-600">album</span>
+      </div>
+    </div>
+
+    <!-- Text side -->
+    <div>
+      <span class="text-red-700 font-headline tracking-widest text-xl mb-4 block uppercase">{{ section.settings.label }}</span>
+      <h2 class="text-6xl md:text-8xl font-headline mb-8 leading-none uppercase text-brand-offwhite">
+        {{ section.settings.heading_prefix }}
+        <span class="text-stone-500">{{ section.settings.heading_accent }}</span>
+      </h2>
+
+      <div class="space-y-6 text-xl font-body text-brand-silver leading-relaxed">
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'paragraph' -%}
+              <p class="{% if block.settings.bold %}font-bold text-brand-offwhite{% endif %}" {{ block.shopify_attributes }}>
+                {{ block.settings.text }}
+              </p>
+          {%- endcase -%}
+        {%- endfor -%}
+      </div>
+
+      <div class="mt-12 flex items-center gap-4">
+        <div class="h-1 w-24 bg-red-900"></div>
+        <span class="font-headline text-2xl tracking-tighter text-brand-offwhite uppercase">{{ section.settings.pledge_text }}</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "GFC Our Story",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Story Image"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Top Label",
+      "default": "SINCE 1994"
+    },
+    {
+      "type": "text",
+      "id": "heading_prefix",
+      "label": "Heading Prefix",
+      "default": "BORN OF"
+    },
+    {
+      "type": "text",
+      "id": "heading_accent",
+      "label": "Heading Accent Word",
+      "default": "SOUL"
+    },
+    {
+      "type": "text",
+      "id": "pledge_text",
+      "label": "Pledge / Footer Line",
+      "default": "THE FOUNDER'S PLEDGE"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "paragraph",
+      "name": "Paragraph",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "It started in a smoke-filled basement with a vintage hi-fi system and a dream of a better cup."
+        },
+        {
+          "type": "checkbox",
+          "id": "bold",
+          "label": "Bold / Highlighted",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "GFC Our Story",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "settings": {
+            "text": "It started in a smoke-filled basement with a vintage hi-fi system and a dream of a better cup. No pretense, just the pursuit of the divine bean.",
+            "bold": false
+          }
+        },
+        {
+          "type": "paragraph",
+          "settings": {
+            "text": "We don't follow trends. We follow the rhythm. Every batch is roasted to the sounds of jazz, blues, and soul—infusing every bean with the spirit of the classics.",
+            "bold": false
+          }
+        },
+        {
+          "type": "paragraph",
+          "settings": {
+            "text": "Real Coffee for Real Souls. That's the only gospel we preach.",
+            "bold": true
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

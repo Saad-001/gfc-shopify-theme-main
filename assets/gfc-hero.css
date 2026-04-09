@@ -1,0 +1,172 @@
+@font-face {
+  font-family: 'HVD Poster';
+  src: url('HVDPoster-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --gfc-burgundy: #3D0B0B;
+  --gfc-oxblood: #2A0707;
+  --gfc-ash: #2A2D2E;
+  --gfc-graphite: #1C1E1F;
+  --gfc-aluminum: #B0B7BC;
+  --gfc-silver: #D4D8DB;
+  --gfc-offwhite: #F0EDED;
+  --gfc-red: #B91C1C;
+}
+
+.gfc-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 96px;
+  overflow: hidden;
+  background:
+    linear-gradient(rgba(26, 36, 38, 0.82), rgba(26, 36, 38, 0.82)),
+    url('https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=2070&auto=format&fit=crop') center / cover no-repeat;
+}
+
+.gfc-hero__grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.05;
+  z-index: 0;
+}
+
+/* Floating icons */
+.gfc-hero__floating {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+}
+.gfc-hero__floating--tl {
+  top: 25%;
+  left: 40px;
+  opacity: 0.4;
+  filter: blur(2px);
+  transform: rotate(12deg);
+}
+.gfc-hero__floating--br {
+  bottom: 25%;
+  right: 80px;
+  opacity: 0.3;
+  filter: blur(6px);
+  transform: rotate(-45deg);
+}
+.gfc-hero__floating--tr {
+  top: 33%;
+  right: 40px;
+  opacity: 0.4;
+  filter: blur(2px);
+  transform: rotate(-12deg);
+}
+.gfc-hero__floating .gfc-icon {
+  font-size: 64px;
+  color: #57534e;
+}
+.gfc-hero__floating--br .gfc-icon {
+  font-size: 96px;
+  color: #78716c;
+}
+.gfc-hero__floating--tr .gfc-icon {
+  font-size: 40px;
+}
+
+/* Main content */
+.gfc-hero__content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 0 16px;
+  max-width: 900px;
+}
+
+.gfc-hero__logo {
+  width: 256px;
+  height: 256px;
+  object-fit: contain;
+  margin: 0 auto 32px;
+  display: block;
+  filter: drop-shadow(0 0 50px rgba(61,11,11,0.5));
+}
+.gfc-hero__logo.gfc-placeholder-svg {
+  width: 256px;
+  height: 256px;
+  border-radius: 50%;
+}
+
+.gfc-hero__headline {
+  font-family: 'HVD Poster', 'Alfa Slab One', serif;
+  font-size: clamp(2.5rem, 8vw, 6rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--gfc-offwhite);
+  margin: 0 0 24px;
+  text-shadow: 0 4px 24px rgba(0,0,0,0.4);
+}
+
+.gfc-hero__headline--accent {
+  color: var(--gfc-red);
+}
+
+.gfc-hero__subtext {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(1rem, 2.5vw, 1.375rem);
+  color: var(--gfc-silver);
+  margin: 0 auto 40px;
+  max-width: 672px;
+  font-style: italic;
+  line-height: 1.6;
+}
+
+.gfc-hero__cta {
+  display: inline-block;
+  background-color: var(--gfc-burgundy);
+  color: var(--gfc-offwhite);
+  font-family: 'HVD Poster', 'Alfa Slab One', serif;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 24px 48px;
+  border-radius: 12px;
+  border: 2px solid var(--gfc-aluminum);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+  transition: background-color 0.3s, transform 0.3s;
+}
+.gfc-hero__cta:hover {
+  background-color: var(--gfc-oxblood);
+  transform: scale(1.05);
+}
+.gfc-hero__cta:active {
+  transform: scale(0.95);
+}
+
+/* Torn edge divider at bottom */
+.gfc-hero__torn-edge {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 48px;
+  background-color: var(--gfc-graphite);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 48' preserveAspectRatio='none'%3E%3Cpath d='M0,48 L0,20 C50,30 100,10 150,22 C200,34 250,8 300,18 C350,28 400,6 450,16 C500,26 550,4 600,14 C650,24 700,2 750,12 C800,22 850,0 900,10 C950,20 1000,2 1050,12 C1100,22 1150,5 1200,15 L1200,48 Z' fill='%231C1E1F'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 48' preserveAspectRatio='none'%3E%3Cpath d='M0,48 L0,20 C50,30 100,10 150,22 C200,34 250,8 300,18 C350,28 400,6 450,16 C500,26 550,4 600,14 C650,24 700,2 750,12 C800,22 850,0 900,10 C950,20 1000,2 1050,12 C1100,22 1150,5 1200,15 L1200,48 Z' fill='%231C1E1F'/%3E%3C/svg%3E");
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  z-index: 3;
+}
+
+@media (min-width: 768px) {
+  .gfc-hero__logo {
+    width: 320px;
+    height: 320px;
+  }
+}

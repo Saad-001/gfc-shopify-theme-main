@@ -1,0 +1,57 @@
+<style>
+  @keyframes gfc-marquee-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  .gfc-animate-marquee {
+    animation: gfc-marquee-scroll 30s linear infinite;
+  }
+  #gfc-marquee-{{ section.id }} .gfc-animate-marquee {
+    animation-duration: {{ section.settings.speed }}s;
+  }
+</style>
+
+<div class="bg-brand-graphite py-6 overflow-hidden border-y border-stone-800" id="gfc-marquee-{{ section.id }}">
+  <div class="flex whitespace-nowrap gfc-animate-marquee" aria-hidden="true">
+    {%- assign items = section.settings.items | split: ',' -%}
+
+    {%- for pass in (1..2) -%}
+      <div class="flex space-x-12 items-center px-6">
+        {%- for item in items -%}
+          <span class="text-3xl font-headline text-brand-aluminum/40">{{ item | strip | upcase }}</span>
+          <span class="material-symbols-outlined text-red-900" style="font-variation-settings: 'FILL' 1;">star</span>
+        {%- endfor -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "GFC Marquee",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "text",
+      "id": "items",
+      "label": "Marquee Items (comma separated)",
+      "default": "FRESHLY ROASTED,BORN IN 1994,ANALOG SOUL,DIVINE FLAVOR"
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "min": 10,
+      "max": 80,
+      "step": 5,
+      "unit": "s",
+      "label": "Scroll Speed",
+      "default": 30
+    }
+  ],
+  "presets": [
+    {
+      "name": "GFC Marquee"
+    }
+  ]
+}
+{% endschema %}

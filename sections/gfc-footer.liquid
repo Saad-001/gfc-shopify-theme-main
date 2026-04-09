@@ -1,0 +1,254 @@
+<footer class="pt-32 pb-12 border-t-2 border-dashed border-white" id="gfc-footer-{{ section.id }}">
+
+  <!-- Top grid -->
+  <div class="page-width mx-auto px-16 grid grid-cols-1 md:grid-cols-4 gap-12 text-left mb-20">
+
+    <!-- Brand column -->
+    <div class="col-span-1">
+      <div class="text-4xl font-headline text-red-700 mb-6">{{ section.settings.brand_name }}</div>
+      <p class="text-neutral-400 font-body mb-8">{{ section.settings.tagline }}</p>
+      <div class="flex gap-4">
+        {%- if section.settings.social_facebook != blank -%}
+          <a class="w-10 h-10 border border-stone-700 rounded-full flex items-center justify-center hover:bg-brand-burgundy transition-colors text-brand-offwhite" href="{{ section.settings.social_facebook }}" target="_blank" rel="noopener" aria-label="Facebook">
+            <span class="material-symbols-outlined text-sm">share</span>
+          </a>
+        {%- endif -%}
+        {%- if section.settings.social_youtube != blank -%}
+          <a class="w-10 h-10 border border-stone-700 rounded-full flex items-center justify-center hover:bg-brand-burgundy transition-colors text-brand-offwhite" href="{{ section.settings.social_youtube }}" target="_blank" rel="noopener" aria-label="YouTube">
+            <span class="material-symbols-outlined text-sm">play_circle</span>
+          </a>
+        {%- endif -%}
+        {%- if section.settings.social_instagram != blank -%}
+          <a class="w-10 h-10 border border-stone-700 rounded-full flex items-center justify-center hover:bg-brand-burgundy transition-colors text-brand-offwhite" href="{{ section.settings.social_instagram }}" target="_blank" rel="noopener" aria-label="Instagram">
+            <span class="material-symbols-outlined text-sm">photo_camera</span>
+          </a>
+        {%- endif -%}
+        {%- if section.settings.social_facebook == blank and section.settings.social_youtube == blank and section.settings.social_instagram == blank -%}
+          <a class="w-10 h-10 border border-stone-700 rounded-full flex items-center justify-center hover:bg-brand-burgundy transition-colors text-brand-offwhite" href="#" aria-label="Share">
+            <span class="material-symbols-outlined text-sm">share</span>
+          </a>
+          <a class="w-10 h-10 border border-stone-700 rounded-full flex items-center justify-center hover:bg-brand-burgundy transition-colors text-brand-offwhite" href="#" aria-label="YouTube">
+            <span class="material-symbols-outlined text-sm">play_circle</span>
+          </a>
+          <a class="w-10 h-10 border border-stone-700 rounded-full flex items-center justify-center hover:bg-brand-burgundy transition-colors text-brand-offwhite" href="#" aria-label="Instagram">
+            <span class="material-symbols-outlined text-sm">photo_camera</span>
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <!-- Link columns from blocks -->
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+        {%- when 'link_column' -%}
+          <div {{ block.shopify_attributes }}>
+            <h4 class="font-headline text-neutral-100 mb-6 text-xl tracking-widest">{{ block.settings.heading }}</h4>
+            <ul class="space-y-4">
+              {%- assign links = block.settings.links | split: '||' -%}
+              {%- assign urls  = block.settings.urls  | split: '||' -%}
+              {%- for link_label in links -%}
+                <li>
+                  <a class="text-neutral-500 hover:text-neutral-200 transition-colors font-body" href="{{ urls[forloop.index0] | default: '#' | strip }}">
+                    {{ link_label | strip }}
+                  </a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+      {%- endcase -%}
+    {%- endfor -%}
+
+    <!-- Newsletter column -->
+    <div>
+      <h4 class="font-headline text-neutral-100 mb-6 text-xl tracking-widest">{{ section.settings.newsletter_heading }}</h4>
+      <p class="text-neutral-400 mb-6 font-body text-sm">{{ section.settings.newsletter_desc }}</p>
+      {%- form 'customer', id: 'gfc-footer-newsletter-form' -%}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <div class="relative">
+          <input
+            class="w-full bg-brand-graphite border-b-2 border-stone-700 focus:border-brand-burgundy py-3 px-0 text-brand-offwhite outline-none transition-colors font-body"
+            type="email"
+            name="contact[email]"
+            placeholder="{{ section.settings.newsletter_placeholder }}"
+            autocomplete="email"
+            required
+          >
+          <button class="absolute right-0 top-3 material-symbols-outlined text-red-900" type="submit" aria-label="Subscribe">send</button>
+        </div>
+        {%- if form.posted_successfully? -%}
+          <p class="mt-4 text-green-400 text-sm font-body">{{ section.settings.newsletter_success }}</p>
+        {%- endif -%}
+      {%- endform -%}
+    </div>
+
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="page-width mx-auto px-16 border-t border-stone-700 pt-10 flex flex-col md:flex-row justify-between items-center gap-6">
+    <p class="text-neutral-500 text-xs font-body tracking-widest uppercase">{{ section.settings.copyright }}</p>
+    <div class="flex gap-8">
+      {%- if section.settings.privacy_link != blank -%}
+        <a class="text-neutral-500 text-xs hover:text-neutral-200 transition-colors font-body" href="{{ section.settings.privacy_link }}">Privacy Policy</a>
+      {%- else -%}
+        <a class="text-neutral-500 text-xs hover:text-neutral-200 transition-colors font-body" href="#">Privacy Policy</a>
+      {%- endif -%}
+      {%- if section.settings.terms_link != blank -%}
+        <a class="text-neutral-500 text-xs hover:text-neutral-200 transition-colors font-body" href="{{ section.settings.terms_link }}">Terms of Service</a>
+      {%- else -%}
+        <a class="text-neutral-500 text-xs hover:text-neutral-200 transition-colors font-body" href="#">Terms of Service</a>
+      {%- endif -%}
+      {%- if section.settings.shipping_link != blank -%}
+        <a class="text-neutral-500 text-xs hover:text-neutral-200 transition-colors font-body" href="{{ section.settings.shipping_link }}">Shipping Info</a>
+      {%- else -%}
+        <a class="text-neutral-500 text-xs hover:text-neutral-200 transition-colors font-body" href="#">Shipping Info</a>
+      {%- endif -%}
+    </div>
+  </div>
+
+</footer>
+
+{% schema %}
+{
+  "name": "GFC Footer",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Brand"
+    },
+    {
+      "type": "text",
+      "id": "brand_name",
+      "label": "Brand Name",
+      "default": "GODS FAVORITE"
+    },
+    {
+      "type": "textarea",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "Real Coffee for Real Souls. Est. 1994. Roasting divine beans in our temple of soul."
+    },
+    {
+      "type": "header",
+      "content": "Social Links"
+    },
+    {
+      "type": "url",
+      "id": "social_facebook",
+      "label": "Facebook / Share URL"
+    },
+    {
+      "type": "url",
+      "id": "social_youtube",
+      "label": "YouTube URL"
+    },
+    {
+      "type": "url",
+      "id": "social_instagram",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "header",
+      "content": "Newsletter"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_heading",
+      "label": "Newsletter Heading",
+      "default": "THE CONGREGATION"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_desc",
+      "label": "Newsletter Description",
+      "default": "Join the mailing list for soulful updates and divine deals."
+    },
+    {
+      "type": "text",
+      "id": "newsletter_placeholder",
+      "label": "Input Placeholder",
+      "default": "YOUR EMAIL ADDRESS"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_success",
+      "label": "Success Message",
+      "default": "Thank you for joining the congregation!"
+    },
+    {
+      "type": "header",
+      "content": "Bottom Bar"
+    },
+    {
+      "type": "text",
+      "id": "copyright",
+      "label": "Copyright Text",
+      "default": "© 2024 GODS FAVORITE COFFEE CO. REAL COFFEE FOR REAL SOULS."
+    },
+    {
+      "type": "url",
+      "id": "privacy_link",
+      "label": "Privacy Policy Link"
+    },
+    {
+      "type": "url",
+      "id": "terms_link",
+      "label": "Terms of Service Link"
+    },
+    {
+      "type": "url",
+      "id": "shipping_link",
+      "label": "Shipping Info Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "link_column",
+      "name": "Link Column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Column Heading",
+          "default": "SHOP"
+        },
+        {
+          "type": "textarea",
+          "id": "links",
+          "label": "Link Labels (separated by ||)",
+          "default": "All Collections||Whole Bean||Ground Coffee||Subscriptions||Merchandise"
+        },
+        {
+          "type": "textarea",
+          "id": "urls",
+          "label": "Link URLs (separated by ||)",
+          "default": "/collections/all||/collections/whole-bean||/collections/ground-coffee||/collections/subscriptions||/collections/merchandise"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "GFC Footer",
+      "blocks": [
+        {
+          "type": "link_column",
+          "settings": {
+            "heading": "SHOP",
+            "links": "All Collections||Whole Bean||Ground Coffee||Subscriptions||Merchandise",
+            "urls": "/collections/all||/collections/whole-bean||/collections/ground-coffee||/collections/subscriptions||/collections/merchandise"
+          }
+        },
+        {
+          "type": "link_column",
+          "settings": {
+            "heading": "LEGACY",
+            "links": "Our Story||The Roast Process||Wholesale||Sustainability||Contact Us",
+            "urls": "/pages/our-story||/pages/roast-process||/pages/wholesale||/pages/sustainability||/pages/contact"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
