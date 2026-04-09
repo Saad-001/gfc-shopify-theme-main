@@ -10,7 +10,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 60px 50px;
+    padding: 60px 50px 0px;
     box-sizing: border-box;
     position: relative;
     font-family: "Poppins", sans-serif;
@@ -54,7 +54,7 @@
   /* ---- Floating product image ---- */
   #gfc-ps-{{ section.id }} .gfc-ps__product-img {
     position: absolute;
-    z-index: 10;
+    z-index: 2;
     width: 280px;
     left: 24%;
     top: 50%;
@@ -97,7 +97,7 @@
   #gfc-ps-{{ section.id }} .gfc-ps__nav-btn {
     position: absolute;
     top: 50%;
-    z-index: 30;
+    z-index: 2;
     display: inline-flex;
     border: none;
     width: 52px;
@@ -388,7 +388,7 @@
 
   @media screen and (max-width: 992px) {
     #gfc-ps-{{ section.id }} {
-      padding: 40px 20px 60px;
+      padding: 40px 20px 0px;
       min-height: auto;
       align-items: flex-start;
     }
@@ -396,128 +396,148 @@
     /* Heading stays above everything */
     #gfc-ps-{{ section.id }} .gfc-ps__section-heading {
       position: relative;
-      z-index: 10;
       font-size: 3.5rem;
     }
 
-    /* Inner becomes a column: product-img zone → slider */
+    /*
+      CSS Grid layout on inner:
+        Row 1 (150px)  = image zone    — product image lives here
+        Row 2 (auto)   = card zone     — slider card lives here
+        Cols: [52px nav] [1fr card] [52px nav]
+
+      The product image is 290px tall, overflowing row 1 by 140px —
+      it straddles the junction, same visual idea as desktop.
+      Nav buttons go in row 2 col 1/3 so align-self: center puts them
+      exactly in the vertical middle of the card, no guesswork needed.
+    */
     #gfc-ps-{{ section.id }} .gfc-ps__inner {
+      display: grid;
+      grid-template-rows: 150px auto;
+      grid-template-columns: 52px 1fr 52px;
       height: auto;
-      display: flex;
-      flex-direction: column;
+      position: relative;
     }
 
-    /* bg-shape is purely decorative background behind the image zone */
+    /* Coloured backdrop stays absolute — only decoration behind row 1 */
     #gfc-ps-{{ section.id }} .gfc-ps__bg-shape {
+      grid-row: 1; grid-column: 1 / -1;
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 260px;
+      top: 0; left: 0;
+      width: 100%; height: 150px;
       border-radius: 20px;
       z-index: 0;
     }
 
-    /* Product image becomes a REAL flex item — truly stacked above the card */
+    /*
+      Product image spans all cols in row 1.
+      Height 290px > row height 150px — overflows 140px into the card.
+      align-self: start anchors it to the top of the row.
+    */
     #gfc-ps-{{ section.id }} .gfc-ps__product-img {
+      grid-row: 1; grid-column: 1 / -1;
       position: relative;
-      left: auto;
-      top: auto;
-      transform: none;
-      width: 100%;
-      height: 260px;
+      left: auto; top: auto; transform: none;
+      width: 100%; height: 290px;
       max-height: none;
       z-index: 2;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      align-self: start;
+      pointer-events: none;
     }
 
-    /* Image items fill the container; slide in horizontally */
+    /* Items fill the container; horizontal slide-in animation */
     #gfc-ps-{{ section.id }} .gfc-ps__product-img-item {
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
+      top: 0; bottom: 0; left: 0; right: 0;
       transform: translateX(-50px);
     }
     #gfc-ps-{{ section.id }} .gfc-ps__product-img-item.is-active {
       transform: translateX(0);
     }
 
-    /* Slider sits as the second flex item — no overlap with image */
-    #gfc-ps-{{ section.id }} .gfc-ps__slider {
+    /* Prev: row 2 col 1 — align-self: center hits the card midpoint exactly */
+    #gfc-ps-{{ section.id }} .gfc-ps__prev {
+      grid-row: 2; grid-column: 1;
       position: relative;
-      top: auto;
-      right: auto;
-      transform: none;
-      width: 100%;
-      height: auto;
-      margin-top: 16px;
-      border-radius: 20px 20px 20px 20px;
+      left: auto; right: auto; top: auto; bottom: auto;
+      transform: translateX(50%);    /* shift right so centre sits on card left edge */
+      align-self: center;
+      justify-self: center;
+      z-index: 2;
     }
 
-    /* Swiper internals need height: auto on mobile */
+    /* Next: row 2 col 3 */
+    #gfc-ps-{{ section.id }} .gfc-ps__next {
+      grid-row: 2; grid-column: 3;
+      position: relative;
+      left: auto; right: auto; top: auto; bottom: auto;
+      transform: translateX(-50%);   /* shift left so centre sits on card right edge */
+      align-self: center;
+      justify-self: center;
+      z-index: 2;
+    }
+
+    /* Slider card: row 2 col 2 */
+    #gfc-ps-{{ section.id }} .gfc-ps__slider {
+      grid-row: 2; grid-column: 2;
+      position: relative;
+      top: auto; right: auto; transform: none;
+      width: 100%; height: auto;
+      border-radius: 20px;
+      box-shadow: 0 12px 40px rgba(0,0,0,.25);
+    }
+
+    /* Swiper must size to content on mobile */
     #gfc-ps-{{ section.id }} .gfc-ps__slider .swiper-wrapper { height: auto; }
     #gfc-ps-{{ section.id }} .gfc-ps__slide { height: auto; }
 
-    /* Card keeps all rounded corners, expands to content */
     #gfc-ps-{{ section.id }} .gfc-ps__card {
       height: auto;
-      min-height: 300px;
+      min-height: 280px;
       border-radius: 20px;
       align-items: flex-start;
     }
 
-    /* Normal content padding — no top-padding hack needed */
+    /* padding-top clears the 140px overflow (290 - 150) + breathing room */
     #gfc-ps-{{ section.id }} .gfc-ps__content {
-      padding: 32px 36px 50px;
+      padding: 155px 32px 50px;
       text-align: center;
     }
 
     #gfc-ps-{{ section.id }} .gfc-ps__ctr { justify-content: center; }
     #gfc-ps-{{ section.id }} .gfc-ps__labels-group { justify-content: center; }
     #gfc-ps-{{ section.id }} .gfc-ps__bottom { text-align: center; }
-
-    /* Nav buttons at midpoint of the image zone */
-    #gfc-ps-{{ section.id }} .gfc-ps__prev {
-      left: 0;
-      top: 130px;
-      transform: translate(10%, -50%);
-    }
-    #gfc-ps-{{ section.id }} .gfc-ps__next {
-      right: 0;
-      top: 130px;
-      transform: translate(-10%, -50%);
-    }
   }
 
   @media screen and (max-width: 767px) {
-    #gfc-ps-{{ section.id }} .gfc-ps__section-heading { font-size: 2.5rem; }
+    #gfc-ps-{{ section.id }} .gfc-ps__section-heading { font-size: 5rem; }
     #gfc-ps-{{ section.id }} .gfc-ps__title { font-size: 24px; }
     #gfc-ps-{{ section.id }} .gfc-ps__price { font-size: 26px; }
-    #gfc-ps-{{ section.id }} .gfc-ps__content { padding: 28px 20px 44px; }
     #gfc-ps-{{ section.id }} .gfc-ps__ctr { flex-wrap: wrap; }
     #gfc-ps-{{ section.id }} .gfc-ps__hr-v { display: none; }
     #gfc-ps-{{ section.id }} .gfc-ps__rating { width: 100%; margin-top: 14px; }
-    #gfc-ps-{{ section.id }} .gfc-ps__product-img { height: 220px; }
-    #gfc-ps-{{ section.id }} .gfc-ps__bg-shape { height: 220px; }
-    #gfc-ps-{{ section.id }} .gfc-ps__prev { top: 110px; }
-    #gfc-ps-{{ section.id }} .gfc-ps__next { top: 110px; }
+    /* Shrink image zone row, keep overflow into card */
+    #gfc-ps-{{ section.id }} .gfc-ps__inner { grid-template-rows: 130px auto; }
+    #gfc-ps-{{ section.id }} .gfc-ps__bg-shape { height: 130px; }
+    #gfc-ps-{{ section.id }} .gfc-ps__product-img { height: 260px; }   /* overflows 130px */
+    #gfc-ps-{{ section.id }} .gfc-ps__content { padding: 140px 22px 44px; }
   }
 
   @media screen and (max-width: 576px) {
-    #gfc-ps-{{ section.id }} { padding: 30px 14px 50px; }
-    #gfc-ps-{{ section.id }} .gfc-ps__section-heading { font-size: 5rem; letter-spacing: 3px; }
+    #gfc-ps-{{ section.id }} { padding: 30px 14px 0px; }
+    #gfc-ps-{{ section.id }} .gfc-ps__section-heading { font-size: 4rem; letter-spacing: 3px; }
     #gfc-ps-{{ section.id }} .gfc-ps__title { font-size: 20px; }
     #gfc-ps-{{ section.id }} .gfc-ps__price { font-size: 22px; }
-    #gfc-ps-{{ section.id }} .gfc-ps__content { padding: 24px 16px 40px; }
-    #gfc-ps-{{ section.id }} .gfc-ps__product-img { height: 200px; }
-    #gfc-ps-{{ section.id }} .gfc-ps__bg-shape { height: 200px; }
+    #gfc-ps-{{ section.id }} .gfc-ps__inner {
+      grid-template-rows: 110px auto;
+      /* grid-template-columns: 44px 1fr 44px; */
+      grid-template-columns: 20px 1fr 20px;
+    }
+    #gfc-ps-{{ section.id }} .gfc-ps__bg-shape { height: 110px; }
+    #gfc-ps-{{ section.id }} .gfc-ps__product-img { height: 230px; }   /* overflows 120px */
+    #gfc-ps-{{ section.id }} .gfc-ps__content { padding: 130px 16px 40px; }
     #gfc-ps-{{ section.id }} .gfc-ps__nav-btn { width: 44px; height: 44px; }
+    #gfc-ps-{{ section.id }} .gfc-ps__prev { transform: translateX(25%); }
+    #gfc-ps-{{ section.id }} .gfc-ps__next { transform: translateX(-25%); }
     #gfc-ps-{{ section.id }} .gfc-ps__cart-btn { width: 100%; max-width: 260px; text-align: center; }
-    #gfc-ps-{{ section.id }} .gfc-ps__prev { top: 100px; transform: translate(15%, -50%); }
-    #gfc-ps-{{ section.id }} .gfc-ps__next { top: 100px; transform: translate(-15%, -50%); }
   }
 </style>
 

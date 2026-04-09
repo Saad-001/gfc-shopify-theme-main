@@ -8,9 +8,16 @@
     width: 100%;
     border-radius: 35px;
     z-index: -1;
-    /* border: 4px solid; 
-    border-color: rgb(61 11 11 / var(--tw-border-opacity, 1)); */
-    transition: border-color .3s;
+    border: 3px solid transparent;
+    box-shadow: 0 0 0px 0px transparent;
+    transition: border-color 0.4s ease, box-shadow 0.4s ease;
+  }
+
+  .gfc__product-card:hover:before {
+    border-color: var(--gfc-card-glow, #ffffff);
+    box-shadow:
+      0 0 14px 3px var(--gfc-card-glow, #ffffff),
+      0 0 40px 8px color-mix(in srgb, var(--gfc-card-glow, #ffffff) 35%, transparent);
   }
 
   .gfc__product-image-wrapper img {

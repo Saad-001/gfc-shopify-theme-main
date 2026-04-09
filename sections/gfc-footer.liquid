@@ -66,14 +66,14 @@
         <input type="hidden" name="contact[tags]" value="newsletter">
         <div class="relative">
           <input
-            class="w-full bg-brand-graphite border-b-2 border-stone-700 focus:border-brand-burgundy py-3 px-0 text-brand-offwhite outline-none transition-colors font-body"
+            class="w-full bg-brand-graphite border-b-2 border-stone-700 focus:border-brand-burgundy py-4 px-4 text-brand-offwhite outline-none transition-colors font-body"
             type="email"
             name="contact[email]"
             placeholder="{{ section.settings.newsletter_placeholder }}"
             autocomplete="email"
             required
           >
-          <button class="absolute right-0 top-3 material-symbols-outlined text-red-900" type="submit" aria-label="Subscribe">send</button>
+          <button class="absolute right-2 top-3 material-symbols-outlined text-red-900" type="submit" aria-label="Subscribe">send</button>
         </div>
         {%- if form.posted_successfully? -%}
           <p class="mt-4 text-green-400 text-sm font-body">{{ section.settings.newsletter_success }}</p>
