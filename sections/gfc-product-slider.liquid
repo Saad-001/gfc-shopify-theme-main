@@ -1,11 +1,8 @@
-{{ 'https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css' | stylesheet_tag }}
-
 <style>
   #gfc-ps-{{ section.id }} {
     --gfc-accent: {{ section.settings.accent_color }};
 
     width: 100%;
-    min-height: 100vh;
     background-color: {{ section.settings.section_bg_color }};
     display: flex;
     align-items: center;
@@ -134,16 +131,18 @@
     transform: translate(50%, -50%);
   }
 
-  /* ---- Slider (no overflow:hidden — card handles clipping) ---- */
+  /* ---- Slider ---- */
   #gfc-ps-{{ section.id }} .gfc-ps__slider {
     width: 76%;
-    height: 88%;
+    /* height: 88%; */
+    height: 100%;
     border-radius: 28px;
     box-shadow: 0 24px 70px rgba(0,0,0,.3);
     position: absolute;
     top: 50%;
     right: 0;
     transform: translateY(-50%);
+    overflow: hidden;
   }
 
   #gfc-ps-{{ section.id }} .gfc-ps__slider .swiper-wrapper {
@@ -245,7 +244,7 @@
   }
 
   #gfc-ps-{{ section.id }} .gfc-ps__labels-title {
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 700;
     letter-spacing: 3px;
     text-transform: uppercase;
@@ -342,7 +341,8 @@
     padding: 13px 36px;
     border-radius: 10px;
     min-height: 50px;
-    font-family: "Poppins", sans-serif;
+    /* font-family: "Poppins", sans-serif; */
+    font-family: "HVD Poster", serif;
     font-weight: 700;
     font-size: 12px;
     letter-spacing: 2px;
@@ -513,7 +513,7 @@
     #gfc-ps-{{ section.id }} .gfc-ps__price { font-size: 26px; }
     #gfc-ps-{{ section.id }} .gfc-ps__ctr { flex-wrap: wrap; }
     #gfc-ps-{{ section.id }} .gfc-ps__hr-v { display: none; }
-    #gfc-ps-{{ section.id }} .gfc-ps__rating { width: 100%; margin-top: 14px; }
+    #gfc-ps-{{ section.id }} .gfc-ps__rating { width: 100%; margin-top: 14px; display: none;}
     /* Shrink image zone row, keep overflow into card */
     #gfc-ps-{{ section.id }} .gfc-ps__inner { grid-template-rows: 130px auto; }
     #gfc-ps-{{ section.id }} .gfc-ps__bg-shape { height: 130px; }

@@ -3,10 +3,11 @@
 
     <!-- Image side -->
     <div class="relative group">
-      <div class="absolute inset-0 bg-brand-burgundy rounded-lg translate-x-4 translate-y-4 -z-10 group-hover:translate-x-2 group-hover:translate-y-2 transition-transform duration-500"></div>
+      <div class="absolute inset-0 bg-brand-burgundy translate-x-4 translate-y-4 -z-10 group-hover:translate-x-2 group-hover:translate-y-2 transition-transform duration-500" style="border-radius: 28px;"></div>
       {%- if section.settings.image != blank -%}
         <img
-          class="rounded-lg w-full aspect-[4/5] object-cover border-2 border-brand-aluminum"
+          class="w-full aspect-[4/5] object-cover border-2 border-brand-aluminum"
+          style="border-radius: 28px;"
           src="{{ section.settings.image | image_url: width: 800 }}"
           alt="{{ section.settings.image.alt | default: 'Our Story' }}"
           width="800"
@@ -14,12 +15,19 @@
           loading="lazy"
         >
       {%- else -%}
-        <div class="rounded-lg w-full aspect-[4/5] bg-stone-800 border-2 border-brand-aluminum flex items-center justify-center">
+        <div class="w-full aspect-[4/5] bg-stone-800 border-2 border-brand-aluminum flex items-center justify-center" style="border-radius: 28px;">
           <span class="material-symbols-outlined text-8xl text-stone-600">coffee</span>
         </div>
       {%- endif -%}
-      <div class="absolute -top-10 -left-10 w-40 h-40 opacity-20" aria-hidden="true">
-        <span class="material-symbols-outlined text-[160px] text-stone-600">album</span>
+      <div class="absolute -top-10 -left-10 opacity-40 pointer-events-none" aria-hidden="true">
+        <svg class="gfc-icon-wheel gfc-icon-wheel--slow gfc-icon-wheel--ccw" width="140" height="140" viewBox="0 0 140 140">
+          <defs>
+            <path id="gfc-story-circle-{{ section.id }}" d="M 70,70 m -54,0 a 54,54 0 1,1 108,0 a 54,54 0 1,1 -108,0"/>
+          </defs>
+          <text fill="#ffffff" font-family="'HVD Poster', serif" font-size="12" letter-spacing="4">
+            <textPath href="#gfc-story-circle-{{ section.id }}" startOffset="0%">GODS FAVORITE ✦ GODS FAVORITE ✦ </textPath>
+          </text>
+        </svg>
       </div>
     </div>
 

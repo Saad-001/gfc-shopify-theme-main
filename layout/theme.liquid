@@ -312,7 +312,8 @@
         font-display: swap;
       }
     </style>
-
+    {% comment %} swiper css cdn {% endcomment %}
+     {{ 'https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css' | stylesheet_tag }}
     <!-- GFC: Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script>
@@ -353,14 +354,6 @@
       }
     </script>
 
-    <!-- GFC: Body background & global overrides -->
-    <style>
-      body.gradient,
-      body {
-        background-color: black !important;
-        background: black !important;
-      }
-    </style>
   </head>
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">

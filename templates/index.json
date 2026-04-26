@@ -123,6 +123,9 @@
     },
     "gfc_marquee": {
       "type": "gfc-marquee",
+      "custom_css": [
+        "span {color: #fff;}"
+      ],
       "settings": {
         "items": "FRESHLY ROASTED,BORN IN 1994,ANALOG SOUL,DIVINE FLAVOR",
         "speed": 30
@@ -134,7 +137,7 @@
         "card_1": {
           "type": "product_card",
           "settings": {
-            "product": "the-first-called-andrew-medium-roast-brazil-mexico",
+            "product": "the-first-called",
             "custom_title": "MORNING MASS",
             "custom_price": "$19",
             "custom_desc": "Dark roast with notes of smoked cocoa, toasted oak, and morning clarity.",
@@ -146,7 +149,7 @@
         "card_2": {
           "type": "product_card",
           "settings": {
-            "product": "the-foundation-peter-dark-roast-brazil",
+            "product": "the-foundation",
             "custom_title": "ALMOST HOLY",
             "custom_price": "$21",
             "custom_desc": "Medium roast featuring a balanced profile of honey-crisp apple and walnut.",
@@ -158,7 +161,7 @@
         "card_3": {
           "type": "product_card",
           "settings": {
-            "product": "the-traveler-philip-light-roast-blend-ethiopia-mexico-brazil",
+            "product": "the-traveler",
             "custom_title": "SOUL AWAKENING",
             "custom_price": "$24",
             "custom_desc": "Bright light roast with vibrant floral notes and a smooth citrus finish.",
@@ -170,7 +173,7 @@
         "card_4": {
           "type": "product_card",
           "settings": {
-            "product": "the-first-called-andrew-medium-roast-brazil-mexico",
+            "product": "the-first-called",
             "custom_title": "MIDNIGHT VIGIL",
             "custom_price": "$22",
             "custom_desc": "The ultimate espresso blend. Thick crema, heavy body, and soulful depth.",
@@ -199,7 +202,7 @@
         "slide_3pfULF": {
           "type": "slide",
           "settings": {
-            "product": "the-first-called-andrew-medium-roast-brazil-mexico",
+            "product": "the-first-called",
             "slide_bg_color": "#ffffff",
             "text_color": "#000000",
             "cart_btn_color": "#000000",
@@ -214,7 +217,7 @@
         "slide_mdmVhi": {
           "type": "slide",
           "settings": {
-            "product": "the-foundation-peter-dark-roast-brazil",
+            "product": "the-foundation",
             "slide_bg_color": "#ffffff",
             "text_color": "#000000",
             "cart_btn_color": "#000000",
@@ -229,7 +232,7 @@
         "slide_fVQdPa": {
           "type": "slide",
           "settings": {
-            "product": "the-traveler-philip-light-roast-blend-ethiopia-mexico-brazil",
+            "product": "the-traveler",
             "slide_bg_color": "#ffffff",
             "text_color": "#000000",
             "cart_btn_color": "#000000",
@@ -247,13 +250,14 @@
         "slide_mdmVhi",
         "slide_fVQdPa"
       ],
+      "disabled": true,
       "name": "GFC Product Slider – BG Image",
       "settings": {
         "heading_text": "",
         "heading_color": "#ffffff",
         "section_heading": "Featured Products",
         "section_bg_image": "shopify://shop_images/unnamed_25.png",
-        "overlay_color": "rgba(10,6,4,0.65)",
+        "overlay_color": "#0a0604a6",
         "bg_position": "center center",
         "fallback_bg_color": "#1a1614",
         "bg_shape_color": "#857f75",
@@ -309,7 +313,7 @@
         "slide_FMhhPm": {
           "type": "slide",
           "settings": {
-            "product": "the-first-called-andrew-medium-roast-brazil-mexico",
+            "product": "the-first-called",
             "slide_bg_color": "#ffffff",
             "text_color": "#121212",
             "cart_btn_color": "#121212",
@@ -324,7 +328,7 @@
         "slide_QdFXKa": {
           "type": "slide",
           "settings": {
-            "product": "the-foundation-peter-dark-roast-brazil",
+            "product": "the-foundation",
             "slide_bg_color": "#ffffff",
             "text_color": "#121212",
             "cart_btn_color": "#121212",
@@ -339,7 +343,7 @@
         "slide_EGEiqp": {
           "type": "slide",
           "settings": {
-            "product": "the-traveler-philip-light-roast-blend-ethiopia-mexico-brazil",
+            "product": "the-traveler",
             "slide_bg_color": "#ffffff",
             "text_color": "#121212",
             "cart_btn_color": "#121212",
@@ -413,13 +417,6 @@
     "gfc_instagram_grid": {
       "type": "gfc-instagram-grid",
       "blocks": {
-        "photo_1": {
-          "type": "photo",
-          "settings": {
-            "image": "shopify://shop_images/unnamed_22.png",
-            "link": ""
-          }
-        },
         "photo_2": {
           "type": "photo",
           "settings": {
@@ -427,7 +424,42 @@
             "link": ""
           }
         },
+        "photo_1": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/unnamed_22.png",
+            "link": ""
+          }
+        },
+        "photo_L3chgp": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/unnamed_23.png",
+            "link": ""
+          }
+        },
+        "photo_c6ATrE": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/unnamed_25.png",
+            "link": ""
+          }
+        },
         "photo_3": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/unnamed_24.png",
+            "link": ""
+          }
+        },
+        "photo_Wqzerj": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/unnamed_22.png",
+            "link": ""
+          }
+        },
+        "photo_tKVGDG": {
           "type": "photo",
           "settings": {
             "image": "shopify://shop_images/unnamed_24.png",
@@ -440,19 +472,39 @@
             "image": "shopify://shop_images/unnamed_25.png",
             "link": ""
           }
+        },
+        "photo_3jgHQq": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/unnamed_23.png",
+            "link": ""
+          }
+        },
+        "photo_p88ebm": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/unnamed_25.png",
+            "link": ""
+          }
         }
       },
       "block_order": [
-        "photo_1",
         "photo_2",
+        "photo_1",
+        "photo_L3chgp",
+        "photo_c6ATrE",
         "photo_3",
-        "photo_4"
+        "photo_Wqzerj",
+        "photo_tKVGDG",
+        "photo_4",
+        "photo_3jgHQq",
+        "photo_p88ebm"
       ],
       "settings": {
         "heading": "THE VIBE CHECK",
         "subheading": "Tag @GODSFAVORITECOFFEE for a chance to be featured in the temple.",
         "instagram_handle": "@godsfavoritecoffee",
-        "columns": 4
+        "columns": 5
       }
     },
     "gfc_footer": {

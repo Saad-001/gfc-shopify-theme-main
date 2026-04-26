@@ -1,11 +1,8 @@
-{{ 'https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css' | stylesheet_tag }}
-
 <style>
   #gfc-ps-{{ section.id }} {
     --gfc-accent: {{ section.settings.accent_color }};
 
     width: 100%;
-    min-height: 100vh;
     {%- if section.settings.section_bg_image != blank -%}
     background-image:
       linear-gradient({{ section.settings.overlay_color }}, {{ section.settings.overlay_color }}),
@@ -146,7 +143,8 @@
   /* ---- Slider ---- */
   #gfc-ps-{{ section.id }} .gfc-ps__slider {
     width: 76%;
-    height: 88%;
+    /* height: 88%; */
+    height: 100%;
     border-radius: 28px;
     box-shadow: 0 24px 70px rgba(0,0,0,.3);
     position: absolute;
@@ -253,7 +251,7 @@
   }
 
   #gfc-ps-{{ section.id }} .gfc-ps__labels-title {
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 700;
     letter-spacing: 3px;
     text-transform: uppercase;
@@ -534,7 +532,7 @@
     #gfc-ps-{{ section.id }} .gfc-ps__price { font-size: 26px; }
     #gfc-ps-{{ section.id }} .gfc-ps__ctr { flex-wrap: wrap; }
     #gfc-ps-{{ section.id }} .gfc-ps__hr-v { display: none; }
-    #gfc-ps-{{ section.id }} .gfc-ps__rating { width: 100%; margin-top: 14px; }
+    #gfc-ps-{{ section.id }} .gfc-ps__rating { width: 100%; margin-top: 14px; display: none;}
     #gfc-ps-{{ section.id }} .gfc-ps__inner { grid-template-rows: 130px auto; }
     #gfc-ps-{{ section.id }} .gfc-ps__bg-shape { height: 130px; }
     #gfc-ps-{{ section.id }} .gfc-ps__product-img { height: 260px; }

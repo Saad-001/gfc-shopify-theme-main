@@ -3595,3 +3595,32 @@ details-disclosure > details {
     transform: translateX(100%) scaleX(0);
   }
 }
+@media screen and (max-width: 767px){
+  .text-6xl {
+    font-size: 4.5rem !important;
+    }
+  }
+/* ============================================================
+   GFC: Global custom styles
+   ============================================================ */
+
+body.gradient,
+body {
+  background-color: black !important;
+  background: black !important;
+}
+
+/* GFC: Spinning wheel icon */
+@keyframes gfc-wheel-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.gfc-icon-wheel {
+  display: inline-block;
+  animation: gfc-wheel-spin 8s linear infinite;
+}
+
+.gfc-icon-wheel--slow { animation-duration: 14s; }
+.gfc-icon-wheel--fast { animation-duration: 4s; }
+.gfc-icon-wheel--ccw  { animation-direction: reverse; }

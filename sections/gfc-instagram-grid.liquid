@@ -1,3 +1,11 @@
+<style>
+  @media (min-width: 768px) {
+    #gfc-ig-{{ section.id }} .gfc-ig-grid {
+      grid-template-columns: repeat({{ section.settings.columns }}, minmax(0, 1fr));
+    }
+  }
+</style>
+
 <section class="py-24 border-y border-stone-800" id="gfc-ig-{{ section.id }}">
   <div class="page-width mx-auto px-12">
 
@@ -8,7 +16,7 @@
     </div>
 
     <!-- Grid -->
-    <div class="grid grid-cols-2 md:grid-cols-{{ section.settings.columns }} gap-4">
+    <div class="grid gfc-ig-grid grid-cols-2 gap-4">
       {%- for block in section.blocks -%}
         {%- case block.type -%}
           {%- when 'photo' -%}
@@ -80,7 +88,7 @@
       "type": "range",
       "id": "columns",
       "min": 2,
-      "max": 4,
+      "max": 6,
       "step": 1,
       "label": "Columns (desktop)",
       "default": 4

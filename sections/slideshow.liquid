@@ -27,6 +27,7 @@
 
 <slideshow-component
   class="slider-mobile-gutter{% if section.settings.layout == 'grid' %} page-width{% endif %}{% if section.settings.show_text_below %} mobile-text-below{% endif %}"
+  style="position: relative; overflow: hidden;"
   role="region"
   aria-roledescription="{{ 'sections.slideshow.carousel' | t }}"
   aria-label="{{ section.settings.accessibility_info | escape }}"
@@ -255,6 +256,106 @@
       {%- endif -%}
     </div>
   {%- endif -%}
+
+  <!-- GFC: Coffee beans circle (bottom-right) — 12 beans at 30° intervals -->
+  <div class="gfc-beans-ring" id="gfc-beans-{{ section.id }}" aria-hidden="true">
+    <div class="gfc-beans-ring__spinner">
+
+      <div class="gfc-beans-ring__slot" style="--a:0deg">
+        <img src="https://cdn.shopify.com/s/files/1/0984/7459/0510/files/coffee-bean-16.webp?v=1775727404" alt="" width="" height="">
+      </div>
+      <div class="gfc-beans-ring__slot" style="--a:30deg">
+        <img src="https://cdn.shopify.com/s/files/1/0984/7459/0510/files/coffee-bean-3_1.webp?v=1775727404" alt="" width="" height="">
+      </div>
+      <div class="gfc-beans-ring__slot" style="--a:60deg">
+        <img src="https://cdn.shopify.com/s/files/1/0984/7459/0510/files/coffee-bean-4.webp?v=1775727404" alt="" width="" height="">
+      </div>
+      <div class="gfc-beans-ring__slot" style="--a:90deg">
+        <img src="https://cdn.shopify.com/s/files/1/0984/7459/0510/files/coffee-bean-7.webp?v=1775727404" alt="" width="" height="">
+      </div>
+      <div class="gfc-beans-ring__slot" style="--a:120deg">
+        <img src="https://cdn.shopify.com/s/files/1/0984/7459/0510/files/coffee-bean-3.webp?v=1775727404" alt="" width="" height="">
+      </div>
+      <div class="gfc-beans-ring__slot" style="--a:150deg">
+        <img src="https://cdn.shopify.com/s/files/1/0984/7459/0510/files/coffee-bean-2.webp?v=1775727404" alt="" width="" height="">
+      </div>
+      <!-- duplicate set -->
+      <div class="gfc-beans-ring__slot" style="--a:180deg">
+        <img src="https://cdn.shopify.com/s/files/1/0984/7459/0510/files/coffee-bean-16.webp?v=1775727404" alt="" width="" height="">
+      </div>
+      <div class="gfc-beans-ring__slot" style="--a:210deg">
+        <img src="https://cdn.shopify.com/s/files/1/0984/7459/0510/files/coffee-bean-3_1.webp?v=1775727404" alt="" width="" height="">
+      </div>
+      <div class="gfc-beans-ring__slot" style="--a:240deg">
+        <img src="https://cdn.shopify.com/s/files/1/0984/7459/0510/files/coffee-bean-4.webp?v=1775727404" alt="" width="" height="">
+      </div>
+      <div class="gfc-beans-ring__slot" style="--a:270deg">
+        <img src="https://cdn.shopify.com/s/files/1/0984/7459/0510/files/coffee-bean-7.webp?v=1775727404" alt="" width="" height="">
+      </div>
+      <div class="gfc-beans-ring__slot" style="--a:300deg">
+        <img src="https://cdn.shopify.com/s/files/1/0984/7459/0510/files/coffee-bean-3.webp?v=1775727404" alt="" width="" height="">
+      </div>
+      <div class="gfc-beans-ring__slot" style="--a:330deg">
+        <img src="https://cdn.shopify.com/s/files/1/0984/7459/0510/files/coffee-bean-2.webp?v=1775727404" alt="" width="" height="">
+      </div>
+
+    </div>
+  </div>
+
+  <style>
+    #gfc-beans-{{ section.id }} {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      width: 200px;
+      height: 200px;
+      pointer-events: none;
+      z-index: 2;
+      overflow: visible;
+    }
+
+    #gfc-beans-{{ section.id }} .gfc-beans-ring__spinner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      animation: gfc-ring-spin 22s linear infinite;
+      will-change: transform;
+    }
+
+    /* radius = 80px — keeps 40px beans snug inside 200px circle */
+    #gfc-beans-{{ section.id }} .gfc-beans-ring__slot {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 40px;
+      height: 40px;
+      transform:
+        translate(-50%, -50%)
+        rotate(var(--a))
+        translateY(-80px);
+    }
+
+    #gfc-beans-{{ section.id }} .gfc-beans-ring__slot img {
+      width: 40px;
+      height: auto;
+      opacity: 0.5;
+      display: block;
+      animation: gfc-ring-counter 22s linear infinite;
+      will-change: transform;
+      -webkit-user-drag: none;
+    }
+
+    @keyframes gfc-ring-spin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    @keyframes gfc-ring-counter {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(-360deg); }
+    }
+  </style>
+
 </slideshow-component>
 
 {%- if request.design_mode -%}
