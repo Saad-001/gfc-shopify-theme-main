@@ -1,0 +1,572 @@
+{%- style -%}
+  {%- assign sid = section.id -%}{%- assign col_pct = 100 | divided_by: section.settings.columns_desktop -%}/* ── Card base styles ─────────────────────────────────────── */
+  #gfc-rp-{{ sid }}.gfc__product-card:before {
+    content: "";
+    position: absolute;
+    top: 14.5%;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    border-radius: 35px;
+    z-index: -1;
+    border: 3px solid #ffffff;
+    box-shadow: 0 0 0 0 #ffffff;
+    transition: border-color 0.4s ease
+    , box-shadow 0.4s ease;
+  }
+
+  #gfc-rp-{{ sid }}.gfc__product-card:hover:before {
+    border-color: var(--gfc-card-glow, #ffffff);
+    box-shadow: 0 0 14px 3px var(--gfc-card-glow, #ffffff)
+    , 0 0 40px 8px color-mix(in srgb, var(--gfc-card-glow, #ffffff) 35%, transparent);
+  }
+
+  #gfc-rp-{{ sid }}
+  .gfc__product-image-wrapper img {
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform-origin: bottom center;
+  }
+
+  #gfc-rp-{{ sid }}.group:hover .gfc__product-image-wrapper img {
+    transform: rotate(8deg);
+  }
+
+  /* ── Grid layout ──────────────────────────────────────────── */
+  #gfc-rp-{{ sid }} .gfc-rp__track {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 2rem;
+  }
+
+  @media (min-width: 640px) {
+    #gfc-rp-{{ sid }} .gfc-rp__track {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    #gfc-rp-{{ sid }} .gfc-rp__track {
+      grid-template-columns: repeat({{ section.settings.columns_desktop }}, 1fr);
+    }
+  }
+
+  /* ── Slider mode ──────────────────────────────────────────── */
+  #gfc-rp-{{ sid }}gfc-rp-slider {
+    display: block;
+    position: relative;
+  }
+
+  #gfc-rp-{{ sid }}
+  gfc-rp-slider.is-slider .gfc-rp__track {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+  }
+
+  #gfc-rp-{{ sid }}
+  gfc-rp-slider.is-slider .gfc-rp__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  #gfc-rp-{{ sid }}
+  gfc-rp-slider.is-slider .gfc-rp__card-wrapper {
+    flex: 0 0 calc(85% - 1rem);
+    scroll-snap-align: start;
+  }
+
+  @media (min-width: 640px) {
+    #gfc-rp-{{ sid }}gfc-rp-slider.is-slider .gfc-rp__card-wrapper {
+      flex: 0 0 calc(50% - 1rem);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    #gfc-rp-{{ sid }}gfc-rp-slider.is-slider .gfc-rp__card-wrapper {
+      flex: 0 0 calc({{ col_pct }}% - 1.5rem);
+    }
+  }
+
+  /* ── Nav buttons ──────────────────────────────────────────── */
+  #gfc-rp-{{ sid }} .gfc-rp__nav {
+    display: none;
+  }
+
+  #gfc-rp-{{ sid }}
+  gfc-rp-slider.is-slider .gfc-rp__nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #f5f0eb;
+    cursor: pointer;
+    transition: background 0.2s ease
+    , border-color 0.2s ease
+    , opacity 0.2s ease;
+    backdrop-filter: blur(4px);
+  }
+
+  #gfc-rp-{{ sid }}gfc-rp-slider.is-slider .gfc-rp__nav:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+
+  #gfc-rp-{{ sid }}gfc-rp-slider.is-slider .gfc-rp__nav:disabled {
+    opacity: 0.25;
+    cursor: default;
+  }
+
+  #gfc-rp-{{ sid }}
+  gfc-rp-slider.is-slider .gfc-rp__prev {
+    left: -24px;
+  }
+
+  #gfc-rp-{{ sid }}
+  gfc-rp-slider.is-slider .gfc-rp__next {
+    right: -24px;
+  }
+
+  /* ── Dots ─────────────────────────────────────────────────── */
+  #gfc-rp-{{ sid }} .gfc-rp__dots {
+    display: none;
+  }
+
+  #gfc-rp-{{ sid }}
+  gfc-rp-slider.is-slider ~ .gfc-rp__dots
+  , #gfc-rp-{{ sid }}
+  gfc-rp-slider.is-slider + .gfc-rp__dots {
+    display: flex;
+  }
+
+  #gfc-rp-{{ sid }}
+  .gfc-rp__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.25);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.2s ease
+    , transform 0.2s ease;
+  }
+
+  #gfc-rp-{{ sid }}
+  .gfc-rp__dot.is-active {
+    background: #f5f0eb;
+    transform: scale(1.3);
+  }
+{%- endstyle -%}
+
+<section class="py-24 px-12 page-width mx-auto" id="gfc-rp-{{ section.id }}">
+
+  <!-- Section Header -->
+  <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+    <div class="max-w-2xl">
+      <h2 class="text-5xl md:text-7xl font-headline leading-none mb-4 uppercase text-brand-offwhite">
+        {{ section.settings.heading_prefix }}
+        <span class="text-stone-500">{{ section.settings.heading_accent }}</span>
+      </h2>
+      <p class="text-brand-silver text-xl font-body">{{ section.settings.subheading }}</p>
+    </div>
+  </div>
+
+  <!-- Recommendations Container -->
+  <product-recommendations
+    data-url="{{ routes.product_recommendations_url }}?limit={{ section.settings.products_to_show }}&intent={{ section.settings.recommendation_intent }}"
+    data-section-id="{{ section.id }}"
+    data-product-id="{{ product.id }}">
+    {%- if recommendations.performed and recommendations.products_count > 0 -%}
+
+      <gfc-rp-slider
+        data-desktop="{{ section.settings.desktop_layout }}"
+        data-mobile="{{ section.settings.mobile_layout }}"
+        data-section-id="{{ section.id }}">
+        <!-- Prev / Next nav -->
+        <button
+          class="gfc-rp__nav gfc-rp__prev"
+          aria-label="Previous products"
+          disabled>
+          <span class="material-symbols-outlined" style="font-size:22px;">arrow_back</span>
+        </button>
+        <button class="gfc-rp__nav gfc-rp__next" aria-label="Next products">
+          <span class="material-symbols-outlined" style="font-size:22px;">arrow_forward</span>
+        </button>
+
+        <!-- Track -->
+        <div class="gfc-rp__track">
+          {%- for product in recommendations.products -%}
+
+            {%- assign card_glow = section.settings.glow_color -%}
+          {%- assign current_variant = product.selected_or_first_available_variant -%}
+
+            {%- comment -%} Badge logic from product tags {%- endcomment -%}
+            {%- assign badge_label = '' -%}
+            {%- assign badge_style = 'primary' -%}
+            {%- if product.tags contains 'best-seller' or product.tags contains 'best seller' -%}
+              {%- assign badge_label = 'BEST SELLER' -%}
+              {%- assign badge_style = 'primary' -%}
+            {%- elsif product.tags contains 'new-arrival' or product.tags contains 'new arrival' or product.tags contains 'new' -%}
+              {%- assign badge_label = 'NEW ARRIVAL' -%}
+              {%- assign badge_style = 'secondary' -%}
+            {%- elsif product.tags contains 'limited' -%}
+              {%- assign badge_label = 'LIMITED' -%}
+              {%- assign badge_style = 'danger' -%}
+            {%- elsif product.compare_at_price > product.price -%}
+              {%- assign badge_label = 'SALE' -%}
+              {%- assign badge_style = 'danger' -%}
+            {%- endif -%}
+
+            <div class="gfc-rp__card-wrapper gfc__product-card relative p-4 rounded-lg group transition-all duration-300 flex flex-col items-center text-center" style="--gfc-card-glow: {{ card_glow }};">
+
+              <!-- Product Image -->
+              <div class="relative mb-6 px-[10%] gfc__product-image-wrapper w-full">
+                <a href="{{ product.url }}">
+                  <img
+                    class="w-full h-auto object-contain rounded-2xl"
+                    src="{{ product.featured_image | image_url: width: 600 }}"
+                    alt="{{ product.featured_image.alt | default: product.title }}"
+                    width="600"
+                    height="750"
+                    loading="lazy">
+                </a>
+
+                {%- if badge_label != '' -%}
+                  {%- case badge_style -%}
+                    {%- when 'secondary' -%}
+                      <span class="absolute top-[8rem] left-4 bg-stone-700 text-brand-offwhite px-3 py-1 text-xs font-headline rounded-full uppercase">{{ badge_label }}</span>
+                    {%- when 'danger' -%}
+                      <span class="absolute top-[8rem] left-4 bg-red-900 text-brand-offwhite px-3 py-1 text-xs font-headline rounded-full uppercase">{{ badge_label }}</span>
+                    {%- else -%}
+                      <span class="absolute top-[8rem] left-4 bg-brand-burgundy text-brand-offwhite px-3 py-1 text-xs font-headline rounded-full uppercase">{{ badge_label }}</span>
+                  {%- endcase -%}
+                {%- endif -%}
+              </div>
+
+              <!-- Title + Price -->
+              <div class="flex justify-between gap-8 items-start my-8 w-full px-5">
+                <h3 class="text-xl font-headline text-brand-offwhite uppercase leading-tight line-clamp-2 -rotate-2">
+                  {{ product.title | upcase }}
+                </h3>
+                <span class="text-lg font-headline text-brand-silver">
+                  {{ product.price | money }}
+                </span>
+              </div>
+
+              <!-- Buttons -->
+              <div class="space-y-3 w-full px-5 pb-5">
+                {%- if current_variant.available -%}
+                  <form action="/cart/add" method="post">
+                    <input
+                      type="hidden"
+                      name="id"
+                      value="{{ current_variant.id }}">
+                    <input
+                      type="hidden"
+                      name="quantity"
+                      value="1">
+                    <div class="overflow-hidden">
+                      <button type="submit" class="block w-full border border-[#888] bg-white cursor-pointer p-0 group/btn">
+                        <i class="block float-left  w-8 h-8 -mt-4 -ml-4 rounded-full border border-[#888] bg-black"></i>
+                        <i class="block float-right w-8 h-8 -mt-4 -mr-4 rounded-full border border-[#888] bg-black"></i>
+                        <div class="py-4 px-6 text-center text-sm font-headline uppercase tracking-widest text-black group-hover/btn:opacity-70 transition-opacity duration-200 select-none pointer-events-none">
+                          ADD TO CART
+                        </div>
+                        <i class="block float-right w-8 h-8 -mt-4 -mr-4 -mb-[17px] rounded-full border border-[#888] bg-black"></i>
+                        <i class="block float-left  w-8 h-8 -mt-4 -ml-4 -mb-[17px] rounded-full border border-[#888] bg-black"></i>
+                      </button>
+                    </div>
+                  </form>
+                {%- else -%}
+                  <div class="overflow-hidden">
+                    <button
+                      type="button"
+                      disabled
+                      class="block w-full border border-[#444] bg-stone-900 cursor-not-allowed p-0">
+                      <i class="block float-left  w-8 h-8 -mt-4 -ml-4 rounded-full border border-[#444] bg-black"></i>
+                      <i class="block float-right w-8 h-8 -mt-4 -mr-4 rounded-full border border-[#444] bg-black"></i>
+                      <div class="py-4 px-6 text-center text-sm font-headline uppercase tracking-widest text-stone-500 select-none pointer-events-none">
+                        OUT OF STOCK
+                      </div>
+                      <i class="block float-right w-8 h-8 -mt-4 -mr-4 -mb-[17px] rounded-full border border-[#444] bg-black"></i>
+                      <i class="block float-left  w-8 h-8 -mt-4 -ml-4 -mb-[17px] rounded-full border border-[#444] bg-black"></i>
+                    </button>
+                  </div>
+                {%- endif -%}
+
+                <a href="{{ product.url }}" class="block w-full border border-2 border-white text-brand-silver py-4 rounded-2xl font-headline text-xs uppercase transition-colors tracking-widest text-center">
+                  SUBSCRIBE &amp; SAVE 15%
+                </a>
+              </div>
+
+            </div>
+          {%- endfor -%}
+        </div>
+      <!-- /.gfc-rp__track -->
+
+      </gfc-rp-slider>
+
+      <!-- Dots (rendered by JS) -->
+      <div class="gfc-rp__dots justify-center gap-2 mt-8" id="gfc-rp-dots-{{ section.id }}"></div>
+
+    {%- endif -%}
+  </product-recommendations>
+
+</section>
+
+<script>
+  (function () {
+  if (customElements.get('gfc-rp-slider')) return;
+
+  class GfcRpSlider extends HTMLElement {
+    constructor() {
+      super();
+      this._onScroll = this._onScroll.bind(this);
+      this._onResize = this._onResize.bind(this);
+    }
+
+    connectedCallback() {
+      this.track   = this.querySelector('.gfc-rp__track');
+      this.prevBtn = this.querySelector('.gfc-rp__prev');
+      this.nextBtn = this.querySelector('.gfc-rp__next');
+      this.cards   = Array.from(this.querySelectorAll('.gfc-rp__card-wrapper'));
+
+      // Dots container lives as a sibling (outside this element)
+      const sectionId = this.dataset.sectionId;
+      this.dotsContainer = document.getElementById('gfc-rp-dots-' + sectionId);
+
+      this.prevBtn?.addEventListener('click', () => this._scrollBy(-1));
+      this.nextBtn?.addEventListener('click', () => this._scrollBy(1));
+      this.track?.addEventListener('scroll', this._onScroll, { passive: true });
+      window.addEventListener('resize', this._onResize);
+
+      this._updateLayout();
+    }
+
+    disconnectedCallback() {
+      window.removeEventListener('resize', this._onResize);
+      this.track?.removeEventListener('scroll', this._onScroll);
+    }
+
+    get _isSlider() {
+      const mobile = window.innerWidth < 768;
+      return mobile
+        ? this.dataset.mobile === 'slider'
+        : this.dataset.desktop === 'slider';
+    }
+
+    _updateLayout() {
+      if (this._isSlider) {
+        this.classList.add('is-slider');
+        this._buildDots();
+        this._updateNav();
+        // show dots container
+        if (this.dotsContainer) this.dotsContainer.style.display = 'flex';
+      } else {
+        this.classList.remove('is-slider');
+        if (this.dotsContainer) this.dotsContainer.style.display = 'none';
+        this._clearDots();
+        if (this.prevBtn) this.prevBtn.style.display = '';
+        if (this.nextBtn) this.nextBtn.style.display = '';
+      }
+    }
+
+    _onResize() {
+      clearTimeout(this._resizeTimer);
+      this._resizeTimer = setTimeout(() => this._updateLayout(), 150);
+    }
+
+    // ── Scroll-based navigation ────────────────────────────────
+    _scrollBy(direction) {
+      if (!this.track || !this.cards.length) return;
+      const card     = this.cards[0];
+      const gap      = parseFloat(getComputedStyle(this.track).gap) || 32;
+      const stepPx   = (card.offsetWidth + gap) * this._visibleCount;
+      this.track.scrollBy({ left: direction * stepPx, behavior: 'smooth' });
+    }
+
+    get _visibleCount() {
+      const w = window.innerWidth;
+      if (w >= 1024) return parseInt(this.dataset.columns) || 4;
+      if (w >= 640)  return 2;
+      return 1;
+    }
+
+    _onScroll() {
+      this._updateNav();
+      this._updateActiveDot();
+    }
+
+    _updateNav() {
+      if (!this.track) return;
+      const atStart = this.track.scrollLeft <= 2;
+      const atEnd   = this.track.scrollLeft + this.track.clientWidth >= this.track.scrollWidth - 2;
+      if (this.prevBtn) this.prevBtn.disabled = atStart;
+      if (this.nextBtn) this.nextBtn.disabled = atEnd;
+    }
+
+    // ── Dots ──────────────────────────────────────────────────
+    _buildDots() {
+      if (!this.dotsContainer || !this.cards.length) return;
+      this._clearDots();
+      const count = Math.ceil(this.cards.length / this._visibleCount);
+      for (let i = 0; i < count; i++) {
+        const dot = document.createElement('button');
+        dot.className = 'gfc-rp__dot' + (i === 0 ? ' is-active' : '');
+        dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+        dot.addEventListener('click', () => this._goToSlide(i));
+        this.dotsContainer.appendChild(dot);
+      }
+    }
+
+    _clearDots() {
+      if (this.dotsContainer) this.dotsContainer.innerHTML = '';
+    }
+
+    _goToSlide(index) {
+      if (!this.track || !this.cards.length) return;
+      const card  = this.cards[0];
+      const gap   = parseFloat(getComputedStyle(this.track).gap) || 32;
+      const step  = (card.offsetWidth + gap) * this._visibleCount;
+      this.track.scrollTo({ left: index * step, behavior: 'smooth' });
+    }
+
+    _updateActiveDot() {
+      if (!this.dotsContainer || !this.track) return;
+      const dots     = Array.from(this.dotsContainer.querySelectorAll('.gfc-rp__dot'));
+      if (!dots.length) return;
+      const card     = this.cards[0];
+      const gap      = parseFloat(getComputedStyle(this.track).gap) || 32;
+      const step     = (card.offsetWidth + gap) * this._visibleCount;
+      const active   = Math.round(this.track.scrollLeft / step);
+      dots.forEach((d, i) => d.classList.toggle('is-active', i === active));
+    }
+  }
+
+  customElements.define('gfc-rp-slider', GfcRpSlider);
+  })();
+</script>
+
+{% schema %}
+  {
+    "name": "GFC Related Products",
+    "tag": "section",
+    "class": "section",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Dynamically shows products related to the current product using Shopify's recommendation engine. Only visible on product pages."
+      },
+      {
+        "type": "header",
+        "content": "Section Heading"
+      },
+      {
+        "type": "text",
+        "id": "heading_prefix",
+        "label": "Heading Prefix",
+        "default": "YOU MAY"
+      },
+      {
+        "type": "text",
+        "id": "heading_accent",
+        "label": "Heading Accent",
+        "default": "ALSO LIKE"
+      }, {
+        "type": "text",
+        "id": "subheading",
+        "label": "Subheading",
+        "default": "Handpicked roasts that pair well with your selection."
+      }, {
+        "type": "header",
+        "content": "Products"
+      }, {
+        "type": "range",
+        "id": "products_to_show",
+        "min": 2,
+        "max": 10,
+        "step": 1,
+        "default": 4,
+        "label": "Products to Show"
+      }, {
+        "type": "select",
+        "id": "recommendation_intent",
+        "label": "Recommendation Type",
+        "options": [
+          {
+            "value": "related",
+            "label": "Related"
+          }, {
+            "value": "complementary",
+            "label": "Complementary"
+          }
+        ],
+        "default": "related",
+        "info": "Related shows similar products. Complementary uses Shopify's product complementary metafield."
+      }, {
+        "type": "range",
+        "id": "columns_desktop",
+        "min": 2,
+        "max": 4,
+        "step": 1,
+        "default": 4,
+        "label": "Columns on Desktop"
+      }, {
+        "type": "header",
+        "content": "Layout"
+      }, {
+        "type": "select",
+        "id": "desktop_layout",
+        "label": "Desktop Layout",
+        "options": [
+          {
+            "value": "grid",
+            "label": "Grid"
+          }, {
+            "value": "slider",
+            "label": "Slider"
+          }
+        ],
+        "default": "grid"
+      }, {
+        "type": "select",
+        "id": "mobile_layout",
+        "label": "Mobile Layout",
+        "options": [
+          {
+            "value": "grid",
+            "label": "Grid"
+          }, {
+            "value": "slider",
+            "label": "Slider"
+          }
+        ],
+        "default": "slider"
+      }, {
+        "type": "header",
+        "content": "Card Style"
+      }, {
+        "type": "color",
+        "id": "glow_color",
+        "label": "Card Hover Glow Color",
+        "default": "#ffffff"
+      }
+    ],
+    "presets": [
+      {
+        "name": "GFC Related Products"
+      }
+    ]
+  }
+{% endschema %}

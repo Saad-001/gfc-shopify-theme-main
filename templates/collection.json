@@ -14,7 +14,7 @@
       "settings": {
         "show_collection_description": true,
         "show_collection_image": false,
-        "color_scheme": "scheme-1"
+        "color_scheme": "scheme-4"
       }
     },
     "product-grid": {
@@ -22,24 +22,65 @@
       "settings": {
         "products_per_page": 16,
         "columns_desktop": 4,
-        "color_scheme": "scheme-1",
-        "image_ratio": "adapt",
+        "columns_mobile": "2",
+        "color_scheme": "scheme-4",
+        "image_ratio": "portrait",
         "image_shape": "default",
-        "show_secondary_image": false,
-        "show_vendor": false,
+        "show_secondary_image": true,
+        "show_vendor": true,
         "show_rating": false,
         "quick_add": "none",
         "enable_filtering": true,
-        "filter_type": "horizontal",
+        "filter_type": "vertical",
         "enable_sorting": true,
-        "columns_mobile": "2",
         "padding_top": 36,
         "padding_bottom": 36
+      }
+    },
+    "gfc_footer_NbM9Yw": {
+      "type": "gfc-footer",
+      "blocks": {
+        "link_column_wxjz7f": {
+          "type": "link_column",
+          "settings": {
+            "heading": "SHOP",
+            "links": "All Collections||Whole Bean||Ground Coffee||Subscriptions||Merchandise",
+            "urls": "/collections/all||/collections/whole-bean||/collections/ground-coffee||/collections/subscriptions||/collections/merchandise"
+          }
+        },
+        "link_column_cJEGb9": {
+          "type": "link_column",
+          "settings": {
+            "heading": "LEGACY",
+            "links": "Our Story||The Roast Process||Wholesale||Sustainability||Contact Us",
+            "urls": "/pages/our-story||/pages/roast-process||/pages/wholesale||/pages/sustainability||/pages/contact"
+          }
+        }
+      },
+      "block_order": [
+        "link_column_wxjz7f",
+        "link_column_cJEGb9"
+      ],
+      "settings": {
+        "brand_name": "GODS FAVORITE",
+        "tagline": "Real Coffee for Real Souls. Est. 1972. Roasting divine beans in our temple of soul.",
+        "social_facebook": "",
+        "social_youtube": "",
+        "social_instagram": "",
+        "newsletter_heading": "THE CONGREGATION",
+        "newsletter_desc": "Join the mailing list for soulful updates and divine deals.",
+        "newsletter_placeholder": "YOUR EMAIL ADDRESS",
+        "newsletter_success": "Thank you for joining the congregation!",
+        "copyright": "© 2024 GODS FAVORITE COFFEE CO. REAL COFFEE FOR REAL SOULS.",
+        "privacy_link": "",
+        "terms_link": "",
+        "shipping_link": ""
       }
     }
   },
   "order": [
     "banner",
-    "product-grid"
+    "product-grid",
+    "gfc_footer_NbM9Yw"
   ]
 }

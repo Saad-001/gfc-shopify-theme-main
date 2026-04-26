@@ -127,7 +127,7 @@
         "span {color: #fff;}"
       ],
       "settings": {
-        "items": "FRESHLY ROASTED,BORN IN 1994,ANALOG SOUL,DIVINE FLAVOR",
+        "items": "FRESHLY ROASTED,BORN IN 1972,ANALOG SOUL,DIVINE FLAVOR",
         "speed": 30
       }
     },
@@ -188,6 +188,9 @@
         "card_2",
         "card_3",
         "card_4"
+      ],
+      "custom_css": [
+        ".grid {display: grid !important;}"
       ],
       "settings": {
         "heading_prefix": "THE DIVINE",
@@ -406,9 +409,12 @@
         "para_2",
         "para_3"
       ],
+      "custom_css": [
+        ".grid {display: grid !important;}"
+      ],
       "settings": {
         "image": "shopify://shop_images/unnamed_21.png",
-        "label": "SINCE 1994",
+        "label": "SINCE 1972",
         "heading_prefix": "BORN OF",
         "heading_accent": "SOUL",
         "pledge_text": "THE FOUNDER'S PLEDGE"
@@ -500,6 +506,9 @@
         "photo_3jgHQq",
         "photo_p88ebm"
       ],
+      "custom_css": [
+        ".grid {display: grid !important;}"
+      ],
       "settings": {
         "heading": "THE VIBE CHECK",
         "subheading": "Tag @GODSFAVORITECOFFEE for a chance to be featured in the temple.",
@@ -533,7 +542,7 @@
       ],
       "settings": {
         "brand_name": "GODS FAVORITE",
-        "tagline": "Real Coffee for Real Souls. Est. 1994. Roasting divine beans in our temple of soul.",
+        "tagline": "Real Coffee for Real Souls. Est. 1972. Roasting divine beans in our temple of soul.",
         "social_facebook": "",
         "social_youtube": "",
         "social_instagram": "",

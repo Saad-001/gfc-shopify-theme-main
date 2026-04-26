@@ -1,6 +1,6 @@
 <style>
   .gfc-sub-grain {
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml, %3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
     opacity: 0.1;
   }
 </style>
@@ -8,7 +8,7 @@
 <section class="py-24 relative overflow-hidden" id="gfc-sub-{{ section.id }}">
   <div class="gfc-sub-grain absolute inset-0 pointer-events-none"></div>
 
-  <div class="page-width mx-auto px-12 relative grid md:grid-cols-2 items-center gap-16">
+  <div class="page-width mx-auto px-12 relative grid md:grid-cols-2 items-center gap-16" style="display: grid !important;">
 
     <!-- Left: steps -->
     <div class="order-2 md:order-1">
@@ -47,8 +47,7 @@
             alt="{{ section.settings.image.alt | default: 'Subscription' }}"
             width="480"
             height="480"
-            loading="lazy"
-          >
+            loading="lazy">
         {%- else -%}
           <div class="w-80 h-80 md:w-96 md:h-96 rounded-full bg-brand-oxblood flex items-center justify-center drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
             <span class="material-symbols-outlined text-8xl text-brand-aluminum">coffee</span>
@@ -65,86 +64,82 @@
 </section>
 
 {% schema %}
-{
-  "name": "GFC Subscription",
-  "tag": "div",
-  "settings": [
-    {
-      "type": "text",
-      "id": "heading_prefix",
-      "label": "Heading Prefix",
-      "default": "NEVER RUN OUT OF"
-    },
-    {
-      "type": "text",
-      "id": "heading_accent",
-      "label": "Heading Accent",
-      "default": "GRACE"
-    },
-    {
-      "type": "text",
-      "id": "cta_label",
-      "label": "CTA Label",
-      "default": "JOIN THE CONGREGATION"
-    },
-    {
-      "type": "url",
-      "id": "cta_link",
-      "label": "CTA Link"
-    },
-    {
-      "type": "image_picker",
-      "id": "image",
-      "label": "Right Side Image"
-    }
-  ],
-  "blocks": [
-    {
-      "type": "step",
-      "name": "Step",
-      "settings": [
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Step Title",
-          "default": "PICK YOUR BLESSING"
-        },
-        {
-          "type": "textarea",
-          "id": "description",
-          "label": "Step Description",
-          "default": "Choose your favorite blends and the frequency that suits your soul's rhythm."
-        }
-      ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "GFC Subscription",
-      "blocks": [
-        {
-          "type": "step",
-          "settings": {
-            "title": "PICK YOUR BLESSING",
-            "description": "Choose your favorite blends and the frequency that suits your soul's rhythm."
+  {
+    "name": "GFC Subscription",
+    "tag": "div",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading_prefix",
+        "label": "Heading Prefix",
+        "default": "NEVER RUN OUT OF"
+      },
+      {
+        "type": "text",
+        "id": "heading_accent",
+        "label": "Heading Accent",
+        "default": "GRACE"
+      },
+      {
+        "type": "text",
+        "id": "cta_label",
+        "label": "CTA Label",
+        "default": "JOIN THE CONGREGATION"
+      },
+      {
+        "type": "url",
+        "id": "cta_link",
+        "label": "CTA Link"
+      }, {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Right Side Image"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "step",
+        "name": "Step",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Step Title",
+            "default": "PICK YOUR BLESSING"
+          }, {
+            "type": "textarea",
+            "id": "description",
+            "label": "Step Description",
+            "default": "Choose your favorite blends and the frequency that suits your soul's rhythm."
           }
-        },
-        {
-          "type": "step",
-          "settings": {
-            "title": "SET THE TEMPO",
-            "description": "Monthly, bi-weekly, or weekly. We roast it fresh and ship it immediately."
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "GFC Subscription",
+        "blocks": [
+          {
+            "type": "step",
+            "settings": {
+              "title": "PICK YOUR BLESSING",
+              "description": "Choose your favorite blends and the frequency that suits your soul's rhythm."
+            }
+          }, {
+            "type": "step",
+            "settings": {
+              "title": "SET THE TEMPO",
+              "description": "Monthly, bi-weekly, or weekly. We roast it fresh and ship it immediately."
+            }
+          }, {
+            "type": "step",
+            "settings": {
+              "title": "SAVE & SIP",
+              "description": "Enjoy 15% off every order plus exclusive access to experimental roasts."
+            }
           }
-        },
-        {
-          "type": "step",
-          "settings": {
-            "title": "SAVE & SIP",
-            "description": "Enjoy 15% off every order plus exclusive access to experimental roasts."
-          }
-        }
-      ]
-    }
-  ]
-}
+        ]
+      }
+    ]
+  }
 {% endschema %}
