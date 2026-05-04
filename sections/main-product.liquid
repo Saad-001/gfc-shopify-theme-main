@@ -562,12 +562,29 @@
                           assign cp_label_setting = 'label_' | append: cp_key_item
                           assign cp_show_field = block.settings[cp_show_setting]
                           assign cp_field_label = block.settings[cp_label_setting]
-                          assign cp_field_value = cp_metaobject[cp_key_item]
+                          assign cp_raw_value = cp_metaobject[cp_key_item]
+                          assign cp_field_value = cp_raw_value.value | default: cp_raw_value
+
+                          assign cp_is_list = false
+                          assign cp_first_char = cp_field_value | json | slice: 0
+                          if cp_first_char == '['
+                            assign cp_is_list = true
+                          endif
                         -%}
                         {%- if cp_show_field and cp_field_value != blank -%}
                           <div class="coffee-profile-card__row">
                             <dt class="coffee-profile-card__label">{{ cp_field_label | default: cp_key_item }}</dt>
-                            <dd class="coffee-profile-card__value">{{ cp_field_value }}</dd>
+                            <dd class="coffee-profile-card__value">
+                              {%- if cp_is_list -%}
+                                <ul class="coffee-profile-card__tags">
+                                  {%- for cp_item in cp_field_value -%}
+                                    <li class="coffee-profile-card__tag">{{ cp_item }}</li>
+                                  {%- endfor -%}
+                                </ul>
+                              {%- else -%}
+                                {{ cp_field_value }}
+                              {%- endif -%}
+                            </dd>
                           </div>
                         {%- endif -%}
                       {%- endfor -%}
