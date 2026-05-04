@@ -1,0 +1,97 @@
+{%- comment -%}
+  GFC Product Card
+  Reusable product card with hover-glow border, rotating image, badge,
+  add-to-cart button (via 'gfc-add-to-cart-button' snippet), and subscribe link.
+
+  Accepts:
+  - product (object, optional): Shopify product. If blank, renders placeholder using custom_* fields.
+  - custom_title (string, optional): Title for placeholder mode.
+  - custom_price (string, optional): Price for placeholder mode.
+  - glow_color (string, default: '#ffffff'): Hover-glow border color.
+  - badge (string, optional): Badge label (e.g. "BEST SELLER"). Empty/blank hides the badge.
+  - badge_style (string, default: 'primary'): 'primary' | 'secondary' | 'danger'.
+  - card_class (string, optional): Extra CSS classes for the outer card wrapper.
+  - shopify_attributes (string, optional): block.shopify_attributes when rendered inside a block loop.
+  - subscribe_url (string, optional): Override URL for the subscribe link. Defaults to product URL.
+{%- endcomment -%}
+
+{%- assign gfc_card_glow = glow_color | default: '#ffffff' -%}
+{%- assign gfc_card_extra_class = card_class | default: '' -%}
+{%- assign gfc_card_badge_style = badge_style | default: 'primary' -%}
+
+{%- if product != blank -%}
+  {%- assign gfc_card_title = product.title | upcase -%}
+  {%- assign gfc_card_price = product.price | money -%}
+  {%- assign gfc_card_url = product.url -%}
+  {%- assign gfc_card_image = product.featured_image -%}
+  {%- assign gfc_card_image_alt = gfc_card_image.alt | default: product.title -%}
+  {%- assign gfc_card_variant = product.selected_or_first_available_variant -%}
+  {%- assign gfc_card_available = gfc_card_variant.available -%}
+  {%- assign gfc_card_variant_id = gfc_card_variant.id -%}
+{%- else -%}
+  {%- assign gfc_card_title = custom_title | default: '' | upcase -%}
+  {%- assign gfc_card_price = custom_price -%}
+  {%- assign gfc_card_url = '#' -%}
+  {%- assign gfc_card_image = nil -%}
+  {%- assign gfc_card_image_alt = gfc_card_title -%}
+  {%- assign gfc_card_available = true -%}
+  {%- assign gfc_card_variant_id = nil -%}
+{%- endif -%}
+
+{%- assign gfc_card_subscribe_url = subscribe_url | default: gfc_card_url -%}
+
+  <div
+  class="relative p-4 rounded-lg group transition-all duration-300 flex flex-col items-center text-center gfc__product-card {{ gfc_card_extra_class }}"
+  style="--gfc-card-glow: {{ gfc_card_glow }};"
+  {{ shopify_attributes }}>
+  <!-- Image -->
+  <div class="relative mb-6 px-[10%] gfc__product-image-wrapper w-full">
+    {%- if gfc_card_image != blank -%}
+      <a href="{{ gfc_card_url }}">
+        <img
+          class="w-full h-auto object-contain rounded-2xl"
+          src="{{ gfc_card_image | image_url: width: 600 }}"
+          alt="{{ gfc_card_image_alt }}"
+          width="600"
+          height="750"
+          loading="lazy">
+      </a>
+    {%- else -%}
+      <div class="w-full bg-stone-800 flex items-center justify-center aspect-[4/5] rounded-2xl">
+        <span class="material-symbols-outlined text-6xl text-stone-600">coffee</span>
+      </div>
+    {%- endif -%}
+
+    {%- if badge != blank -%}
+      {%- case gfc_card_badge_style -%}
+        {%- when 'secondary' -%}
+          <span class="absolute top-[8rem] left-4 bg-stone-700 text-brand-offwhite px-3 py-1 text-xs font-headline rounded-full uppercase">{{ badge }}</span>
+        {%- when 'danger' -%}
+          <span class="absolute top-[8rem] left-4 bg-red-900 text-brand-offwhite px-3 py-1 text-xs font-headline rounded-full uppercase">{{ badge }}</span>
+        {%- else -%}
+          <span class="absolute top-[8rem] left-4 bg-brand-burgundy text-brand-offwhite px-3 py-1 text-xs font-headline rounded-full uppercase">{{ badge }}</span>
+      {%- endcase -%}
+    {%- endif -%}
+  </div>
+
+  <!-- Title + Price -->
+  <div class="flex justify-between gap-8 items-start my-8 w-full px-5">
+    <h3 class="text-xl font-headline text-brand-offwhite uppercase leading-tight line-clamp-2 -rotate-2">
+      {{ gfc_card_title }}
+    </h3>
+    <span class="text-lg font-headline text-brand-silver">
+      {{ gfc_card_price }}
+    </span>
+  </div>
+
+  <!-- Buttons -->
+  <div class="space-y-3 w-full px-5 pb-5">
+    {%- render 'gfc-add-to-cart-button'
+      , variant_id: gfc_card_variant_id
+      , available: gfc_card_available
+    -%}
+    <a href="{{ gfc_card_subscribe_url }}" class="block w-full border border-2 border-white text-brand-silver py-4 rounded-2xl font-headline text-xs uppercase transition-colors tracking-widest text-center">
+      SUBSCRIBE &amp; SAVE 15%
+    </a>
+  </div>
+</div>

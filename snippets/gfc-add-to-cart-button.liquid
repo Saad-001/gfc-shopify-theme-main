@@ -1,0 +1,57 @@
+{%- comment -%}
+  GFC Add-to-Cart Button
+  Renders the styled "punched-corner" button used across GFC sections.
+
+  Accepts:
+    - variant_id (number, optional): Variant ID for the cart form. If absent and `available` is true, renders a styled placeholder button (no form).
+    - available (boolean, default: true): When false, renders the disabled out-of-stock state.
+    - label (string, default: 'ADD TO CART'): Button label for the active state.
+    - oos_label (string, default: 'OUT OF STOCK'): Button label for the disabled state.
+    - quantity (number, default: 1): Quantity to add to cart.
+{%- endcomment -%}
+
+{%- assign gfc_btn_label = label | default: 'ADD TO CART' -%}
+{%- assign gfc_btn_oos = oos_label | default: 'OUT OF STOCK' -%}
+{%- assign gfc_btn_qty = quantity | default: 1 -%}
+
+{%- if available == false -%}
+  <div class="overflow-hidden">
+    <button type="button" disabled class="block w-full border border-[#444] bg-stone-900 cursor-not-allowed p-0">
+      <i class="block float-left  w-8 h-8 -mt-4 -ml-4 rounded-full border border-[#444] bg-black"></i>
+      <i class="block float-right w-8 h-8 -mt-4 -mr-4 rounded-full border border-[#444] bg-black"></i>
+      <div class="py-4 px-6 text-center text-sm font-headline uppercase tracking-widest text-stone-500 select-none pointer-events-none">
+        {{ gfc_btn_oos }}
+      </div>
+      <i class="block float-right w-8 h-8 -mt-4 -mr-4 -mb-[17px] rounded-full border border-[#444] bg-black"></i>
+      <i class="block float-left  w-8 h-8 -mt-4 -ml-4 -mb-[17px] rounded-full border border-[#444] bg-black"></i>
+    </button>
+  </div>
+{%- elsif variant_id != blank -%}
+  <form action="/cart/add" method="post">
+    <input type="hidden" name="id" value="{{ variant_id }}">
+    <input type="hidden" name="quantity" value="{{ gfc_btn_qty }}">
+    <div class="overflow-hidden">
+      <button type="submit" class="block w-full border border-[#888] bg-white cursor-pointer p-0 group/btn">
+        <i class="block float-left  w-8 h-8 -mt-4 -ml-4 rounded-full border border-[#888] bg-black"></i>
+        <i class="block float-right w-8 h-8 -mt-4 -mr-4 rounded-full border border-[#888] bg-black"></i>
+        <div class="py-4 px-6 text-center text-sm font-headline uppercase tracking-widest text-black group-hover/btn:opacity-70 transition-opacity duration-200 select-none pointer-events-none">
+          {{ gfc_btn_label }}
+        </div>
+        <i class="block float-right w-8 h-8 -mt-4 -mr-4 -mb-[17px] rounded-full border border-[#888] bg-black"></i>
+        <i class="block float-left  w-8 h-8 -mt-4 -ml-4 -mb-[17px] rounded-full border border-[#888] bg-black"></i>
+      </button>
+    </div>
+  </form>
+{%- else -%}
+  <div class="overflow-hidden">
+    <button type="button" class="block w-full border border-[#888] bg-white cursor-pointer p-0 group/btn">
+      <i class="block float-left  w-8 h-8 -mt-4 -ml-4 rounded-full border border-[#888] bg-black"></i>
+      <i class="block float-right w-8 h-8 -mt-4 -mr-4 rounded-full border border-[#888] bg-black"></i>
+      <div class="py-4 px-6 text-center text-sm font-headline uppercase tracking-widest text-black group-hover/btn:opacity-70 transition-opacity duration-200 select-none pointer-events-none">
+        {{ gfc_btn_label }}
+      </div>
+      <i class="block float-right w-8 h-8 -mt-4 -mr-4 -mb-[17px] rounded-full border border-[#888] bg-black"></i>
+      <i class="block float-left  w-8 h-8 -mt-4 -ml-4 -mb-[17px] rounded-full border border-[#888] bg-black"></i>
+    </button>
+  </div>
+{%- endif -%}

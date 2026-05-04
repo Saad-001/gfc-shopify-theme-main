@@ -66,6 +66,29 @@
     color: rgb(var(--color-background));
   }
 
+  .gfc__product-card:before {
+    content: "";
+    position: absolute;
+    top: 14.5%;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    border-radius: 35px;
+    z-index: -1;
+    border: 3px solid #ffffff;
+    box-shadow: 0 0 0 0 #ffffff;
+    transition: border-color 0.4s ease
+    , box-shadow 0.4s ease;
+  }
+
+  .gfc__product-image-wrapper img {
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform-origin: bottom center;
+  }
+
+  .group:hover .gfc__product-image-wrapper img {
+    transform: rotate(8deg);
+  }
 {%- endstyle -%}
 
 <div class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}">
@@ -189,18 +212,22 @@
                   data-cascade
                   style="--animation-order: {{ forloop.index }};"
                   {% endif %}>
-                  {% render 'card-product'
-                    , card_product: product
-                    , media_aspect_ratio: section.settings.image_ratio
-                    , image_shape: section.settings.image_shape
-                    , show_secondary_image: section.settings.show_secondary_image
-                    , show_vendor: section.settings.show_vendor
-                    , show_rating: section.settings.show_rating
-                    , lazy_load: lazy_load
-                    , skip_styles: skip_card_product_styles
-                    , quick_add: section.settings.quick_add
-                    , section_id: section.id
-                  %}
+                  {% comment %} {% render 'card-product'
+                                                                                , card_product: product
+                                                                                , media_aspect_ratio: section.settings.image_ratio
+                                                                                , image_shape: section.settings.image_shape
+                                                                                , show_secondary_image: section.settings.show_secondary_image
+                                                                                , show_vendor: section.settings.show_vendor
+                                                                                , show_rating: section.settings.show_rating
+                                                                                , lazy_load: lazy_load
+                                                                                , skip_styles: skip_card_product_styles
+                                                                                , quick_add: section.settings.quick_add
+                                                                                , section_id: section.id
+                                                                        %} {% endcomment %}
+
+                  {%- render 'gfc-product-card'
+                    , product: product
+                  -%}
                 </li>
                 {%- assign skip_card_product_styles = true -%}
               {%- endfor -%}

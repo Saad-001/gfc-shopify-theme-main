@@ -186,114 +186,37 @@
 
         <!-- Track -->
         <div class="gfc-rp__track">
-          {%- for product in recommendations.products -%}
+          {%- assign glow_colors_str = section.settings.glow_color_1 | append: '|' | append: section.settings.glow_color_2 | append: '|' | append: section.settings.glow_color_3 | append: '|' | append: section.settings.glow_color_4 -%}
+          {%- assign glow_colors_arr = glow_colors_str | split: '|' -%}
 
-            {%- assign glow_colors_str = section.settings.glow_color_1 | append: '|' | append: section.settings.glow_color_2 | append: '|' | append: section.settings.glow_color_3 | append: '|' | append: section.settings.glow_color_4 -%}
-            {%- assign glow_colors_arr = glow_colors_str | split: '|' -%}
+          {%- for product in recommendations.products -%}
             {%- assign glow_idx = forloop.index0 | modulo: 4 -%}
             {%- assign card_glow = glow_colors_arr[glow_idx] -%}
-            {%- assign current_variant = product.selected_or_first_available_variant -%}
 
             {%- comment -%} Badge logic from product tags {%- endcomment -%}
             {%- assign badge_label = '' -%}
-            {%- assign badge_style = 'primary' -%}
+            {%- assign card_badge_style = 'primary' -%}
             {%- if product.tags contains 'best-seller' or product.tags contains 'best seller' -%}
               {%- assign badge_label = 'BEST SELLER' -%}
-              {%- assign badge_style = 'primary' -%}
+              {%- assign card_badge_style = 'primary' -%}
             {%- elsif product.tags contains 'new-arrival' or product.tags contains 'new arrival' or product.tags contains 'new' -%}
               {%- assign badge_label = 'NEW ARRIVAL' -%}
-              {%- assign badge_style = 'secondary' -%}
+              {%- assign card_badge_style = 'secondary' -%}
             {%- elsif product.tags contains 'limited' -%}
               {%- assign badge_label = 'LIMITED' -%}
-              {%- assign badge_style = 'danger' -%}
+              {%- assign card_badge_style = 'danger' -%}
             {%- elsif product.compare_at_price > product.price -%}
               {%- assign badge_label = 'SALE' -%}
-              {%- assign badge_style = 'danger' -%}
+              {%- assign card_badge_style = 'danger' -%}
             {%- endif -%}
 
-            <div class="gfc-rp__card-wrapper gfc__product-card relative p-4 rounded-lg group transition-all duration-300 flex flex-col items-center text-center" style="--gfc-card-glow: {{ card_glow }};">
-
-              <!-- Product Image -->
-              <div class="relative mb-6 px-[10%] gfc__product-image-wrapper w-full">
-                <a href="{{ product.url }}">
-                  <img
-                    class="w-full h-auto object-contain rounded-2xl"
-                    src="{{ product.featured_image | image_url: width: 600 }}"
-                    alt="{{ product.featured_image.alt | default: product.title }}"
-                    width="600"
-                    height="750"
-                    loading="lazy">
-                </a>
-
-                {%- if badge_label != '' -%}
-                  {%- case badge_style -%}
-                    {%- when 'secondary' -%}
-                      <span class="absolute top-[8rem] left-4 bg-stone-700 text-brand-offwhite px-3 py-1 text-xs font-headline rounded-full uppercase">{{ badge_label }}</span>
-                    {%- when 'danger' -%}
-                      <span class="absolute top-[8rem] left-4 bg-red-900 text-brand-offwhite px-3 py-1 text-xs font-headline rounded-full uppercase">{{ badge_label }}</span>
-                    {%- else -%}
-                      <span class="absolute top-[8rem] left-4 bg-brand-burgundy text-brand-offwhite px-3 py-1 text-xs font-headline rounded-full uppercase">{{ badge_label }}</span>
-                  {%- endcase -%}
-                {%- endif -%}
-              </div>
-
-              <!-- Title + Price -->
-              <div class="flex justify-between gap-8 items-start my-8 w-full px-5">
-                <h3 class="text-xl font-headline text-brand-offwhite uppercase leading-tight line-clamp-2 -rotate-2">
-                  {{ product.title | upcase }}
-                </h3>
-                <span class="text-lg font-headline text-brand-silver">
-                  {{ product.price | money }}
-                </span>
-              </div>
-
-              <!-- Buttons -->
-              <div class="space-y-3 w-full px-5 pb-5">
-                {%- if current_variant.available -%}
-                  <form action="/cart/add" method="post">
-                    <input
-                      type="hidden"
-                      name="id"
-                      value="{{ current_variant.id }}">
-                    <input
-                      type="hidden"
-                      name="quantity"
-                      value="1">
-                    <div class="overflow-hidden">
-                      <button type="submit" class="block w-full border border-[#888] bg-white cursor-pointer p-0 group/btn">
-                        <i class="block float-left  w-8 h-8 -mt-4 -ml-4 rounded-full border border-[#888] bg-black"></i>
-                        <i class="block float-right w-8 h-8 -mt-4 -mr-4 rounded-full border border-[#888] bg-black"></i>
-                        <div class="py-4 px-6 text-center text-sm font-headline uppercase tracking-widest text-black group-hover/btn:opacity-70 transition-opacity duration-200 select-none pointer-events-none">
-                          ADD TO CART
-                        </div>
-                        <i class="block float-right w-8 h-8 -mt-4 -mr-4 -mb-[17px] rounded-full border border-[#888] bg-black"></i>
-                        <i class="block float-left  w-8 h-8 -mt-4 -ml-4 -mb-[17px] rounded-full border border-[#888] bg-black"></i>
-                      </button>
-                    </div>
-                  </form>
-                {%- else -%}
-                  <div class="overflow-hidden">
-                    <button
-                      type="button"
-                      disabled
-                      class="block w-full border border-[#444] bg-stone-900 cursor-not-allowed p-0">
-                      <i class="block float-left  w-8 h-8 -mt-4 -ml-4 rounded-full border border-[#444] bg-black"></i>
-                      <i class="block float-right w-8 h-8 -mt-4 -mr-4 rounded-full border border-[#444] bg-black"></i>
-                      <div class="py-4 px-6 text-center text-sm font-headline uppercase tracking-widest text-stone-500 select-none pointer-events-none">
-                        OUT OF STOCK
-                      </div>
-                      <i class="block float-right w-8 h-8 -mt-4 -mr-4 -mb-[17px] rounded-full border border-[#444] bg-black"></i>
-                      <i class="block float-left  w-8 h-8 -mt-4 -ml-4 -mb-[17px] rounded-full border border-[#444] bg-black"></i>
-                    </button>
-                  </div>
-                {%- endif -%}
-
-                <a href="{{ product.url }}" class="block w-full border border-2 border-white text-brand-silver py-4 rounded-2xl font-headline text-xs uppercase transition-colors tracking-widest text-center">
-                  SUBSCRIBE &amp; SAVE 15%
-                </a>
-              </div>
-
-            </div>
+            {%- render 'gfc-product-card',
+              product: product,
+              glow_color: card_glow,
+              badge: badge_label,
+              badge_style: card_badge_style,
+              card_class: 'gfc-rp__card-wrapper'
+            -%}
           {%- endfor -%}
         </div>
       <!-- /.gfc-rp__track -->
