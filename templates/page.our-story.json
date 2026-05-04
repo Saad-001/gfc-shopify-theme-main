@@ -63,6 +63,7 @@
         "heading_prefix": "Born of",
         "heading_accent": "Soul",
         "tagline": "Real coffee for real souls — no shortcuts, no filler, just the pursuit of something divine.",
+        "image": "shopify://shop_images/our-story-img.png",
         "hero_height": "md",
         "overlay_opacity": 65,
         "show_torn_edge": true,
