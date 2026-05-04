@@ -1,0 +1,253 @@
+{%- liquid
+  assign overlay = section.settings.overlay_opacity | divided_by: 100.0
+  assign hero_image = collection.image
+  if section.settings.image_override != blank
+    assign hero_image = section.settings.image_override
+  endif
+-%}
+
+<style>
+  #gfc-coll-hero-{{ section.id }} {
+    {%- if hero_image != blank -%}
+      background-image: linear-gradient(rgba(26, 36, 38, {{ overlay }}), rgba(26, 36, 38, {{ overlay | plus: 0.1 }}))
+      , url('{{ hero_image | image_url: width: 2200 }}');
+    {%- else -%}
+      background-image: linear-gradient(rgba(26, 36, 38, 0.92), rgba(26, 36, 38, 0.96))
+      , url('https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=2070&auto=format&fit=crop');
+    {%- endif -%}
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  #gfc-coll-hero-{{ section.id }}
+  .gfc-coll-hero--sm {
+    min-height: 60vh;
+  }
+  #gfc-coll-hero-{{ section.id }}
+  .gfc-coll-hero--md {
+    min-height: 75vh;
+  }
+  #gfc-coll-hero-{{ section.id }}
+  .gfc-coll-hero--lg {
+    min-height: 90vh;
+  }
+
+  .gfc-coll-hero .gfc-coll-grain {
+    background-image: url("data:image/svg+xml, %3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.05;
+  }
+
+  .gfc-coll-hero .gfc-coll-torn-edge {
+    -webkit-mask-image: url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 48' preserveAspectRatio='none'%3E%3Cpath d='M0, 48 L0, 20 C50, 30 100, 10 150, 22 C200, 34 250, 8 300, 18 C350, 28 400, 6 450, 16 C500, 26 550, 4 600, 14 C650, 24 700, 2 750, 12 C800, 22 850, 0 900, 10 C950, 20 1000, 2 1050, 12 C1100, 22 1150, 5 1200, 15 L1200, 48 Z'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 48' preserveAspectRatio='none'%3E%3Cpath d='M0, 48 L0, 20 C50, 30 100, 10 150, 22 C200, 34 250, 8 300, 18 C350, 28 400, 6 450, 16 C500, 26 550, 4 600, 14 C650, 24 700, 2 750, 12 C800, 22 850, 0 900, 10 C950, 20 1000, 2 1050, 12 C1100, 22 1150, 5 1200, 15 L1200, 48 Z'/%3E%3C/svg%3E");
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+  }
+</style>
+
+<section id="gfc-coll-hero-{{ section.id }}" class="gfc-coll-hero gfc-coll-hero--{{ section.settings.height }} relative flex flex-col items-center justify-center pt-28 pb-20 overflow-hidden">
+  <div class="gfc-coll-grain absolute inset-0 pointer-events-none"></div>
+
+  {%- if section.settings.show_wheels -%}
+    <div class="absolute top-1/4 left-8 md:left-16 opacity-40 pointer-events-none md:block" aria-hidden="true">
+      <svg
+        class="gfc-icon-wheel gfc-icon-wheel--slow"
+        width="150"
+        height="150"
+        viewBox="0 0 150 150">
+        <defs>
+          <path id="gfc-coll-circle-{{ section.id }}-a" d="M 75,75 m -58,0 a 58,58 0 1,1 116,0 a 58,58 0 1,1 -116,0" />
+        </defs>
+        <text
+          fill="#ffffff"
+          font-family="'HVD Poster', serif"
+          font-size="12"
+          letter-spacing="4">
+          <textPath href="#gfc-coll-circle-{{ section.id }}-a" startOffset="0%">GODS FAVORITE ✦ GODS FAVORITE ✦
+          </textPath>
+        </text>
+      </svg>
+    </div>
+  {%- endif -%}
+
+  <div class="relative z-2 text-center px-4 max-w-5xl mx-auto">
+    {%- if section.settings.show_breadcrumbs -%}
+      <nav class="mb-8 font-body text-sm tracking-widest text-brand-silver/70 uppercase" aria-label="Breadcrumb">
+        <a href="{{ routes.root_url }}" class="hover:text-red-700 transition-colors no-underline">Home</a>
+        <span>/</span>
+        <a href="{{ routes.collections_url }}" class="hover:text-red-700 transition-colors no-underline">Collections</a>
+        <span>/</span>
+        <span class="text-brand-offwhite">{{ collection.title | default: section.settings.fallback_title }}</span>
+      </nav>
+    {%- endif -%}
+
+    {%- if section.settings.eyebrow_label != blank -%}
+      <span class="inline-flex items-center gap-3 text-red-700 font-headline tracking-widest text-base md:text-xl mb-6 uppercase">
+        <span class="h-px w-10 bg-red-900"></span>
+        {{ section.settings.eyebrow_label }}
+        <span class="h-px w-10 bg-red-900"></span>
+      </span>
+    {%- endif -%}
+
+    <h1 class="text-6xl md:text-8xl lg:text-9xl font-headline mb-6 tracking-tighter leading-none text-brand-offwhite drop-shadow-lg uppercase">
+      {%- if collection.title != blank -%}
+        {{ collection.title }}
+      {%- else -%}
+        {{ section.settings.fallback_title }}
+      {%- endif -%}
+    </h1>
+
+    {%- if section.settings.show_description -%}
+      {%- assign description_text = collection.description | default: section.settings.fallback_description -%}
+      {%- if description_text != blank -%}
+        <div class="text-lg md:text-xl font-body text-brand-silver mb-8 max-w-2xl mx-auto italic leading-relaxed">
+          {{ description_text | strip_html | truncatewords: 45 }}
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+
+    {%- if section.settings.show_product_count and collection.products_count > 0 -%}
+      <div class="flex items-center justify-center gap-4 mb-10">
+        <div class="h-1 w-16 bg-red-900"></div>
+        <span class="font-headline text-xl md:text-2xl tracking-tighter text-brand-offwhite uppercase">
+          {{ collection.products_count }}
+          {%- if collection.products_count == 1 -%}
+            {{ ' Brew' }}
+          {%- else -%}
+            {{ ' Brews' }}
+          {%- endif -%}
+          On The Altar
+        </span>
+        <div class="h-1 w-16 bg-red-900"></div>
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.cta_label != blank -%}
+      <a href="{{ section.settings.cta_link | default: '#product-grid' }}" class="inline-block bg-brand-burgundy hover:bg-brand-oxblood text-brand-offwhite font-headline text-xl md:text-2xl uppercase px-10 py-5 rounded-lg transition-all duration-300 hover:scale-105 active:scale-95 border-2 border-brand-aluminum shadow-2xl no-underline">
+        {{ section.settings.cta_label }}
+      </a>
+    {%- endif -%}
+  </div>
+
+  {%- if section.settings.show_torn_edge -%}
+    <div class="gfc-coll-torn-edge absolute bottom-0 left-0 w-full h-12 bg-brand-graphite z-2"></div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+  {
+    "name": "GFC Collection Hero",
+    "tag": "section",
+    "class": "gfc-collection-hero-wrapper",
+    "enabled_on": {
+      "templates": ["collection"]
+    },
+    "settings": [
+      {
+        "type": "header",
+        "content": "Content"
+      },
+      {
+        "type": "text",
+        "id": "eyebrow_label",
+        "label": "Eyebrow Label",
+        "default": "THE COLLECTION"
+      },
+      {
+        "type": "text",
+        "id": "fallback_title",
+        "label": "Fallback Title",
+        "info": "Shown when collection title is unavailable",
+        "default": "OUR BREWS"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_description",
+        "label": "Show Description",
+        "default": true
+      }, {
+        "type": "textarea",
+        "id": "fallback_description",
+        "label": "Fallback Description",
+        "info": "Shown when collection description is empty",
+        "default": "Hand-roasted offerings for the believers, the dreamers, and the nocturnal spirits."
+      }, {
+        "type": "checkbox",
+        "id": "show_product_count",
+        "label": "Show Product Count",
+        "default": true
+      }, {
+        "type": "checkbox",
+        "id": "show_breadcrumbs",
+        "label": "Show Breadcrumbs",
+        "default": true
+      }, {
+        "type": "header",
+        "content": "Call To Action"
+      }, {
+        "type": "text",
+        "id": "cta_label",
+        "label": "CTA Button Label",
+        "info": "Leave empty to hide the button"
+      }, {
+        "type": "url",
+        "id": "cta_link",
+        "label": "CTA Button Link",
+        "info": "Defaults to scrolling down to the product grid"
+      }, {
+        "type": "header",
+        "content": "Background"
+      }, {
+        "type": "image_picker",
+        "id": "image_override",
+        "label": "Background Image Override",
+        "info": "Falls back to the collection's image, then to a default if neither exists"
+      }, {
+        "type": "range",
+        "id": "overlay_opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "label": "Background Overlay Opacity",
+        "default": 75
+      }, {
+        "type": "header",
+        "content": "Layout & Style"
+      }, {
+        "type": "select",
+        "id": "height",
+        "label": "Section Height",
+        "options": [
+          {
+            "value": "sm",
+            "label": "Small (60vh)"
+          }, {
+            "value": "md",
+            "label": "Medium (75vh)"
+          }, {
+            "value": "lg",
+            "label": "Large (90vh)"
+          }
+        ],
+        "default": "md"
+      }, {
+        "type": "checkbox",
+        "id": "show_wheels",
+        "label": "Show Decorative Word Wheels",
+        "default": true
+      }, {
+        "type": "checkbox",
+        "id": "show_torn_edge",
+        "label": "Show Torn Edge Divider",
+        "default": true
+      }
+    ],
+    "presets": [
+      {
+        "name": "GFC Collection Hero"
+      }
+    ]
+  }
+{% endschema %}

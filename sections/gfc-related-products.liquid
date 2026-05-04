@@ -1,6 +1,6 @@
-{%- style -%}
-  {%- assign sid = section.id -%}{%- assign col_pct = 100 | divided_by: section.settings.columns_desktop -%}/* ── Card base styles ─────────────────────────────────────── */
-  #gfc-rp-{{ sid }}.gfc__product-card:before {
+<style>
+  /* ── Card base styles ─────────────────────────────────────── */
+  .gfc-rp .gfc__product-card:before {
     content: "";
     position: absolute;
     top: 14.5%;
@@ -10,54 +10,50 @@
     border-radius: 35px;
     z-index: -1;
     border: 3px solid #ffffff;
-    box-shadow: 0 0 0 0 #ffffff;
-    transition: border-color 0.4s ease
-    , box-shadow 0.4s ease;
+    box-shadow: 0 0 0px 0px #ffffff;
+    transition: border-color 0.4s ease, box-shadow 0.4s ease;
   }
 
-  #gfc-rp-{{ sid }}.gfc__product-card:hover:before {
+  .gfc-rp .gfc__product-card:hover:before {
     border-color: var(--gfc-card-glow, #ffffff);
-    box-shadow: 0 0 14px 3px var(--gfc-card-glow, #ffffff)
-    , 0 0 40px 8px color-mix(in srgb, var(--gfc-card-glow, #ffffff) 35%, transparent);
+    box-shadow: 0 0 14px 3px var(--gfc-card-glow, #ffffff), 0 0 40px 8px color-mix(in srgb, var(--gfc-card-glow, #ffffff) 35%, transparent);
   }
 
-  #gfc-rp-{{ sid }}
-  .gfc__product-image-wrapper img {
+  .gfc-rp .gfc__product-image-wrapper img {
     transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     transform-origin: bottom center;
   }
 
-  #gfc-rp-{{ sid }}.group:hover .gfc__product-image-wrapper img {
+  .gfc-rp .group:hover .gfc__product-image-wrapper img {
     transform: rotate(8deg);
   }
 
   /* ── Grid layout ──────────────────────────────────────────── */
-  #gfc-rp-{{ sid }} .gfc-rp__track {
+  .gfc-rp .gfc-rp__track {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     gap: 2rem;
   }
 
   @media (min-width: 640px) {
-    #gfc-rp-{{ sid }} .gfc-rp__track {
+    .gfc-rp .gfc-rp__track {
       grid-template-columns: repeat(2, 1fr);
     }
   }
 
   @media (min-width: 1024px) {
-    #gfc-rp-{{ sid }} .gfc-rp__track {
-      grid-template-columns: repeat({{ section.settings.columns_desktop }}, 1fr);
+    .gfc-rp .gfc-rp__track {
+      grid-template-columns: repeat(var(--gfc-rp-cols, 4), 1fr);
     }
   }
 
   /* ── Slider mode ──────────────────────────────────────────── */
-  #gfc-rp-{{ sid }}gfc-rp-slider {
+  .gfc-rp gfc-rp-slider {
     display: block;
     position: relative;
   }
 
-  #gfc-rp-{{ sid }}
-  gfc-rp-slider.is-slider .gfc-rp__track {
+  .gfc-rp gfc-rp-slider.is-slider .gfc-rp__track {
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
@@ -67,36 +63,33 @@
     scroll-behavior: smooth;
   }
 
-  #gfc-rp-{{ sid }}
-  gfc-rp-slider.is-slider .gfc-rp__track::-webkit-scrollbar {
+  .gfc-rp gfc-rp-slider.is-slider .gfc-rp__track::-webkit-scrollbar {
     display: none;
   }
 
-  #gfc-rp-{{ sid }}
-  gfc-rp-slider.is-slider .gfc-rp__card-wrapper {
+  .gfc-rp gfc-rp-slider.is-slider .gfc-rp__card-wrapper {
     flex: 0 0 calc(85% - 1rem);
     scroll-snap-align: start;
   }
 
   @media (min-width: 640px) {
-    #gfc-rp-{{ sid }}gfc-rp-slider.is-slider .gfc-rp__card-wrapper {
+    .gfc-rp gfc-rp-slider.is-slider .gfc-rp__card-wrapper {
       flex: 0 0 calc(50% - 1rem);
     }
   }
 
   @media (min-width: 1024px) {
-    #gfc-rp-{{ sid }}gfc-rp-slider.is-slider .gfc-rp__card-wrapper {
-      flex: 0 0 calc({{ col_pct }}% - 1.5rem);
+    .gfc-rp gfc-rp-slider.is-slider .gfc-rp__card-wrapper {
+      flex: 0 0 calc(var(--gfc-rp-col-pct, 25%) - 1.5rem);
     }
   }
 
   /* ── Nav buttons ──────────────────────────────────────────── */
-  #gfc-rp-{{ sid }} .gfc-rp__nav {
+  .gfc-rp .gfc-rp__nav {
     display: none;
   }
 
-  #gfc-rp-{{ sid }}
-  gfc-rp-slider.is-slider .gfc-rp__nav {
+  .gfc-rp gfc-rp-slider.is-slider .gfc-rp__nav {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -107,69 +100,56 @@
     width: 48px;
     height: 48px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.2);
     color: #f5f0eb;
     cursor: pointer;
-    transition: background 0.2s ease
-    , border-color 0.2s ease
-    , opacity 0.2s ease;
+    transition: background 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
     backdrop-filter: blur(4px);
   }
 
-  #gfc-rp-{{ sid }}gfc-rp-slider.is-slider .gfc-rp__nav:hover:not(:disabled) {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.4);
+  .gfc-rp gfc-rp-slider.is-slider .gfc-rp__nav:hover:not(:disabled) {
+    background: rgba(255,255,255,0.15);
+    border-color: rgba(255,255,255,0.4);
   }
 
-  #gfc-rp-{{ sid }}gfc-rp-slider.is-slider .gfc-rp__nav:disabled {
+  .gfc-rp gfc-rp-slider.is-slider .gfc-rp__nav:disabled {
     opacity: 0.25;
     cursor: default;
   }
 
-  #gfc-rp-{{ sid }}
-  gfc-rp-slider.is-slider .gfc-rp__prev {
-    left: -24px;
-  }
-
-  #gfc-rp-{{ sid }}
-  gfc-rp-slider.is-slider .gfc-rp__next {
-    right: -24px;
-  }
+  .gfc-rp gfc-rp-slider.is-slider .gfc-rp__prev { left: -24px; }
+  .gfc-rp gfc-rp-slider.is-slider .gfc-rp__next { right: -24px; }
 
   /* ── Dots ─────────────────────────────────────────────────── */
-  #gfc-rp-{{ sid }} .gfc-rp__dots {
-    display: none;
-  }
+  .gfc-rp .gfc-rp__dots { display: none; }
 
-  #gfc-rp-{{ sid }}
-  gfc-rp-slider.is-slider ~ .gfc-rp__dots
-  , #gfc-rp-{{ sid }}
-  gfc-rp-slider.is-slider + .gfc-rp__dots {
-    display: flex;
-  }
+  .gfc-rp gfc-rp-slider.is-slider ~ .gfc-rp__dots,
+  .gfc-rp gfc-rp-slider.is-slider + .gfc-rp__dots { display: flex; }
 
-  #gfc-rp-{{ sid }}
-  .gfc-rp__dot {
+  .gfc-rp .gfc-rp__dot {
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.25);
+    background: rgba(255,255,255,0.25);
     border: none;
     cursor: pointer;
     padding: 0;
-    transition: background 0.2s ease
-    , transform 0.2s ease;
+    transition: background 0.2s ease, transform 0.2s ease;
   }
 
-  #gfc-rp-{{ sid }}
-  .gfc-rp__dot.is-active {
+  .gfc-rp .gfc-rp__dot.is-active {
     background: #f5f0eb;
     transform: scale(1.3);
   }
-{%- endstyle -%}
+</style>
 
-<section class="py-24 px-12 page-width mx-auto" id="gfc-rp-{{ section.id }}">
+{%- assign col_pct = 100.0 | divided_by: section.settings.columns_desktop | round: 2 -%}
+<section
+  class="gfc-rp py-24 px-12 page-width mx-auto"
+  id="gfc-rp-{{ section.id }}"
+  style="--gfc-rp-cols: {{ section.settings.columns_desktop }}; --gfc-rp-col-pct: {{ col_pct }}%;"
+>
 
   <!-- Section Header -->
   <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
@@ -208,8 +188,11 @@
         <div class="gfc-rp__track">
           {%- for product in recommendations.products -%}
 
-            {%- assign card_glow = section.settings.glow_color -%}
-          {%- assign current_variant = product.selected_or_first_available_variant -%}
+            {%- assign glow_colors_str = section.settings.glow_color_1 | append: '|' | append: section.settings.glow_color_2 | append: '|' | append: section.settings.glow_color_3 | append: '|' | append: section.settings.glow_color_4 -%}
+            {%- assign glow_colors_arr = glow_colors_str | split: '|' -%}
+            {%- assign glow_idx = forloop.index0 | modulo: 4 -%}
+            {%- assign card_glow = glow_colors_arr[glow_idx] -%}
+            {%- assign current_variant = product.selected_or_first_available_variant -%}
 
             {%- comment -%} Badge logic from product tags {%- endcomment -%}
             {%- assign badge_label = '' -%}
@@ -555,12 +538,27 @@
         "default": "slider"
       }, {
         "type": "header",
-        "content": "Card Style"
+        "content": "Card Glow Colors"
       }, {
         "type": "color",
-        "id": "glow_color",
-        "label": "Card Hover Glow Color",
+        "id": "glow_color_1",
+        "label": "Glow Color — Card 1",
+        "default": "#c0392b"
+      }, {
+        "type": "color",
+        "id": "glow_color_2",
+        "label": "Glow Color — Card 2",
+        "default": "#d4a017"
+      }, {
+        "type": "color",
+        "id": "glow_color_3",
+        "label": "Glow Color — Card 3",
         "default": "#ffffff"
+      }, {
+        "type": "color",
+        "id": "glow_color_4",
+        "label": "Glow Color — Card 4",
+        "default": "#7b68ee"
       }
     ],
     "presets": [

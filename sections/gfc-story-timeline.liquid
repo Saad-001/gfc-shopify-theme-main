@@ -1,0 +1,207 @@
+<style>
+  #gfc-story-timeline-{{ section.id }} .gfc-tl-grain {
+    background-image: url("data:image/svg+xml, %3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.05;
+  }
+  #gfc-story-timeline-{{ section.id }}
+  .gfc-tl-rail {
+    background: repeating-linear-gradient(to bottom, #7B0F0F 0, #7B0F0F 8px, transparent 8px, transparent 16px);
+  }
+</style>
+
+<section class="relative py-24 md:py-32 bg-brand-graphite overflow-hidden border-y border-stone-800" id="gfc-story-timeline-{{ section.id }}">
+  <div class="gfc-tl-grain absolute inset-0 pointer-events-none"></div>
+
+  <div class="page-width mx-auto px-6 md:px-12 relative">
+
+    <!-- Header -->
+    <div class="text-center mb-20 md:mb-24 relative">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="inline-flex items-center gap-3 text-red-700 font-headline tracking-widest text-base md:text-xl mb-6 uppercase">
+          <span class="h-px w-10 bg-red-900"></span>
+          {{ section.settings.eyebrow }}
+          <span class="h-px w-10 bg-red-900"></span>
+        </span>
+      {%- endif -%}
+
+      <h2 class="text-5xl md:text-7xl lg:text-8xl font-headline tracking-tighter leading-none uppercase text-brand-offwhite">
+        {{ section.settings.heading_prefix }}
+        <span class="text-stone-500 italic">{{ section.settings.heading_accent }}</span>
+      </h2>
+
+      {%- if section.settings.subheading != blank -%}
+        <p class="mt-6 text-lg md:text-xl font-body text-brand-silver max-w-2xl mx-auto italic">
+          {{ section.settings.subheading }}
+        </p>
+      {%- endif -%}
+    </div>
+
+    <!-- Timeline -->
+    <div class="relative">
+      <!-- center rail (desktop) -->
+      <div class="gfc-tl-rail absolute top-0 bottom-0 left-6 md:left-1/2 md:-translate-x-1/2 w-1 hidden sm:block" aria-hidden="true"></div>
+
+      <div class="space-y-16 md:space-y-24">
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'milestone' -%}
+              {%- assign is_left = forloop.index | modulo: 2 -%}
+                <div
+                class="relative grid sm:grid-cols-2 gap-8 md:gap-16 items-center"
+                style="display: grid !important;"
+                {{ block.shopify_attributes }}>
+
+                <!-- node dot -->
+                <div class="absolute left-6 md:left-1/2 -translate-x-1/2 top-2 z-10" aria-hidden="true">
+                  <div class="w-6 h-6 rounded-full bg-brand-burgundy border-4 border-brand-aluminum shadow-lg"></div>
+                </div>
+
+                <!-- left side card -->
+                <div class="pl-16 sm:pl-0 {% if is_left == 1 %}sm:pr-12 sm:text-right{% else %}sm:order-2 sm:pl-12{% endif %}">
+                  <span class="inline-block bg-brand-burgundy text-brand-offwhite font-headline text-2xl md:text-4xl tracking-tighter uppercase px-5 py-2 rounded-lg border-2 border-brand-aluminum mb-4">
+                    {{ block.settings.year }}
+                  </span>
+                  <h3 class="text-3xl md:text-4xl font-headline uppercase text-brand-offwhite mb-3 leading-tight">
+                    {{ block.settings.title }}
+                  </h3>
+                  <p class="text-base md:text-lg font-body text-brand-silver leading-relaxed">
+                    {{ block.settings.description }}
+                  </p>
+                </div>
+
+                <!-- image side -->
+                <div class="pl-16 sm:pl-0 {% if is_left == 1 %}sm:pl-12{% else %}sm:order-1 sm:pr-12{% endif %}">
+                  {%- if block.settings.image != blank -%}
+                    <div class="relative group">
+                      <div class="absolute inset-0 bg-brand-oxblood translate-x-3 translate-y-3 -z-10 group-hover:translate-x-1 group-hover:translate-y-1 transition-transform duration-500" style="border-radius: 20px;"></div>
+                      <img
+                        class="w-full aspect-video object-cover border-2 border-brand-aluminum"
+                        style="border-radius: 20px;"
+                        src="{{ block.settings.image | image_url: width: 800 }}"
+                        alt="{{ block.settings.image.alt | default: block.settings.title }}"
+                        width="800"
+                        height="500"
+                        loading="lazy">
+                    </div>
+                  {%- else -%}
+                    <div class="w-full aspect-video bg-stone-800 border-2 border-brand-aluminum flex items-center justify-center" style="border-radius: 20px;">
+                      <span class="material-symbols-outlined text-7xl text-stone-600">{{ block.settings.icon | default: 'coffee' }}</span>
+                    </div>
+                  {%- endif -%}
+                </div>
+
+              </div>
+          {%- endcase -%}
+        {%- endfor -%}
+      </div>
+
+      <!-- end cap -->
+      <div class="absolute left-6 md:left-1/2 -translate-x-1/2 -bottom-2 z-10" aria-hidden="true">
+        <span class="material-symbols-outlined text-4xl text-red-700" style="font-variation-settings: 'FILL' 1;">star</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "GFC Story Timeline",
+    "tag": "div",
+    "settings": [
+      {
+        "type": "text",
+        "id": "eyebrow",
+        "label": "Eyebrow",
+        "default": "THE JOURNEY"
+      }, {
+        "type": "text",
+        "id": "heading_prefix",
+        "label": "Heading Prefix",
+        "default": "OUR"
+      }, {
+        "type": "text",
+        "id": "heading_accent",
+        "label": "Heading Accent",
+        "default": "PILGRIMAGE"
+      }, {
+        "type": "textarea",
+        "id": "subheading",
+        "label": "Subheading",
+        "default": "Three decades of chasing the perfect roast — through smoke-filled basements, late-night sessions, and a few sacred mistakes."
+      }
+    ],
+    "blocks": [
+      {
+        "type": "milestone",
+        "name": "Milestone",
+        "settings": [
+          {
+            "type": "text",
+            "id": "year",
+            "label": "Year",
+            "default": "1994"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "THE FIRST ROAST"
+          },
+          {
+            "type": "textarea",
+            "id": "description",
+            "label": "Description",
+            "default": "A second-hand drum roaster, a milk crate of vinyl, and one stubborn idea — coffee should feel like something."
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          }, {
+            "type": "text",
+            "id": "icon",
+            "label": "Fallback Icon (Material)",
+            "default": "coffee"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "GFC Story Timeline",
+        "blocks": [
+          {
+            "type": "milestone",
+            "settings": {
+              "year": "1994",
+              "title": "THE FIRST ROAST",
+              "description": "A second-hand drum roaster, a milk crate of vinyl, and one stubborn idea — coffee should feel like something."
+            }
+          }, {
+            "type": "milestone",
+            "settings": {
+              "year": "2003",
+              "title": "THE BASEMENT CHAPEL",
+              "description": "Word spread block by block. We turned the basement into a tasting room and started slinging beans by the pound."
+            }
+          }, {
+            "type": "milestone",
+            "settings": {
+              "year": "2014",
+              "title": "DIRECT TRADE GOSPEL",
+              "description": "We stopped buying through middlemen. Got on planes. Met the farmers. Shook the hands that grew the beans."
+            }
+          }, {
+            "type": "milestone",
+            "settings": {
+              "year": "2024",
+              "title": "THE NEW SANCTUARY",
+              "description": "A bigger roastery, the same stubborn idea. Still hand-roasted. Still soundtracked by the classics."
+            }
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

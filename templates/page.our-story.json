@@ -1,0 +1,142 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "gfc_editorial_Nax8WD": {
+      "type": "gfc-editorial",
+      "blocks": {
+        "paragraph_kiAGzi": {
+          "type": "paragraph",
+          "settings": {
+            "text": "Replace this paragraph with the body copy you want to highlight on this page. The first letter will render as a large drop cap when enabled.",
+            "bold": false
+          }
+        },
+        "paragraph_NDMKpD": {
+          "type": "paragraph",
+          "settings": {
+            "text": "Add as many paragraphs, subheadings, inline quotes, images, and dividers as you need — or switch the Content Source to 'Pull from a Shopify Page' to render the rich text from your page admin instead.",
+            "bold": false
+          }
+        },
+        "subheading_wRDMdm": {
+          "type": "subheading",
+          "settings": {
+            "text": "A SECTION HEADING"
+          }
+        },
+        "paragraph_CVknXR": {
+          "type": "paragraph",
+          "settings": {
+            "text": "Subheadings break long copy into scannable sections.",
+            "bold": false
+          }
+        }
+      },
+      "block_order": [
+        "paragraph_kiAGzi",
+        "paragraph_NDMKpD",
+        "subheading_wRDMdm",
+        "paragraph_CVknXR"
+      ],
+      "name": "GFC Editorial",
+      "settings": {
+        "content_source": "page",
+        "source_page": "",
+        "use_page_title": false,
+        "label": "Since 1972",
+        "heading_prefix": "Born of",
+        "heading_accent": "Soul",
+        "tagline": "Real coffee for real souls — no shortcuts, no filler, just the pursuit of something divine.",
+        "hero_height": "md",
+        "overlay_opacity": 65,
+        "show_torn_edge": true,
+        "show_wheels": true,
+        "wheel_text": "GODS FAVORITE ✦ GODS FAVORITE ✦",
+        "lead": "It didn't start with a business plan. It started with a cup of coffee that changed everything.",
+        "drop_cap": true,
+        "body_max_width": "wide",
+        "pull_quote_part_one": "",
+        "pull_quote": "",
+        "pull_quote_part_two": "",
+        "pull_quote_attribution": "",
+        "image_secondary": "shopify://shop_images/unnamed_23.png",
+        "image_secondary_caption": "",
+        "pledge_text": "THE FOUNDER'S PLEDGE",
+        "cta_label": "SHOP THE BREWS",
+        "cta_link": "shopify://collections/all-coffee"
+      }
+    },
+    "gfc_story_values_Ackxa7": {
+      "type": "gfc-story-values",
+      "blocks": {
+        "value_JYabhX": {
+          "type": "value",
+          "settings": {
+            "icon": "local_fire_department",
+            "title": "REAL OVER PERFECT",
+            "description": "Polished is boring. We chase character — the smoky, the bright, the moody. Coffee that tastes like it lived a little."
+          }
+        },
+        "value_4aFxTM": {
+          "type": "value",
+          "settings": {
+            "icon": "music_note",
+            "title": "ROASTED TO RHYTHM",
+            "description": "Every batch runs to a record. Jazz on Tuesdays. Soul on Saturdays. Bean meets beat in our roastery."
+          }
+        },
+        "value_FinVQR": {
+          "type": "value",
+          "settings": {
+            "icon": "handshake",
+            "title": "DIRECT, ALWAYS",
+            "description": "We know our farmers by name. No middlemen, no markup theater — just fair prices for the people doing the work."
+          }
+        },
+        "value_p3knq6": {
+          "type": "value",
+          "settings": {
+            "icon": "eco",
+            "title": "SLOW & SACRED",
+            "description": "Roasted to order, in small batches, by hand. If it leaves our roastery, it left fresh — no exceptions."
+          }
+        }
+      },
+      "block_order": [
+        "value_JYabhX",
+        "value_4aFxTM",
+        "value_FinVQR",
+        "value_p3knq6"
+      ],
+      "name": "GFC Story Values",
+      "settings": {
+        "eyebrow": "THE COMMANDMENTS",
+        "heading_prefix": "WHAT WE",
+        "heading_accent": "PREACH",
+        "intro": "No corporate values poster. No empty gospel. These are the four ideas that decide every roast, every bag, every cup we serve.",
+        "columns": 4
+      }
+    }
+  },
+  "order": [
+    "main",
+    "gfc_editorial_Nax8WD",
+    "gfc_story_values_Ackxa7"
+  ]
+}

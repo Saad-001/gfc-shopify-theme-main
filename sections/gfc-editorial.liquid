@@ -1,0 +1,734 @@
+{%- liquid
+  assign source_page = null
+
+  if section.settings.source_page != blank
+    assign source_page = pages[section.settings.source_page]
+  elsif page != blank and page.content != blank
+    assign source_page = page
+  endif
+
+  assign use_page_content = false
+  if section.settings.content_source == 'page' and source_page != blank and source_page.content != blank
+    assign use_page_content = true
+  endif
+
+  assign resolved_title = section.settings.heading_prefix
+  if section.settings.use_page_title and source_page != blank and source_page.title != blank
+    assign resolved_title = source_page.title | upcase
+  endif
+
+  assign max_w_class = 'max-w-5xl'
+  if section.settings.body_max_width == 'medium'
+    assign max_w_class = 'max-w-6xl'
+  elsif section.settings.body_max_width == 'wide'
+    assign max_w_class = 'max-w-7xl'
+  endif
+
+  assign overlay_opacity = section.settings.overlay_opacity | default: 65 | divided_by: 100.0
+
+  assign hero_min_height = '70vh'
+  if section.settings.hero_height == 'sm'
+    assign hero_min_height = '55vh'
+  elsif section.settings.hero_height == 'lg'
+    assign hero_min_height = '90vh'
+  endif
+
+  assign uid = section.id
+-%}
+
+<style>
+  #gfc-edt-{{ uid }} .gfc-edt-grain {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.05;
+  }
+
+  #gfc-edt-{{ uid }} .gfc-edt-prose {
+    color: #D4D8DB;
+    font-family: 'Poppins', sans-serif;
+  }
+  #gfc-edt-{{ uid }} .gfc-edt-prose > * + * { margin-top: 1.5rem; }
+  #gfc-edt-{{ uid }} .gfc-edt-prose p {
+    font-size: 1.25rem;
+    line-height: 1.8;
+    color: #D4D8DB;
+  }
+  #gfc-edt-{{ uid }} .gfc-edt-prose p strong,
+  #gfc-edt-{{ uid }} .gfc-edt-prose strong {
+    color: #F0EDED;
+    font-weight: 700;
+  }
+  #gfc-edt-{{ uid }} .gfc-edt-prose em { color: #F0EDED; }
+  #gfc-edt-{{ uid }} .gfc-edt-prose a {
+    color: #B91C1C;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 1px;
+    transition: color 0.2s;
+  }
+  #gfc-edt-{{ uid }} .gfc-edt-prose a:hover { color: #F0EDED; }
+
+  #gfc-edt-{{ uid }} .gfc-edt-prose h2 {
+    font-family: 'HVD Poster', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    text-transform: uppercase;
+    line-height: 1.05;
+    color: #F0EDED;
+    margin-top: 4rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+  }
+  #gfc-edt-{{ uid }} .gfc-edt-prose h2::before {
+    content: '✦';
+    color: #B91C1C;
+    margin-right: 0.75rem;
+    font-size: 0.7em;
+    vertical-align: middle;
+  }
+  #gfc-edt-{{ uid }} .gfc-edt-prose h3 {
+    font-family: 'HVD Poster', serif;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    text-transform: uppercase;
+    line-height: 1.1;
+    color: #F0EDED;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+  }
+  #gfc-edt-{{ uid }} .gfc-edt-prose h4 {
+    font-family: 'HVD Poster', serif;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    color: #B91C1C;
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.05em;
+  }
+
+  #gfc-edt-{{ uid }} .gfc-edt-prose blockquote {
+    border-left: 4px solid #7f1d1d;
+    padding: 0.5rem 0 0.5rem 2rem;
+    margin: 2.5rem 0;
+    font-family: 'HVD Poster', serif;
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-style: italic;
+    line-height: 1.2;
+    color: #F0EDED;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+  }
+  #gfc-edt-{{ uid }} .gfc-edt-prose blockquote p { font-size: inherit; line-height: inherit; color: inherit; }
+
+  #gfc-edt-{{ uid }} .gfc-edt-prose ul,
+  #gfc-edt-{{ uid }} .gfc-edt-prose ol {
+    padding-left: 1.5rem;
+    font-size: 1.25rem;
+    line-height: 1.8;
+  }
+  #gfc-edt-{{ uid }} .gfc-edt-prose ul li {
+    list-style: none;
+    position: relative;
+    padding-left: 1.75rem;
+    margin-bottom: 0.75rem;
+  }
+  #gfc-edt-{{ uid }} .gfc-edt-prose ul li::before {
+    content: '✦';
+    position: absolute;
+    left: 0;
+    top: 0.1em;
+    color: #B91C1C;
+  }
+  #gfc-edt-{{ uid }} .gfc-edt-prose ol { list-style: decimal; }
+  #gfc-edt-{{ uid }} .gfc-edt-prose ol li { margin-bottom: 0.75rem; padding-left: 0.5rem; }
+  #gfc-edt-{{ uid }} .gfc-edt-prose ol li::marker { color: #B91C1C; font-family: 'HVD Poster', serif; }
+
+  #gfc-edt-{{ uid }} .gfc-edt-prose img {
+    border-radius: 20px;
+    border: 2px solid #B0B7BC;
+    margin: 2.5rem auto;
+    box-shadow: 0 18px 50px rgba(0,0,0,0.45);
+  }
+  #gfc-edt-{{ uid }} .gfc-edt-prose hr {
+    border: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #7f1d1d, transparent);
+    margin: 3rem 0;
+  }
+  #gfc-edt-{{ uid }} .gfc-edt-prose table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    font-size: 1rem;
+  }
+  #gfc-edt-{{ uid }} .gfc-edt-prose th,
+  #gfc-edt-{{ uid }} .gfc-edt-prose td {
+    border-bottom: 1px solid #44403c;
+    padding: 0.75rem 1rem;
+    text-align: left;
+  }
+  #gfc-edt-{{ uid }} .gfc-edt-prose th {
+    font-family: 'HVD Poster', serif;
+    text-transform: uppercase;
+    color: #F0EDED;
+    letter-spacing: 0.05em;
+  }
+
+  {%- if section.settings.drop_cap -%}
+    #gfc-edt-{{ uid }} .gfc-edt-prose--dropcap > p:first-of-type::first-letter,
+    #gfc-edt-{{ uid }} .gfc-edt-prose--dropcap > p:first-child::first-letter {
+      float: left;
+      font-family: 'HVD Poster', serif;
+      font-size: 5.5rem;
+      line-height: 1;
+      color: #B91C1C;
+      margin: 0.4rem 0.75rem 0 0;
+      padding: 0;
+      text-transform: uppercase;
+    }
+  {%- endif -%}
+
+  #gfc-edt-{{ uid }} .gfc-edt-hero {
+    {%- if section.settings.image != blank -%}
+      background-image:
+        linear-gradient(rgba(26, 36, 38, {{ overlay_opacity }}), rgba(26, 36, 38, {{ overlay_opacity | plus: 0.1 }})),
+        url('{{ section.settings.image | image_url: width: 2200 }}');
+    {%- else -%}
+      background-image:
+        linear-gradient(rgba(26, 36, 38, 0.92), rgba(26, 36, 38, 0.96)),
+        url('https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=2070&auto=format&fit=crop');
+    {%- endif -%}
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: {{ hero_min_height }};
+  }
+  #gfc-edt-{{ uid }} .gfc-edt-torn {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 48' preserveAspectRatio='none'%3E%3Cpath d='M0,48 L0,20 C50,30 100,10 150,22 C200,34 250,8 300,18 C350,28 400,6 450,16 C500,26 550,4 600,14 C650,24 700,2 750,12 C800,22 850,0 900,10 C950,20 1000,2 1050,12 C1100,22 1150,5 1200,15 L1200,48 Z'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 48' preserveAspectRatio='none'%3E%3Cpath d='M0,48 L0,20 C50,30 100,10 150,22 C200,34 250,8 300,18 C350,28 400,6 450,16 C500,26 550,4 600,14 C650,24 700,2 750,12 C800,22 850,0 900,10 C950,20 1000,2 1050,12 C1100,22 1150,5 1200,15 L1200,48 Z'/%3E%3C/svg%3E");
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+  }
+</style>
+
+<section class="relative overflow-hidden" id="gfc-edt-{{ uid }}">
+
+  <!-- ============ HERO: image background + overlay + heading on top ============ -->
+  <div class="gfc-edt-hero relative flex items-center justify-center overflow-hidden">
+    <div class="gfc-edt-grain absolute inset-0 pointer-events-none"></div>
+
+    {%- if section.settings.show_wheels -%}
+      <div class="absolute top-12 left-4 md:left-10 opacity-50 pointer-events-none" aria-hidden="true">
+        <svg class="gfc-icon-wheel gfc-icon-wheel--slow" width="140" height="140" viewBox="0 0 140 140">
+          <defs>
+            <path id="gfc-edt-wheel-{{ uid }}-a" d="M 70,70 m -54,0 a 54,54 0 1,1 108,0 a 54,54 0 1,1 -108,0"/>
+          </defs>
+          <text fill="#ffffff" font-family="'HVD Poster', serif" font-size="12" letter-spacing="4">
+            <textPath href="#gfc-edt-wheel-{{ uid }}-a" startOffset="0%">{{ section.settings.wheel_text }}</textPath>
+          </text>
+        </svg>
+      </div>
+      <div class="absolute bottom-16 right-4 md:right-10 opacity-45 pointer-events-none hidden md:block" aria-hidden="true">
+        <svg class="gfc-icon-wheel gfc-icon-wheel--slow gfc-icon-wheel--ccw" width="160" height="160" viewBox="0 0 160 160">
+          <defs>
+            <path id="gfc-edt-wheel-{{ uid }}-b" d="M 80,80 m -62,0 a 62,62 0 1,1 124,0 a 62,62 0 1,1 -124,0"/>
+          </defs>
+          <text fill="#ffffff" font-family="'HVD Poster', serif" font-size="13" letter-spacing="4">
+            <textPath href="#gfc-edt-wheel-{{ uid }}-b" startOffset="0%">{{ section.settings.wheel_text }}</textPath>
+          </text>
+        </svg>
+      </div>
+    {%- endif -%}
+
+    <!-- hero content -->
+    <div class="relative z-2 text-center max-w-5xl mx-auto px-6 md:px-12 py-32 md:py-40">
+      {%- if section.settings.label != blank -%}
+        <span class="inline-flex items-center gap-3 text-red-700 font-headline tracking-widest text-base md:text-xl mb-6 uppercase">
+          <span class="h-px w-10 bg-red-900"></span>
+          {{ section.settings.label }}
+          <span class="h-px w-10 bg-red-900"></span>
+        </span>
+      {%- endif -%}
+
+      <h2 class="text-6xl md:text-8xl lg:text-9xl font-headline tracking-tighter leading-none uppercase text-brand-offwhite drop-shadow-[0_4px_20px_rgba(0,0,0,0.6)] mb-8">
+        {%- if section.settings.use_page_title and source_page != blank and source_page.title != blank -%}
+          {{ source_page.title }}
+        {%- else -%}
+          {{ section.settings.heading_prefix }}
+          <span class="text-red-700 italic">{{ section.settings.heading_accent }}</span>
+        {%- endif -%}
+      </h2>
+
+      {%- if section.settings.tagline != blank -%}
+        <p class="text-lg md:text-2xl font-body text-brand-silver italic leading-relaxed mx-auto max-w-3xl drop-shadow-md">
+          {{ section.settings.tagline }}
+        </p>
+      {%- endif -%}
+
+      {%- if section.settings.image != blank -%}
+        <div class="mt-12 flex items-center justify-center gap-4" aria-hidden="true">
+          <div class="h-px w-16 md:w-24 bg-red-900"></div>
+          <span class="material-symbols-outlined text-red-700 text-3xl" style="font-variation-settings: 'FILL' 1;">star</span>
+          <div class="h-px w-16 md:w-24 bg-red-900"></div>
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.show_torn_edge -%}
+      <div class="gfc-edt-torn absolute bottom-0 left-0 w-full h-12 bg-brand-graphite z-2" aria-hidden="true"></div>
+    {%- endif -%}
+  </div>
+
+  <!-- ============ BODY ============ -->
+  <div class="relative py-20 md:py-28">
+    <div class="gfc-edt-grain absolute inset-0 pointer-events-none"></div>
+
+    <div class="page-width mx-auto px-6 md:px-12 relative">
+
+      <!-- LEAD -->
+      {%- if section.settings.lead != blank -%}
+        <div class="{{ max_w_class }} mx-auto mb-12 md:mb-16">
+          <p class="font-body text-2xl md:text-3xl text-brand-offwhite leading-snug italic">
+            &ldquo;{{ section.settings.lead }}&rdquo;
+          </p>
+        </div>
+      {%- endif -%}
+
+      <!-- BODY -->
+      <div class="{{ max_w_class }} mx-auto">
+        {%- if use_page_content -%}
+          <div class="gfc-edt-prose {% if section.settings.drop_cap %}gfc-edt-prose--dropcap{% endif %}">
+            {{ source_page.content }}
+          </div>
+        {%- else -%}
+          <div class="gfc-edt-prose {% if section.settings.drop_cap %}gfc-edt-prose--dropcap{% endif %}">
+            {%- for block in section.blocks -%}
+              {%- case block.type -%}
+                {%- when 'paragraph' -%}
+                  <p class="{% if block.settings.bold %}font-bold text-brand-offwhite{% endif %}" {{ block.shopify_attributes }}>
+                    {{ block.settings.text | newline_to_br }}
+                  </p>
+                {%- when 'subheading' -%}
+                  <h3 {{ block.shopify_attributes }}>{{ block.settings.text }}</h3>
+                {%- when 'quote' -%}
+                  <blockquote {{ block.shopify_attributes }}>
+                    {{ block.settings.text }}
+                    {%- if block.settings.attribution != blank -%}
+                      <span class="block mt-4 font-body text-sm tracking-widest uppercase text-brand-silver not-italic">— {{ block.settings.attribution }}</span>
+                    {%- endif -%}
+                  </blockquote>
+                {%- when 'image' -%}
+                  <figure class="my-10" {{ block.shopify_attributes }}>
+                    {%- if block.settings.image != blank -%}
+                      <img
+                        src="{{ block.settings.image | image_url: width: 1400 }}"
+                        alt="{{ block.settings.image.alt | default: block.settings.caption }}"
+                        width="1400"
+                        height="900"
+                        loading="lazy">
+                    {%- endif -%}
+                    {%- if block.settings.caption != blank -%}
+                      <figcaption class="mt-4 text-center font-body text-sm tracking-widest uppercase text-brand-silver/70">{{ block.settings.caption }}</figcaption>
+                    {%- endif -%}
+                  </figure>
+                {%- when 'divider' -%}
+                  <hr {{ block.shopify_attributes }}>
+              {%- endcase -%}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- PULL QUOTE BAND -->
+      {%- if section.settings.pull_quote != blank or section.settings.pull_quote_part_one != blank -%}
+        <aside class="my-20 md:my-28 relative">
+          <div class="max-w-4xl mx-auto text-center px-6">
+            <div class="flex items-center justify-center gap-4 mb-8" aria-hidden="true">
+              <div class="h-px w-16 md:w-24 bg-red-900"></div>
+              <span class="material-symbols-outlined text-red-700 text-3xl" style="font-variation-settings: 'FILL' 1;">star</span>
+              <div class="h-px w-16 md:w-24 bg-red-900"></div>
+            </div>
+            <blockquote class="font-headline text-3xl md:text-5xl lg:text-6xl uppercase tracking-tight leading-tight text-brand-offwhite">
+              &ldquo;{{ section.settings.pull_quote_part_one }}
+              {%- if section.settings.pull_quote != blank -%}
+                <span class="text-red-700 italic"> {{ section.settings.pull_quote }}</span>
+              {%- endif -%}
+              {{ section.settings.pull_quote_part_two }}&rdquo;
+            </blockquote>
+            {%- if section.settings.pull_quote_attribution != blank -%}
+              <p class="mt-8 font-body text-sm md:text-base tracking-widest uppercase text-brand-silver">
+                — {{ section.settings.pull_quote_attribution }}
+              </p>
+            {%- endif -%}
+            <div class="flex items-center justify-center gap-4 mt-8" aria-hidden="true">
+              <div class="h-px w-16 md:w-24 bg-red-900"></div>
+              <span class="material-symbols-outlined text-red-700 text-3xl" style="font-variation-settings: 'FILL' 1;">star</span>
+              <div class="h-px w-16 md:w-24 bg-red-900"></div>
+            </div>
+          </div>
+        </aside>
+      {%- endif -%}
+
+      <!-- SECONDARY IMAGE -->
+      {%- if section.settings.image_secondary != blank -%}
+        <figure class="{{ max_w_class }} mx-auto my-16 group relative">
+          <div class="absolute inset-0 bg-brand-oxblood translate-x-3 translate-y-3 -z-2 group-hover:translate-x-1 group-hover:translate-y-1 transition-transform duration-500" style="border-radius: 24px;"></div>
+          <img
+            class="w-full aspect-[16/9] object-cover border-2 border-brand-aluminum"
+            style="border-radius: 24px;"
+            src="{{ section.settings.image_secondary | image_url: width: 1600 }}"
+            alt="{{ section.settings.image_secondary.alt | default: resolved_title }}"
+            width="1600"
+            height="900"
+            loading="lazy">
+          {%- if section.settings.image_secondary_caption != blank -%}
+            <figcaption class="mt-6 text-center font-body text-sm tracking-widest uppercase text-brand-silver/70">
+              {{ section.settings.image_secondary_caption }}
+            </figcaption>
+          {%- endif -%}
+        </figure>
+      {%- endif -%}
+
+      <!-- FOOTER -->
+      {%- if section.settings.pledge_text != blank or section.settings.cta_label != blank -%}
+        <div class="{{ max_w_class }} mx-auto mt-16 md:mt-20 pt-12 border-t border-stone-800">
+          <div class="flex flex-col md:flex-row items-center md:items-center justify-between gap-8">
+            {%- if section.settings.pledge_text != blank -%}
+              <div class="flex items-center gap-4 min-w-0 flex-1">
+                <div class="h-1 w-24 bg-red-900 shrink-0"></div>
+                <span class="font-headline text-xl md:text-2xl tracking-tighter text-brand-offwhite uppercase break-words min-w-0">{{ section.settings.pledge_text }}</span>
+              </div>
+            {%- endif -%}
+
+            {%- if section.settings.cta_label != blank -%}
+              <a href="{{ section.settings.cta_link | default: '/' }}" class="inline-block shrink-0 whitespace-nowrap self-center bg-brand-burgundy hover:bg-brand-oxblood text-brand-offwhite font-headline text-lg md:text-xl uppercase px-8 py-4 rounded-lg transition-all duration-300 hover:scale-105 active:scale-95 border-2 border-brand-aluminum shadow-2xl no-underline">
+                {{ section.settings.cta_label }}
+              </a>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endif -%}
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "GFC Editorial",
+  "tag": "div",
+  "class": "gfc-editorial-wrapper",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content Source"
+    },
+    {
+      "type": "paragraph",
+      "content": "Pull a Shopify page's content into this section, or use 'manual' to author it from blocks below. Works on any template — page, blog, product, custom."
+    },
+    {
+      "type": "select",
+      "id": "content_source",
+      "label": "Content Source",
+      "options": [
+        { "value": "page", "label": "Pull from a Shopify Page" },
+        { "value": "manual", "label": "Manual (use blocks below)" }
+      ],
+      "default": "manual"
+    },
+    {
+      "type": "page",
+      "id": "source_page",
+      "label": "Source Page",
+      "info": "Leave blank on a page template to auto-use the current page."
+    },
+    {
+      "type": "checkbox",
+      "id": "use_page_title",
+      "label": "Use page title as the section heading",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Top Label / Eyebrow",
+      "default": "EDITORIAL"
+    },
+    {
+      "type": "text",
+      "id": "heading_prefix",
+      "label": "Heading Prefix",
+      "default": "OUR"
+    },
+    {
+      "type": "text",
+      "id": "heading_accent",
+      "label": "Heading Accent Word",
+      "default": "STORY"
+    },
+    {
+      "type": "textarea",
+      "id": "tagline",
+      "label": "Tagline / Dek",
+      "default": "A flexible long-form section for any page on your store."
+    },
+    {
+      "type": "header",
+      "content": "Hero Banner"
+    },
+    {
+      "type": "paragraph",
+      "content": "The image becomes the hero banner background. The heading sits on top with a dark overlay for readability."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background Image"
+    },
+    {
+      "type": "select",
+      "id": "hero_height",
+      "label": "Banner Height",
+      "options": [
+        { "value": "sm", "label": "Small (55vh)" },
+        { "value": "md", "label": "Medium (70vh)" },
+        { "value": "lg", "label": "Large (90vh)" }
+      ],
+      "default": "md"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay Opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 65
+    },
+    {
+      "type": "checkbox",
+      "id": "show_torn_edge",
+      "label": "Show Torn Edge Divider",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_wheels",
+      "label": "Show Decorative Word Wheels",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "wheel_text",
+      "label": "Wheel Text",
+      "info": "Text that loops around the rotating wheels. Repeat with ✦ separators for best effect.",
+      "default": "GODS FAVORITE ✦ GODS FAVORITE ✦ "
+    },
+    {
+      "type": "header",
+      "content": "Lead / Reading Style"
+    },
+    {
+      "type": "textarea",
+      "id": "lead",
+      "label": "Lead Quote / Dek (above body)",
+      "info": "A large italic line shown above the body. Leave blank to hide."
+    },
+    {
+      "type": "checkbox",
+      "id": "drop_cap",
+      "label": "Drop Cap on first paragraph",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "body_max_width",
+      "label": "Body Reading Width",
+      "options": [
+        { "value": "narrow", "label": "Narrow (5xl, best for reading)" },
+        { "value": "medium", "label": "Medium (6xl)" },
+        { "value": "wide", "label": "Wide (7xl)" }
+      ],
+      "default": "wide"
+    },
+    {
+      "type": "header",
+      "content": "Pull Quote (mid-page)"
+    },
+    {
+      "type": "text",
+      "id": "pull_quote_part_one",
+      "label": "Quote (part 1)"
+    },
+    {
+      "type": "text",
+      "id": "pull_quote",
+      "label": "Quote Accent (red italic)"
+    },
+    {
+      "type": "text",
+      "id": "pull_quote_part_two",
+      "label": "Quote (part 2)"
+    },
+    {
+      "type": "text",
+      "id": "pull_quote_attribution",
+      "label": "Attribution"
+    },
+    {
+      "type": "header",
+      "content": "Secondary Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_secondary",
+      "label": "Secondary Image"
+    },
+    {
+      "type": "text",
+      "id": "image_secondary_caption",
+      "label": "Caption"
+    },
+    {
+      "type": "header",
+      "content": "Footer"
+    },
+    {
+      "type": "text",
+      "id": "pledge_text",
+      "label": "Pledge / Footer Line",
+      "info": "Leave blank to hide the footer row entirely."
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA Button Label",
+      "info": "Leave blank to hide the button."
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA Button Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "paragraph",
+      "name": "Paragraph",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Replace this with the body copy you want to highlight on this page."
+        },
+        {
+          "type": "checkbox",
+          "id": "bold",
+          "label": "Bold / Highlighted",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "subheading",
+      "name": "Subheading",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Subheading",
+          "default": "A SECTION HEADING"
+        }
+      ]
+    },
+    {
+      "type": "quote",
+      "name": "Inline Quote",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Quote",
+          "default": "A line worth quoting."
+        },
+        {
+          "type": "text",
+          "id": "attribution",
+          "label": "Attribution"
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "name": "Inline Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Caption"
+        }
+      ]
+    },
+    {
+      "type": "divider",
+      "name": "Divider",
+      "settings": []
+    }
+  ],
+  "presets": [
+    {
+      "name": "GFC Editorial",
+      "settings": {
+        "content_source": "manual",
+        "label": "EDITORIAL",
+        "heading_prefix": "OUR",
+        "heading_accent": "STORY",
+        "tagline": "A flexible long-form section for any page on your store.",
+        "lead": "Open with a strong line that sets the tone for the rest of the page.",
+        "show_wheels": true,
+        "show_torn_edge": true,
+        "drop_cap": true,
+        "body_max_width": "wide"
+      },
+      "blocks": [
+        {
+          "type": "paragraph",
+          "settings": {
+            "text": "Replace this paragraph with the body copy you want to highlight on this page. The first letter will render as a large drop cap when enabled.",
+            "bold": false
+          }
+        },
+        {
+          "type": "paragraph",
+          "settings": {
+            "text": "Add as many paragraphs, subheadings, inline quotes, images, and dividers as you need — or switch the Content Source to 'Pull from a Shopify Page' to render the rich text from your page admin instead.",
+            "bold": false
+          }
+        },
+        {
+          "type": "subheading",
+          "settings": {
+            "text": "A SECTION HEADING"
+          }
+        },
+        {
+          "type": "paragraph",
+          "settings": {
+            "text": "Subheadings break long copy into scannable sections.",
+            "bold": false
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,55 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "gfc_editorial_k7tQAk": {
+      "type": "gfc-editorial",
+      "name": "GFC Editorial",
+      "settings": {
+        "content_source": "page",
+        "source_page": "",
+        "use_page_title": false,
+        "label": "For Cafés, Retailers & Hospitality",
+        "heading_prefix": "Bring the",
+        "heading_accent": "Divine",
+        "tagline": "Premium small-batch coffee for businesses that refuse to settle",
+        "image": "shopify://shop_images/unnamed_24.png",
+        "hero_height": "md",
+        "overlay_opacity": 70,
+        "show_torn_edge": true,
+        "show_wheels": true,
+        "wheel_text": "GODS FAVORITE ✦ GODS FAVORITE ✦",
+        "lead": "You've found something worth sharing. So have we.",
+        "drop_cap": true,
+        "body_max_width": "wide",
+        "pull_quote_part_one": "",
+        "pull_quote": "",
+        "pull_quote_part_two": "",
+        "pull_quote_attribution": "",
+        "image_secondary_caption": "",
+        "pledge_text": "Real Coffee for Real Souls. Let's build something great together.",
+        "cta_label": "Submit Your Inquiry",
+        "cta_link": "shopify://pages/contact"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "gfc_editorial_k7tQAk"
+  ]
+}

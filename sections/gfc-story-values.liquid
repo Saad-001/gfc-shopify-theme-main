@@ -1,0 +1,179 @@
+<style>
+  #gfc-story-values-{{ section.id }} .gfc-val-grain {
+    background-image: url("data:image/svg+xml, %3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.06;
+  }
+  @media (min-width: 768px) {
+    #gfc-story-values-{{ section.id }} .gfc-val-grid {
+      grid-template-columns: repeat({{ section.settings.columns }}, minmax(0, 1fr));
+    }
+  }
+</style>
+
+<section class="relative py-24 md:py-32 overflow-hidden" id="gfc-story-values-{{ section.id }}">
+  <div class="gfc-val-grain absolute inset-0 pointer-events-none"></div>
+
+  <div class="page-width mx-auto px-6 md:px-12 relative">
+
+    <!-- Header -->
+    <div class="grid md:grid-cols-12 gap-8 mb-16 md:mb-20 items-end" style="display: grid !important;">
+      <div class="md:col-span-7">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="inline-flex items-center gap-3 text-red-700 font-headline tracking-widest text-base md:text-xl mb-6 uppercase">
+            <span class="h-px w-10 bg-red-900"></span>
+            {{ section.settings.eyebrow }}
+          </span>
+        {%- endif -%}
+        <h2 class="text-5xl md:text-7xl lg:text-8xl font-headline tracking-tighter leading-none uppercase text-brand-offwhite">
+          {{ section.settings.heading_prefix }}
+          <span class="text-red-700 italic">{{ section.settings.heading_accent }}</span>
+        </h2>
+      </div>
+      {%- if section.settings.intro != blank -%}
+        <div class="md:col-span-5">
+          <p class="text-lg md:text-xl font-body text-brand-silver leading-relaxed italic">
+            {{ section.settings.intro }}
+          </p>
+        </div>
+      {%- endif -%}
+    </div>
+
+    <!-- Cards -->
+    <div class="grid gfc-val-grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8" style="display: grid !important;">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'value' -%}
+            <article class="group relative bg-brand-graphite border border-stone-800 hover:border-brand-burgundy p-8 md:p-10 rounded-2xl transition-colors duration-300 overflow-hidden" {{ block.shopify_attributes }}>
+
+              <!-- huge background number -->
+              <span class="absolute -top-6 -right-2 text-[8rem] md:text-[10rem] font-headline text-stone-800/60 leading-none pointer-events-none select-none" aria-hidden="true">
+                {{ forloop.index | prepend: '0' | slice: -2, 2 }}
+              </span>
+
+              <!-- icon -->
+              <div class="relative z-2 mb-6 inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-burgundy border-2 border-brand-aluminum shadow-lg group-hover:rotate-6 transition-transform duration-500">
+                <span class="material-symbols-outlined text-3xl text-brand-offwhite" style="font-variation-settings: 'FILL' 1;">{{ block.settings.icon }}</span>
+              </div>
+
+              <h3 class="relative z-2 text-2xl md:text-3xl font-headline uppercase text-brand-offwhite mb-4 leading-tight tracking-tight">
+                {{ block.settings.title }}
+              </h3>
+
+              <p class="relative z-2 text-base md:text-lg font-body text-brand-silver leading-relaxed">
+                {{ block.settings.description }}
+              </p>
+
+              <!-- bottom accent -->
+              <div class="relative z-2 mt-8 flex items-center gap-3">
+                <div class="h-px w-12 bg-red-900 group-hover:w-20 transition-all duration-500"></div>
+                <span class="text-red-700 text-xl">✦</span>
+              </div>
+            </article>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "GFC Story Values",
+    "tag": "div",
+    "settings": [
+      {
+        "type": "text",
+        "id": "eyebrow",
+        "label": "Eyebrow",
+        "default": "THE COMMANDMENTS"
+      },
+      {
+        "type": "text",
+        "id": "heading_prefix",
+        "label": "Heading Prefix",
+        "default": "WHAT WE"
+      },
+      {
+        "type": "text",
+        "id": "heading_accent",
+        "label": "Heading Accent",
+        "default": "PREACH"
+      },
+      {
+        "type": "textarea",
+        "id": "intro",
+        "label": "Intro Paragraph",
+        "default": "No corporate values poster. No empty gospel. These are the four ideas that decide every roast, every bag, every cup we serve."
+      }, {
+        "type": "range",
+        "id": "columns",
+        "min": 2,
+        "max": 4,
+        "step": 1,
+        "label": "Columns (desktop)",
+        "default": 4
+      }
+    ],
+    "blocks": [
+      {
+        "type": "value",
+        "name": "Value",
+        "settings": [
+          {
+            "type": "text",
+            "id": "icon",
+            "label": "Material Icon Name",
+            "info": "e.g. coffee, favorite, music_note, eco, handshake, local_fire_department",
+            "default": "coffee"
+          }, {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "REAL OVER PERFECT"
+          }, {
+            "type": "textarea",
+            "id": "description",
+            "label": "Description",
+            "default": "Polished is boring. We chase character — the smoky, the bright, the moody. Coffee that tastes like it lived a little."
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "GFC Story Values",
+        "blocks": [
+          {
+            "type": "value",
+            "settings": {
+              "icon": "local_fire_department",
+              "title": "REAL OVER PERFECT",
+              "description": "Polished is boring. We chase character — the smoky, the bright, the moody. Coffee that tastes like it lived a little."
+            }
+          }, {
+            "type": "value",
+            "settings": {
+              "icon": "music_note",
+              "title": "ROASTED TO RHYTHM",
+              "description": "Every batch runs to a record. Jazz on Tuesdays. Soul on Saturdays. Bean meets beat in our roastery."
+            }
+          }, {
+            "type": "value",
+            "settings": {
+              "icon": "handshake",
+              "title": "DIRECT, ALWAYS",
+              "description": "We know our farmers by name. No middlemen, no markup theater — just fair prices for the people doing the work."
+            }
+          }, {
+            "type": "value",
+            "settings": {
+              "icon": "eco",
+              "title": "SLOW & SACRED",
+              "description": "Roasted to order, in small batches, by hand. If it leaves our roastery, it left fresh — no exceptions."
+            }
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

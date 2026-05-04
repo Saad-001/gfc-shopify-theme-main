@@ -125,6 +125,21 @@
         "cta_link": "#appstle_subscription_widget0"
       }
     },
+    "177752807909575047": {
+      "type": "apps",
+      "blocks": {
+        "appstle_bundles_appstle_volume_discount_bundle_eKQ7m8": {
+          "type": "shopify://apps/appstle-bundles/blocks/appstle-volume-discount-bundle/8909921b-2d24-4d68-9b12-9d045d3dcb0a",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "appstle_bundles_appstle_volume_discount_bundle_eKQ7m8"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
     "177651983827a2c901": {
       "type": "apps",
       "blocks": {
@@ -190,7 +205,10 @@
         "columns_desktop": 4,
         "desktop_layout": "grid",
         "mobile_layout": "slider",
-        "glow_color": "#121212"
+        "glow_color_1": "#c0392b",
+        "glow_color_2": "#d4a017",
+        "glow_color_3": "#7cbd18",
+        "glow_color_4": "#7b68ee"
       }
     },
     "related-products": {
@@ -211,54 +229,14 @@
         "padding_top": 36,
         "padding_bottom": 28
       }
-    },
-    "gfc_footer_xMJRBK": {
-      "type": "gfc-footer",
-      "blocks": {
-        "link_column_fqk4ew": {
-          "type": "link_column",
-          "settings": {
-            "heading": "SHOP",
-            "links": "All Collections||Whole Bean||Ground Coffee||Subscriptions||Merchandise",
-            "urls": "/collections/all||/collections/whole-bean||/collections/ground-coffee||/collections/subscriptions||/collections/merchandise"
-          }
-        },
-        "link_column_Cffyzn": {
-          "type": "link_column",
-          "settings": {
-            "heading": "LEGACY",
-            "links": "Our Story||The Roast Process||Wholesale||Sustainability||Contact Us",
-            "urls": "/pages/our-story||/pages/roast-process||/pages/wholesale||/pages/sustainability||/pages/contact"
-          }
-        }
-      },
-      "block_order": [
-        "link_column_fqk4ew",
-        "link_column_Cffyzn"
-      ],
-      "settings": {
-        "brand_name": "GODS FAVORITE",
-        "tagline": "Real Coffee for Real Souls. Est. 1972. Roasting divine beans in our temple of soul.",
-        "social_facebook": "",
-        "social_youtube": "",
-        "social_instagram": "",
-        "newsletter_heading": "THE CONGREGATION",
-        "newsletter_desc": "Join the mailing list for soulful updates and divine deals.",
-        "newsletter_placeholder": "YOUR EMAIL ADDRESS",
-        "newsletter_success": "Thank you for joining the congregation!",
-        "copyright": "© 2024 GODS FAVORITE COFFEE CO. REAL COFFEE FOR REAL SOULS.",
-        "privacy_link": "",
-        "terms_link": "",
-        "shipping_link": ""
-      }
     }
   },
   "order": [
     "main",
     "gfc_subscription_8zi8tC",
+    "177752807909575047",
     "177651983827a2c901",
     "gfc_related_products_YQTiGE",
-    "related-products",
-    "gfc_footer_xMJRBK"
+    "related-products"
   ]
 }

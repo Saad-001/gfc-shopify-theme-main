@@ -1,0 +1,768 @@
+{%- liquid
+  assign uid = section.id
+  assign overlay_opacity = section.settings.overlay_opacity | default: 70 | divided_by: 100.0
+  assign form_id = 'gfc-cf-' | append: uid
+-%}
+
+<style>
+  #gfc-contact-{{ uid }} .gfc-cf-grain {
+    background-image: url("data:image/svg+xml, %3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.05;
+  }
+
+  {%- if section.settings.bg_image != blank -%}
+    #gfc-contact-{{ uid }} {
+      background-image: linear-gradient(rgba(26, 36, 38, {{ overlay_opacity }}), rgba(26, 36, 38, {{ overlay_opacity | plus: 0.1 }}))
+      , url('{{ section.settings.bg_image | image_url: width: 2200 }}');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+  {%- endif -%}
+
+  #gfc-contact-{{ uid }}
+  .gfc-cf-input
+  , #gfc-contact-{{ uid }}
+  .gfc-cf-textarea
+  , #gfc-contact-{{ uid }}
+  .gfc-cf-select {
+    width: 100%;
+    background-color: rgba(26, 30, 31, 0.7);
+    border: 2px solid rgba(176, 183, 188, 0.3);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    font-family: 'Poppins'
+    , sans-serif;
+    font-size: 1rem;
+    color: #F0EDED;
+    transition: border-color 0.25s
+    , box-shadow 0.25s
+    , background-color 0.25s;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+  #gfc-contact-{{ uid }}
+  .gfc-cf-input::placeholder
+  , #gfc-contact-{{ uid }}
+  .gfc-cf-textarea::placeholder {
+    color: rgba(212, 216, 219, 0.45);
+    font-style: italic;
+  }
+  #gfc-contact-{{ uid }}.gfc-cf-input:focus,
+  #gfc-contact-{{ uid }}.gfc-cf-textarea:focus,
+  #gfc-contact-{{ uid }}.gfc-cf-select:focus {
+    border-color: #B91C1C;
+    background-color: rgba(26, 30, 31, 0.95);
+    box-shadow: 0 0 0 4px rgba(185, 28, 28, 0.18);
+  }
+  #gfc-contact-{{ uid }}
+  .gfc-cf-textarea {
+    resize: vertical;
+    min-height: 180px;
+    font-family: 'Poppins'
+    , sans-serif;
+  }
+  #gfc-contact-{{ uid }}
+  .gfc-cf-select {
+    background-image: url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23B91C1C' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1.25rem center;
+    padding-right: 3rem;
+    cursor: pointer;
+  }
+  #gfc-contact-{{ uid }}
+  .gfc-cf-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'HVD Poster'
+    , serif;
+    font-size: 0.875rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #B91C1C;
+    margin-bottom: 0.5rem;
+  }
+  #gfc-contact-{{ uid }}
+  .gfc-cf-label::before {
+    content: '✦';
+    color: #7f1d1d;
+    font-size: 0.75rem;
+  }
+
+  #gfc-contact-{{ uid }}
+  .gfc-cf-success {
+    border: 2px solid #15803d;
+    background: rgba(21, 128, 61, 0.1);
+    color: #F0EDED;
+    padding: 1.25rem 1.5rem;
+    border-radius: 14px;
+    margin-bottom: 1.5rem;
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+  #gfc-contact-{{ uid }}
+  .gfc-cf-error {
+    border: 2px solid #B91C1C;
+    background: rgba(185, 28, 28, 0.12);
+    color: #F0EDED;
+    padding: 1.25rem 1.5rem;
+    border-radius: 14px;
+    margin-bottom: 1.5rem;
+  }
+  #gfc-contact-{{ uid }}
+  .gfc-cf-error a {
+    color: #F0EDED;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  #gfc-contact-{{ uid }}
+  .gfc-cf-card {
+    background: rgba(26, 30, 31, 0.65);
+    border: 1px solid rgba(176, 183, 188, 0.18);
+    border-radius: 24px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+
+  #gfc-contact-{{ uid }}
+  .gfc-cf-info-row {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    padding: 1.25rem 0;
+    border-bottom: 1px dashed rgba(176, 183, 188, 0.18);
+  }
+  #gfc-contact-{{ uid }}.gfc-cf-info-row:last-child {
+    border-bottom: 0;
+  }
+  #gfc-contact-{{ uid }}
+  .gfc-cf-info-icon {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #3D0B0B;
+    border: 2px solid #B0B7BC;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #gfc-contact-{{ uid }}
+  .gfc-cf-info-icon .material-symbols-outlined {
+    font-size: 22px;
+    color: #F0EDED;
+    font-variation-settings: 'FILL' 1;
+  }
+  #gfc-contact-{{ uid }}
+  .gfc-cf-info-label {
+    font-family: 'HVD Poster'
+    , serif;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #B91C1C;
+    margin-bottom: 0.25rem;
+  }
+  #gfc-contact-{{ uid }}
+  .gfc-cf-info-value {
+    font-family: 'Poppins'
+    , sans-serif;
+    font-size: 1.0625rem;
+    color: #D4D8DB;
+    line-height: 1.5;
+  }
+  #gfc-contact-{{ uid }}
+  .gfc-cf-info-value a {
+    color: #F0EDED;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  #gfc-contact-{{ uid }}.gfc-cf-info-value a:hover {
+    color: #B91C1C;
+  }
+
+  #gfc-contact-{{ uid }}
+  .gfc-cf-torn {
+    -webkit-mask-image: url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 48' preserveAspectRatio='none'%3E%3Cpath d='M0, 0 L0, 28 C50, 18 100, 38 150, 26 C200, 14 250, 40 300, 30 C350, 20 400, 42 450, 32 C500, 22 550, 44 600, 34 C650, 24 700, 46 750, 36 C800, 26 850, 48 900, 38 C950, 28 1000, 46 1050, 36 C1100, 26 1150, 43 1200, 33 L1200, 0 Z'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 48' preserveAspectRatio='none'%3E%3Cpath d='M0, 0 L0, 28 C50, 18 100, 38 150, 26 C200, 14 250, 40 300, 30 C350, 20 400, 42 450, 32 C500, 22 550, 44 600, 34 C650, 24 700, 46 750, 36 C800, 26 850, 48 900, 38 C950, 28 1000, 46 1050, 36 C1100, 26 1150, 43 1200, 33 L1200, 0 Z'/%3E%3C/svg%3E");
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+  }
+
+  #gfc-contact-{{ uid }}.relative div:empty {
+    display: block;
+  }
+</style>
+
+<section class="relative py-24 md:py-32 overflow-hidden bg-brand-graphite" id="gfc-contact-{{ uid }}">
+
+  {%- if section.settings.show_top_torn -%}
+    <div class="gfc-cf-torn absolute top-0 left-0 w-full h-12 bg-brand-ash z-10" aria-hidden="true"></div>
+  {%- endif -%}
+
+  <div class="gfc-cf-grain absolute inset-0 pointer-events-none"></div>
+
+  <!-- decorative wheels -->
+  {%- if section.settings.show_wheels -%}
+    <div class="absolute top-20 left-4 md:left-12 opacity-30 pointer-events-none md:block" aria-hidden="true">
+      <svg
+        class="gfc-icon-wheel gfc-icon-wheel--slow"
+        width="140"
+        height="140"
+        viewBox="0 0 140 140">
+        <defs>
+          <path id="gfc-cf-wheel-{{ uid }}-a" d="M 70,70 m -54,0 a 54,54 0 1,1 108,0 a 54,54 0 1,1 -108,0" />
+        </defs>
+        <text
+          fill="#ffffff"
+          font-family="'HVD Poster', serif"
+          font-size="12"
+          letter-spacing="4">
+          <textPath href="#gfc-cf-wheel-{{ uid }}-a" startOffset="0%">{{ section.settings.wheel_text }}</textPath>
+        </text>
+      </svg>
+    </div>
+    <div class="absolute bottom-20 right-4 md:right-12 opacity-30 pointer-events-none md:block" aria-hidden="true">
+      <svg
+        class="gfc-icon-wheel gfc-icon-wheel--slow gfc-icon-wheel--ccw"
+        width="160"
+        height="160"
+        viewBox="0 0 160 160">
+        <defs>
+          <path id="gfc-cf-wheel-{{ uid }}-b" d="M 80,80 m -62,0 a 62,62 0 1,1 124,0 a 62,62 0 1,1 -124,0" />
+        </defs>
+        <text
+          fill="#ffffff"
+          font-family="'HVD Poster', serif"
+          font-size="13"
+          letter-spacing="4">
+          <textPath href="#gfc-cf-wheel-{{ uid }}-b" startOffset="0%">{{ section.settings.wheel_text }}</textPath>
+        </text>
+      </svg>
+    </div>
+  {%- endif -%}
+
+  <div class="page-width mx-auto px-6 md:px-12 relative z-1">
+
+    <!-- Header -->
+    <div class="text-center max-w-3xl mx-auto mb-16 md:mb-20">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="inline-flex items-center gap-3 text-red-700 font-headline tracking-widest text-base md:text-xl mb-6 uppercase">
+          <span class="h-px w-10 bg-red-900"></span>
+          {{ section.settings.eyebrow }}
+          <span class="h-px w-10 bg-red-900"></span>
+        </span>
+      {%- endif -%}
+
+      <h1 class="text-5xl md:text-7xl lg:text-8xl font-headline tracking-tighter leading-none uppercase text-brand-offwhite mb-6">
+        {{ section.settings.heading_prefix }}
+        <span class="text-red-700 italic">{{ section.settings.heading_accent }}</span>
+      </h1>
+
+      {%- if section.settings.tagline != blank -%}
+        <p class="text-lg md:text-2xl font-body text-brand-silver italic leading-relaxed">
+          {{ section.settings.tagline }}
+        </p>
+      {%- endif -%}
+    </div>
+
+    <!-- Two-column body -->
+    <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 max-w-7xl mx-auto" style="display: grid !important;">
+
+      <!-- LEFT: contact info card -->
+      {%- if section.settings.show_info_panel -%}
+        <aside class="lg:col-span-5 order-2 lg:order-1">
+          <div class="gfc-cf-card p-8 md:p-10 h-full">
+            {%- if section.settings.info_heading != blank -%}
+              <h2 class="font-headline text-3xl md:text-4xl uppercase tracking-tighter text-brand-offwhite leading-tight mb-2">
+                {{ section.settings.info_heading_prefix }}
+                <span class="text-red-700 italic">{{ section.settings.info_heading_accent }}</span>
+              </h2>
+              <div class="flex items-center gap-3 mb-6" aria-hidden="true">
+                <div class="h-px w-12 bg-red-900"></div>
+                <span class="text-red-700 text-xl">✦</span>
+              </div>
+            {%- endif -%}
+
+            {%- if section.settings.info_intro != blank -%}
+              <p class="font-body text-base text-brand-silver/80 italic leading-relaxed mb-6">
+                {{ section.settings.info_intro }}
+              </p>
+            {%- endif -%}
+
+            <div class="mt-2">
+              {%- if section.settings.address != blank -%}
+                <div class="gfc-cf-info-row">
+                  <div class="gfc-cf-info-icon">
+                    <span class="material-symbols-outlined">location_on</span>
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <div class="gfc-cf-info-label">{{ section.settings.address_label | default: 'The Roastery' }}</div>
+                    <div class="gfc-cf-info-value">{{ section.settings.address | newline_to_br }}</div>
+                  </div>
+                </div>
+              {%- endif -%}
+
+              {%- if section.settings.hours != blank -%}
+                <div class="gfc-cf-info-row">
+                  <div class="gfc-cf-info-icon">
+                    <span class="material-symbols-outlined">schedule</span>
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <div class="gfc-cf-info-label">{{ section.settings.hours_label | default: 'Open Hours' }}</div>
+                    <div class="gfc-cf-info-value">{{ section.settings.hours | newline_to_br }}</div>
+                  </div>
+                </div>
+              {%- endif -%}
+
+              {%- if section.settings.email != blank -%}
+                <div class="gfc-cf-info-row">
+                  <div class="gfc-cf-info-icon">
+                    <span class="material-symbols-outlined">mail</span>
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <div class="gfc-cf-info-label">{{ section.settings.email_label | default: 'Direct Line' }}</div>
+                    <div class="gfc-cf-info-value">
+                      <a href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a>
+                    </div>
+                  </div>
+                </div>
+              {%- endif -%}
+
+              {%- if section.settings.phone != blank -%}
+                <div class="gfc-cf-info-row">
+                  <div class="gfc-cf-info-icon">
+                    <span class="material-symbols-outlined">call</span>
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <div class="gfc-cf-info-label">{{ section.settings.phone_label | default: 'Telephone' }}</div>
+                    <div class="gfc-cf-info-value">
+                      <a href="tel:{{ section.settings.phone | replace: ' ', '' | replace: '(', '' | replace: ')', '' | replace: '-', '' }}">{{ section.settings.phone }}</a>
+                    </div>
+                  </div>
+                </div>
+              {%- endif -%}
+
+              {%- if section.settings.social_text != blank -%}
+                <div class="gfc-cf-info-row">
+                  <div class="gfc-cf-info-icon">
+                    <span class="material-symbols-outlined">favorite</span>
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <div class="gfc-cf-info-label">{{ section.settings.social_label | default: 'Tag Us' }}</div>
+                    <div class="gfc-cf-info-value">{{ section.settings.social_text }}</div>
+                  </div>
+                </div>
+              {%- endif -%}
+            </div>
+          </div>
+        </aside>
+      {%- endif -%}
+
+      <!-- RIGHT: form card -->
+      <div class="{% if section.settings.show_info_panel %}lg:col-span-7{% else %}lg:col-span-12 max-w-3xl mx-auto w-full{% endif %} order-1 lg:order-2">
+        <div class="gfc-cf-card p-8 md:p-10 relative h-full">
+
+          <!-- corner star -->
+          <span class="absolute -top-4 -right-4 inline-flex items-center justify-center w-12 h-12 rounded-full bg-brand-burgundy border-2 border-brand-aluminum text-brand-offwhite font-headline text-xl rotate-12 shadow-lg" aria-hidden="true">✦</span>
+
+          {%- form 'contact'
+            , id: form_id
+            , class: 'gfc-cf-form' -%}
+
+            {%- if form.posted_successfully? -%}
+              <div
+                class="gfc-cf-success"
+                role="status"
+                tabindex="-1"
+                autofocus>
+                <span class="material-symbols-outlined text-green-400 mt-0.5" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                <div>
+                  <p class="font-headline uppercase tracking-widest text-brand-offwhite mb-1">{{ section.settings.success_heading | default: 'Message received' }}</p>
+                  <p class="font-body text-sm text-brand-silver">{{ section.settings.success_text | default: 'Thanks for reaching out — we’ll get back to you faster than a fresh pour.' }}</p>
+                </div>
+              </div>
+            {%- endif -%}
+
+            {%- if form.errors -%}
+              <div
+                class="gfc-cf-error"
+                role="alert"
+                tabindex="-1"
+                autofocus>
+                <p class="font-headline uppercase tracking-widest text-brand-offwhite mb-2">
+                  Something went sideways
+                </p>
+                <ul class="font-body text-sm text-brand-silver space-y-1 list-none">
+                  {%- for field in form.errors -%}
+                    <li>
+                      {%- if field == 'form' -%}
+                        {{ form.errors.messages[field] }}
+                      {%- else -%}
+                        <a href="#gfc-cf-{{ uid }}-{{ field }}">
+                          {{ form.errors.translated_fields[field] | capitalize }}
+                          {{ form.errors.messages[field] }}
+                        </a>
+                      {%- endif -%}
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              </div>
+            {%- endif -%}
+
+            <div class="grid sm:grid-cols-2 gap-5 md:gap-6" style="display: grid !important;">
+              <div>
+                <label class="gfc-cf-label" for="gfc-cf-{{ uid }}-name">{{ section.settings.label_name | default: 'Your Name' }}</label>
+                <input
+                  class="gfc-cf-input"
+                  type="text"
+                  id="gfc-cf-{{ uid }}-name"
+                  name="contact[name]"
+                  autocomplete="name"
+                  placeholder="{{ section.settings.placeholder_name | default: 'Marcus B. Holloway' }}"
+                  value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+                  required>
+              </div>
+
+              <div>
+                <label class="gfc-cf-label" for="gfc-cf-{{ uid }}-email">{{ section.settings.label_email | default: 'Email' }}</label>
+                <input
+                  class="gfc-cf-input"
+                  type="email"
+                  id="gfc-cf-{{ uid }}-email"
+                  name="contact[email]"
+                  autocomplete="email"
+                  spellcheck="false"
+                  autocapitalize="off"
+                  placeholder="{{ section.settings.placeholder_email | default: 'you@goodcoffee.com' }}"
+                  value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                  required>
+              </div>
+
+              {%- if section.settings.show_phone_field -%}
+                <div>
+                  <label class="gfc-cf-label" for="gfc-cf-{{ uid }}-phone">{{ section.settings.label_phone | default: 'Phone (optional)' }}</label>
+                  <input
+                    class="gfc-cf-input"
+                    type="tel"
+                    id="gfc-cf-{{ uid }}-phone"
+                    name="contact[phone]"
+                    autocomplete="tel"
+                    placeholder="{{ section.settings.placeholder_phone | default: '(555) 555 1994' }}"
+                    value="{% if form.phone %}{{ form.phone }}{% endif %}">
+                </div>
+              {%- endif -%}
+
+              {%- if section.settings.show_subject_field -%}
+                <div>
+                  <label class="gfc-cf-label" for="gfc-cf-{{ uid }}-subject">{{ section.settings.label_subject | default: 'What’s on your mind?' }}</label>
+                  <select
+                    class="gfc-cf-select"
+                    id="gfc-cf-{{ uid }}-subject"
+                    name="contact[Subject]">
+                    {%- assign subjects = section.settings.subject_options | split: ',' -%}
+                    {%- for s in subjects -%}
+                      {%- assign s_clean = s | strip -%}
+                      <option value="{{ s_clean | escape }}">{{ s_clean }}</option>
+                    {%- endfor -%}
+                  </select>
+                </div>
+              {%- endif -%}
+            </div>
+
+            <div class="mt-5 md:mt-6">
+              <label class="gfc-cf-label" for="gfc-cf-{{ uid }}-body">{{ section.settings.label_message | default: 'Your Message' }}</label>
+              <textarea
+                class="gfc-cf-textarea"
+                rows="7"
+                id="gfc-cf-{{ uid }}-body"
+                name="contact[body]"
+                placeholder="{{ section.settings.placeholder_message | default: 'Tell us what you’re thinking — long, short, sweet, salty, all of it.' }}"
+                required>{{ form.body }}</textarea>
+            </div>
+
+            <!-- consent / submit row -->
+            <div class="mt-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+              {%- if section.settings.fine_print != blank -%}
+                <p class="font-body text-xs tracking-wider uppercase text-brand-silver/60 max-w-sm">
+                  {{ section.settings.fine_print }}
+                </p>
+              {%- else -%}
+                <span class="hidden sm:inline-block"></span>
+              {%- endif -%}
+
+              <button type="submit" class="inline-flex items-center justify-center gap-3 shrink-0 whitespace-nowrap bg-brand-burgundy hover:bg-brand-oxblood text-brand-offwhite font-headline text-xl uppercase px-10 py-5 rounded-lg transition-all duration-300 hover:scale-105 active:scale-95 border-2 border-brand-aluminum shadow-2xl">
+                {{ section.settings.submit_label | default: 'Send It' }}
+                <span class="material-symbols-outlined text-2xl" aria-hidden="true">arrow_forward</span>
+              </button>
+            </div>
+
+          {%- endform -%}
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  {%- if section.settings.show_bottom_torn -%}
+    <div class="gfc-cf-torn absolute bottom-0 left-0 w-full h-12 bg-brand-ash z-10 rotate-180" aria-hidden="true"></div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+  {
+    "name": "GFC Contact Form",
+    "tag": "div",
+    "class": "gfc-contact-wrapper",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Heading"
+      },
+      {
+        "type": "text",
+        "id": "eyebrow",
+        "label": "Eyebrow",
+        "default": "GET IN TOUCH"
+      },
+      {
+        "type": "text",
+        "id": "heading_prefix",
+        "label": "Heading Prefix",
+        "default": "DROP US"
+      },
+      {
+        "type": "text",
+        "id": "heading_accent",
+        "label": "Heading Accent",
+        "default": "A LINE"
+      }, {
+        "type": "textarea",
+        "id": "tagline",
+        "label": "Tagline",
+        "default": "Wholesale, press, fan mail, friendly disagreements about the perfect grind size — we read every message."
+      }, {
+        "type": "header",
+        "content": "Contact Info Panel"
+      }, {
+        "type": "checkbox",
+        "id": "show_info_panel",
+        "label": "Show Contact Info Panel",
+        "default": true
+      }, {
+        "type": "text",
+        "id": "info_heading_prefix",
+        "label": "Info Heading Prefix",
+        "default": "FIND"
+      }, {
+        "type": "text",
+        "id": "info_heading_accent",
+        "label": "Info Heading Accent",
+        "default": "US"
+      }, {
+        "type": "text",
+        "id": "info_heading",
+        "label": "Show Info Heading",
+        "info": "Set to any value to enable the heading; leave blank to hide.",
+        "default": "yes"
+      }, {
+        "type": "textarea",
+        "id": "info_intro",
+        "label": "Intro Line",
+        "default": "Or stop by — the door’s open and the kettle’s on."
+      }, {
+        "type": "text",
+        "id": "address_label",
+        "label": "Address Label",
+        "default": "The Roastery"
+      }, {
+        "type": "textarea",
+        "id": "address",
+        "label": "Address",
+        "default": "1994 Vinyl Street\nBrooklyn, NY 11211"
+      }, {
+        "type": "text",
+        "id": "hours_label",
+        "label": "Hours Label",
+        "default": "Open Hours"
+      }, {
+        "type": "textarea",
+        "id": "hours",
+        "label": "Hours",
+        "default": "Mon–Fri: 7am – 9pm\nSat–Sun: 8am – 10pm"
+      }, {
+        "type": "text",
+        "id": "email_label",
+        "label": "Email Label",
+        "default": "Direct Line"
+      }, {
+        "type": "text",
+        "id": "email",
+        "label": "Email",
+        "default": "hello@godsfavoritecoffee.com"
+      }, {
+        "type": "text",
+        "id": "phone_label",
+        "label": "Phone Label",
+        "default": "Telephone"
+      }, {
+        "type": "text",
+        "id": "phone",
+        "label": "Phone",
+        "default": "(555) 555 1994"
+      }, {
+        "type": "text",
+        "id": "social_label",
+        "label": "Social Label",
+        "default": "Tag Us"
+      }, {
+        "type": "text",
+        "id": "social_text",
+        "label": "Social Text",
+        "default": "@godsfavoritecoffee on every platform"
+      }, {
+        "type": "header",
+        "content": "Form Fields"
+      }, {
+        "type": "checkbox",
+        "id": "show_phone_field",
+        "label": "Show Phone Field",
+        "default": true
+      }, {
+        "type": "checkbox",
+        "id": "show_subject_field",
+        "label": "Show Subject Dropdown",
+        "default": true
+      }, {
+        "type": "text",
+        "id": "subject_options",
+        "label": "Subject Options",
+        "info": "Comma-separated list shown in the dropdown.",
+        "default": "General, Wholesale, Press, Order Issue, Other"
+      }, {
+        "type": "header",
+        "content": "Field Labels"
+      }, {
+        "type": "text",
+        "id": "label_name",
+        "label": "Name Label",
+        "default": "Your Name"
+      }, {
+        "type": "text",
+        "id": "label_email",
+        "label": "Email Label",
+        "default": "Email"
+      }, {
+        "type": "text",
+        "id": "label_phone",
+        "label": "Phone Label",
+        "default": "Phone (optional)"
+      }, {
+        "type": "text",
+        "id": "label_subject",
+        "label": "Subject Label",
+        "default": "What’s on your mind?"
+      }, {
+        "type": "text",
+        "id": "label_message",
+        "label": "Message Label",
+        "default": "Your Message"
+      }, {
+        "type": "header",
+        "content": "Placeholders"
+      }, {
+        "type": "text",
+        "id": "placeholder_name",
+        "label": "Name Placeholder",
+        "default": "Marcus B. Holloway"
+      }, {
+        "type": "text",
+        "id": "placeholder_email",
+        "label": "Email Placeholder",
+        "default": "you@goodcoffee.com"
+      }, {
+        "type": "text",
+        "id": "placeholder_phone",
+        "label": "Phone Placeholder",
+        "default": "(555) 555 1994"
+      }, {
+        "type": "textarea",
+        "id": "placeholder_message",
+        "label": "Message Placeholder",
+        "default": "Tell us what you’re thinking — long, short, sweet, salty, all of it."
+      }, {
+        "type": "header",
+        "content": "Submit Button & Messages"
+      }, {
+        "type": "text",
+        "id": "submit_label",
+        "label": "Submit Button Label",
+        "default": "Send It"
+      }, {
+        "type": "textarea",
+        "id": "fine_print",
+        "label": "Fine Print",
+        "default": "We reply within 24 hours, Mon–Fri."
+      }, {
+        "type": "text",
+        "id": "success_heading",
+        "label": "Success Heading",
+        "default": "Message received"
+      }, {
+        "type": "textarea",
+        "id": "success_text",
+        "label": "Success Text",
+        "default": "Thanks for reaching out — we’ll get back to you faster than a fresh pour."
+      }, {
+        "type": "header",
+        "content": "Decorative"
+      }, {
+        "type": "checkbox",
+        "id": "show_wheels",
+        "label": "Show Decorative Word Wheels",
+        "default": true
+      }, {
+        "type": "text",
+        "id": "wheel_text",
+        "label": "Wheel Text",
+        "default": "REAL SOULS ✦ DROP A LINE ✦ "
+      }, {
+        "type": "checkbox",
+        "id": "show_top_torn",
+        "label": "Show Torn Edge — Top",
+        "default": false
+      }, {
+        "type": "checkbox",
+        "id": "show_bottom_torn",
+        "label": "Show Torn Edge — Bottom",
+        "default": false
+      }, {
+        "type": "header",
+        "content": "Background"
+      }, {
+        "type": "image_picker",
+        "id": "bg_image",
+        "label": "Background Image (optional)"
+      }, {
+        "type": "range",
+        "id": "overlay_opacity",
+        "label": "Background Overlay Opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "default": 70
+      }
+    ],
+    "presets": [
+      {
+        "name": "GFC Contact Form"
+      }
+    ]
+  }
+{% endschema %}

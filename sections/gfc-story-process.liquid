@@ -1,0 +1,251 @@
+<style>
+  #gfc-story-process-{{ section.id }} .gfc-pr-grain {
+    background-image: url("data:image/svg+xml, %3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.05;
+  }
+</style>
+
+<section class="relative py-24 md:py-32 overflow-hidden" id="gfc-story-process-{{ section.id }}">
+  <div class="gfc-pr-grain absolute inset-0 pointer-events-none"></div>
+
+  <div class="page-width mx-auto px-6 md:px-12 relative">
+
+    <!-- Header -->
+    <div class="text-center max-w-3xl mx-auto mb-16 md:mb-24">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="inline-flex items-center gap-3 text-red-700 font-headline tracking-widest text-base md:text-xl mb-6 uppercase">
+          <span class="h-px w-10 bg-red-900"></span>
+          {{ section.settings.eyebrow }}
+          <span class="h-px w-10 bg-red-900"></span>
+        </span>
+      {%- endif -%}
+      <h2 class="text-5xl md:text-7xl lg:text-8xl font-headline tracking-tighter leading-none uppercase text-brand-offwhite mb-6">
+        {{ section.settings.heading_prefix }}
+        <span class="text-stone-500 italic">{{ section.settings.heading_accent }}</span>
+      </h2>
+      {%- if section.settings.subheading != blank -%}
+        <p class="text-lg md:text-xl font-body text-brand-silver italic leading-relaxed">
+          {{ section.settings.subheading }}
+        </p>
+      {%- endif -%}
+    </div>
+
+    <!-- Steps -->
+    <div class="space-y-20 md:space-y-32">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'step' -%}
+            {%- assign flip = forloop.index | modulo: 2 -%}
+              <div
+              class="grid md:grid-cols-12 gap-10 md:gap-16 items-center justify-center"
+              {{ block.shopify_attributes }}
+              style="display: grid !important;">
+
+              <!-- image -->
+              <div class="md:col-span-6{% if flip == 0 %} md:order-2{% endif %}">
+                <div class="relative group">
+                  <div class="absolute inset-0 bg-brand-burgundy translate-x-4 translate-y-4 -z-10 group-hover:translate-x-2 group-hover:translate-y-2 transition-transform duration-500" style="border-radius: 24px;"></div>
+
+                  {%- if block.settings.image != blank -%}
+                    <img
+                      class="w-full aspect-[4/3] object-cover border-2 border-brand-aluminum"
+                      style="border-radius: 24px;"
+                      src="{{ block.settings.image | image_url: width: 1200 }}"
+                      alt="{{ block.settings.image.alt | default: block.settings.title }}"
+                      width="1200"
+                      height="900"
+                      loading="lazy">
+                  {%- else -%}
+                    <div class="w-full aspect-[4/3] bg-stone-800 border-2 border-brand-aluminum flex items-center justify-center" style="border-radius: 24px;">
+                      <span class="material-symbols-outlined text-9xl text-stone-600">{{ block.settings.icon | default: 'coffee' }}</span>
+                    </div>
+                  {%- endif -%}
+
+                  <!-- step number stamp -->
+                  <div class="absolute -top-6 {% if flip == 0 %}-right-6{% else %}-left-6{% endif %} bg-brand-graphite border-4 border-brand-burgundy w-20 h-20 md:w-24 md:h-24 rounded-full flex items-center justify-center rotate-[-6deg] shadow-2xl">
+                    <div class="text-center">
+                      <span class="block font-headline text-3xl md:text-4xl text-brand-offwhite leading-none">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+                      <span class="block font-body text-[10px] tracking-widest text-brand-silver uppercase mt-1">step</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- text -->
+              <div class="md:col-span-6 {% if flip == 0 %}md:order-1{% endif %}">
+                {%- if block.settings.label != blank -%}
+                  <span class="inline-block font-headline text-xl tracking-widest text-red-700 uppercase mb-4">
+                    {{ block.settings.label }}
+                  </span>
+                {%- endif -%}
+                <h3 class="text-4xl md:text-6xl font-headline uppercase tracking-tighter leading-none text-brand-offwhite mb-6">
+                  {{ block.settings.title }}
+                </h3>
+                <p class="text-lg md:text-xl font-body text-brand-silver leading-relaxed mb-6">
+                  {{ block.settings.description }}
+                </p>
+                {%- if block.settings.detail != blank -%}
+                  <div class="flex items-start gap-4 mt-6 pt-6 border-t border-stone-800">
+                    <span class="material-symbols-outlined text-red-700 mt-1" style="font-variation-settings: 'FILL' 1;">{{ block.settings.detail_icon | default: 'auto_awesome' }}</span>
+                    <p class="font-body text-base text-brand-silver/80 italic leading-relaxed">
+                      {{ block.settings.detail }}
+                    </p>
+                  </div>
+                {%- endif -%}
+              </div>
+
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+
+    <!-- closing CTA -->
+    {%- if section.settings.cta_label != blank -%}
+      <div class="text-center mt-20 md:mt-24">
+        <a href="{{ section.settings.cta_link }}" class="inline-block bg-brand-burgundy hover:bg-brand-oxblood text-brand-offwhite font-headline text-xl md:text-2xl uppercase px-10 py-5 rounded-lg transition-all duration-300 hover:scale-105 active:scale-95 border-2 border-brand-aluminum shadow-2xl no-underline">
+          {{ section.settings.cta_label }}
+        </a>
+      </div>
+    {%- endif -%}
+
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "GFC Story Process",
+    "tag": "div",
+    "settings": [
+      {
+        "type": "text",
+        "id": "eyebrow",
+        "label": "Eyebrow",
+        "default": "THE CRAFT"
+      },
+      {
+        "type": "text",
+        "id": "heading_prefix",
+        "label": "Heading Prefix",
+        "default": "FROM BEAN"
+      },
+      {
+        "type": "text",
+        "id": "heading_accent",
+        "label": "Heading Accent",
+        "default": "TO BLESSING"
+      },
+      {
+        "type": "textarea",
+        "id": "subheading",
+        "label": "Subheading",
+        "default": "Every cup we send out passes through these four hands, this many ears, and one stubbornly slow process."
+      }, {
+        "type": "header",
+        "content": "Closing CTA"
+      }, {
+        "type": "text",
+        "id": "cta_label",
+        "label": "CTA Label",
+        "default": "TASTE THE DIFFERENCE"
+      }, {
+        "type": "url",
+        "id": "cta_link",
+        "label": "CTA Link"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "step",
+        "name": "Step",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "icon",
+            "label": "Fallback Icon (Material)",
+            "default": "coffee"
+          },
+          {
+            "type": "text",
+            "id": "label",
+            "label": "Eyebrow Label",
+            "default": "ORIGIN"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "SOURCED BY HAND"
+          }, {
+            "type": "textarea",
+            "id": "description",
+            "label": "Description",
+            "default": "We fly to origin twice a year. We taste at the farm. We pick the lots that move us — and we pay above market every time."
+          }, {
+            "type": "textarea",
+            "id": "detail",
+            "label": "Detail / Footnote (optional)",
+            "default": "Currently sourcing from 14 farms across Ethiopia, Colombia, and Guatemala."
+          }, {
+            "type": "text",
+            "id": "detail_icon",
+            "label": "Detail Icon (Material)",
+            "default": "auto_awesome"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "GFC Story Process",
+        "blocks": [
+          {
+            "type": "step",
+            "settings": {
+              "label": "ORIGIN",
+              "title": "SOURCED BY HAND",
+              "description": "We fly to origin twice a year. We taste at the farm. We pick the lots that move us — and we pay above market every time.",
+              "icon": "travel_explore",
+              "detail": "Currently sourcing from 14 farms across Ethiopia, Colombia, and Guatemala.",
+              "detail_icon": "public"
+            }
+          }, {
+            "type": "step",
+            "settings": {
+              "label": "ROAST",
+              "title": "FIRE & RHYTHM",
+              "description": "Small batches, drum-roasted to a record. We taste every roast before it earns the bag — anything off-key gets composted.",
+              "icon": "local_fire_department",
+              "detail": "Roast logs are kept on paper. Yes, paper. The good notes get pinned to the wall.",
+              "detail_icon": "music_note"
+            }
+          }, {
+            "type": "step",
+            "settings": {
+              "label": "REST",
+              "title": "PATIENCE BEFORE THE POUR",
+              "description": "Beans sit for 5 to 10 days post-roast. No bag goes out before the gases settle and the flavor deepens. Slower is better.",
+              "icon": "schedule",
+              "detail": "Cupping happens daily. If a roast peaks early or late, we adjust the next batch.",
+              "detail_icon": "tune"
+            }
+          }, {
+            "type": "step",
+            "settings": {
+              "label": "DELIVER",
+              "title": "FRESH OR NOTHING",
+              "description": "Bagged the morning we ship. Sealed with the roast date stamped — not a 'best by'. You taste it the way we taste it.",
+              "icon": "local_shipping",
+              "detail": "Subscribers always get the most recent roast — no exceptions, no leftovers.",
+              "detail_icon": "verified"
+            }
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

@@ -11,24 +11,92 @@
   "sections": {
     "main": {
       "type": "main-page",
+      "disabled": true,
       "settings": {
         "padding_top": 36,
         "padding_bottom": 36
       }
     },
-    "form": {
-      "type": "contact-form",
+    "gfc_editorial_PEMWPG": {
+      "type": "gfc-editorial",
+      "name": "GFC Editorial",
       "settings": {
-        "heading": "",
-        "heading_size": "h1",
-        "color_scheme": "scheme-1",
-        "padding_top": 36,
-        "padding_bottom": 36
+        "content_source": "page",
+        "source_page": "",
+        "use_page_title": false,
+        "label": "We're Here for You",
+        "heading_prefix": "Get in Touch with",
+        "heading_accent": "the Almighty",
+        "tagline": "We respond fast. Promise.",
+        "hero_height": "md",
+        "overlay_opacity": 65,
+        "show_torn_edge": true,
+        "show_wheels": true,
+        "wheel_text": "GODS FAVORITE ✦ GODS FAVORITE ✦",
+        "lead": "",
+        "drop_cap": true,
+        "body_max_width": "wide",
+        "pull_quote_part_one": "",
+        "pull_quote": "",
+        "pull_quote_part_two": "",
+        "pull_quote_attribution": "",
+        "image_secondary_caption": "",
+        "pledge_text": "Real Coffee for Real Souls. And real support to match.",
+        "cta_label": "",
+        "cta_link": ""
+      }
+    },
+    "gfc_contact_form_ncJgYc": {
+      "type": "gfc-contact-form",
+      "name": "GFC Contact Form",
+      "settings": {
+        "eyebrow": "",
+        "heading_prefix": "DROP US",
+        "heading_accent": "A LINE",
+        "tagline": "Wholesale, press, fan mail, friendly disagreements about the perfect grind size — we read every message.",
+        "show_info_panel": true,
+        "info_heading_prefix": "FIND",
+        "info_heading_accent": "US",
+        "info_heading": "yes",
+        "info_intro": "",
+        "address_label": "The Roastery",
+        "address": "1994 Vinyl Street\nBrooklyn, NY 11211",
+        "hours_label": "Open Hours",
+        "hours": "Mon–Fri: 7am – 9pm\nSat–Sun: 8am – 10pm",
+        "email_label": "Direct Line",
+        "email": "hello@godsfavoritecoffee.com",
+        "phone_label": "Telephone",
+        "phone": "(555) 555 1994",
+        "social_label": "Tag Us",
+        "social_text": "@godsfavoritecoffee on every platform",
+        "show_phone_field": true,
+        "show_subject_field": true,
+        "subject_options": "General, Wholesale, Press, Order Issue, Other",
+        "label_name": "Your Name",
+        "label_email": "Email",
+        "label_phone": "Phone (optional)",
+        "label_subject": "What’s on your mind?",
+        "label_message": "Your Message",
+        "placeholder_name": "Marcus B. Holloway",
+        "placeholder_email": "you@goodcoffee.com",
+        "placeholder_phone": "(555) 555 1994",
+        "placeholder_message": "Tell us what you’re thinking — long, short, sweet, salty, all of it.",
+        "submit_label": "Send It",
+        "fine_print": "We reply within 24 hours, Mon–Fri.",
+        "success_heading": "Message received",
+        "success_text": "Thanks for reaching out — we’ll get back to you faster than a fresh pour.",
+        "show_wheels": true,
+        "wheel_text": "REAL SOULS ✦ DROP A LINE ✦",
+        "show_top_torn": false,
+        "show_bottom_torn": false,
+        "bg_image": "shopify://shop_images/unnamed_25.png",
+        "overlay_opacity": 65
       }
     }
   },
   "order": [
     "main",
-    "form"
+    "gfc_editorial_PEMWPG",
+    "gfc_contact_form_ncJgYc"
   ]
 }

@@ -11,6 +11,45 @@
   "name": "t:sections.footer.name",
   "type": "footer",
   "sections": {
+    "gfc_footer_BrrAbj": {
+      "type": "gfc-footer",
+      "blocks": {
+        "menu_pChQYi": {
+          "type": "menu",
+          "settings": {
+            "heading": "SHOP",
+            "menu": "footer"
+          }
+        },
+        "menu_bWMddf": {
+          "type": "menu",
+          "settings": {
+            "heading": "LEGACY",
+            "menu": "legacy"
+          }
+        }
+      },
+      "block_order": [
+        "menu_pChQYi",
+        "menu_bWMddf"
+      ],
+      "name": "GFC Footer",
+      "settings": {
+        "brand_name": "GODS FAVORITE",
+        "tagline": "Real Coffee for Real Souls. Est. 1994. Roasting divine beans in our temple of soul.",
+        "social_facebook": "",
+        "social_youtube": "",
+        "social_instagram": "",
+        "newsletter_heading": "THE CONGREGATION",
+        "newsletter_desc": "Join the mailing list for soulful updates and divine deals.",
+        "newsletter_placeholder": "YOUR EMAIL ADDRESS",
+        "newsletter_success": "Thank you for joining the congregation!",
+        "copyright": "© 2024 GODS FAVORITE COFFEE CO. REAL COFFEE FOR REAL SOULS.",
+        "privacy_link": "shopify://pages/privacy-policy",
+        "terms_link": "shopify://pages/terms-of-service",
+        "shipping_link": "shopify://pages/shipping-policy"
+      }
+    },
     "footer": {
       "type": "footer",
       "disabled": true,
@@ -31,6 +70,7 @@
     }
   },
   "order": [
+    "gfc_footer_BrrAbj",
     "footer"
   ]
 }
