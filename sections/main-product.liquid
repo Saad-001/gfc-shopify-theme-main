@@ -39,6 +39,11 @@
     }
   {%- endstyle -%}
 
+  {%- assign coffee_profile_blocks = section.blocks | where: 'type', 'coffee_profile' -%}
+  {%- if coffee_profile_blocks.size > 0 -%}
+    {{ 'component-coffee-profile.css' | asset_url | stylesheet_tag }}
+  {%- endif -%}
+
   <script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
   <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
   {%- if product.quantity_price_breaks_configured? -%}
@@ -520,6 +525,60 @@
                         {{- product.metafields.reviews.rating_count }}
                         {{ 'accessibility.total_reviews' | t -}}
                       </span>
+                    </p>
+                  </div>
+                {%- endif -%}
+              {%- when 'coffee_profile' -%}
+                {%- liquid
+                  assign cp_namespace = block.settings.metafield_namespace | strip
+                  assign cp_key = block.settings.metafield_key | strip
+                  assign cp_metaobject = product.metafields[cp_namespace][cp_key].value
+
+                  assign cp_field_keys = 'roast_level,origin,apostle,caffeine,format,processing_method,tasting_notes' | split: ','
+                -%}
+                {%- if cp_metaobject != blank -%}
+                  <div
+                    class="coffee-profile-card coffee-profile-card--{{ block.settings.layout }} quick-add-hidden"
+                    style="--cp-accent: {{ block.settings.accent_color }}; --cp-bg: {{ block.settings.background_color }}; --cp-text: {{ block.settings.text_color }}; --cp-border: {{ block.settings.border_color }}; --cp-cols-desktop: {{ block.settings.columns_desktop }};"
+                    {{ block.shopify_attributes }}
+                  >
+                    {%- if block.settings.show_heading and block.settings.heading != blank -%}
+                      <header class="coffee-profile-card__header">
+                        <span class="coffee-profile-card__heading-mark" aria-hidden="true"></span>
+                        <h2 class="coffee-profile-card__title h4 inline-richtext">{{ block.settings.heading }}</h2>
+                      </header>
+                    {%- endif -%}
+
+
+                    {%- if block.settings.intro != blank -%}
+                      <p class="coffee-profile-card__intro">{{ block.settings.intro }}</p>
+                    {%- endif -%}
+
+
+                    <dl class="coffee-profile-card__list">
+                      {%- for cp_key_item in cp_field_keys -%}
+                        {%- liquid
+                          assign cp_show_setting = 'show_' | append: cp_key_item
+                          assign cp_label_setting = 'label_' | append: cp_key_item
+                          assign cp_show_field = block.settings[cp_show_setting]
+                          assign cp_field_label = block.settings[cp_label_setting]
+                          assign cp_field_value = cp_metaobject[cp_key_item]
+                        -%}
+                        {%- if cp_show_field and cp_field_value != blank -%}
+                          <div class="coffee-profile-card__row">
+                            <dt class="coffee-profile-card__label">{{ cp_field_label | default: cp_key_item }}</dt>
+                            <dd class="coffee-profile-card__value">{{ cp_field_value }}</dd>
+                          </div>
+                        {%- endif -%}
+                      {%- endfor -%}
+                    </dl>
+                  </div>
+                {%- elsif request.design_mode -%}
+                  <div class="coffee-profile-card coffee-profile-card--empty" {{ block.shopify_attributes }}>
+                    <p>
+                      No metaobject linked to this product on
+                      <strong>{{ cp_namespace }}.{{ cp_key }}</strong>.
+                      Add a product metafield with a metaobject reference to display roast details here.
                     </p>
                   </div>
                 {%- endif -%}
@@ -2084,6 +2143,200 @@
           "default": "t:sections.main-product.blocks.icon_with_text.settings.heading_3.default",
           "label": "t:sections.main-product.blocks.icon_with_text.settings.heading_3.label",
           "info": "t:sections.main-product.blocks.icon_with_text.settings.heading.info"
+        }
+      ]
+    },
+    {
+      "type": "coffee_profile",
+      "name": "Coffee profile",
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Pulls fields from a metaobject (e.g. 'Coffee Roast Details') linked to this product through a metafield."
+        },
+        {
+          "type": "header",
+          "content": "Metaobject reference"
+        },
+        {
+          "type": "text",
+          "id": "metafield_namespace",
+          "label": "Metafield namespace",
+          "default": "custom",
+          "info": "The namespace of the product metafield that points to the metaobject."
+        },
+        {
+          "type": "text",
+          "id": "metafield_key",
+          "label": "Metafield key",
+          "default": "coffee_roast_details",
+          "info": "The key of the product metafield."
+        },
+        {
+          "type": "header",
+          "content": "Heading"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_heading",
+          "label": "Show heading",
+          "default": true
+        },
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Roast Details"
+        },
+        {
+          "type": "richtext",
+          "id": "intro",
+          "label": "Intro text",
+          "default": "<p>The story behind this brew.</p>"
+        },
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "select",
+          "id": "layout",
+          "label": "Layout style",
+          "options": [
+            { "value": "cards", "label": "Cards" },
+            { "value": "list", "label": "List" },
+            { "value": "table", "label": "Table" }
+          ],
+          "default": "cards"
+        },
+        {
+          "type": "range",
+          "id": "columns_desktop",
+          "label": "Desktop columns (cards layout)",
+          "min": 1,
+          "max": 4,
+          "step": 1,
+          "default": 2
+        },
+        {
+          "type": "header",
+          "content": "Colors"
+        },
+        {
+          "type": "color",
+          "id": "accent_color",
+          "label": "Accent color",
+          "default": "#7a4b1f"
+        },
+        {
+          "type": "color",
+          "id": "background_color",
+          "label": "Background color",
+          "default": "#fbf5ec"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text color",
+          "default": "#1f1f1f"
+        },
+        {
+          "type": "color",
+          "id": "border_color",
+          "label": "Border color",
+          "default": "#e3d6c0"
+        },
+        {
+          "type": "header",
+          "content": "Fields"
+        },
+        {
+          "type": "paragraph",
+          "content": "Toggle each field and customize its label. Fields not defined on the metaobject are skipped automatically."
+        },
+        {
+          "type": "checkbox",
+          "id": "show_roast_level",
+          "label": "Show Roast Level",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "label_roast_level",
+          "label": "Roast Level label",
+          "default": "Roast Level"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_origin",
+          "label": "Show Origin",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "label_origin",
+          "label": "Origin label",
+          "default": "Origin"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_apostle",
+          "label": "Show Apostle",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "label_apostle",
+          "label": "Apostle label",
+          "default": "Apostle"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_caffeine",
+          "label": "Show Caffeine",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "label_caffeine",
+          "label": "Caffeine label",
+          "default": "Caffeine"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_format",
+          "label": "Show Format",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "label_format",
+          "label": "Format label",
+          "default": "Format"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_processing_method",
+          "label": "Show Processing Method",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "label_processing_method",
+          "label": "Processing Method label",
+          "default": "Processing Method"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_tasting_notes",
+          "label": "Show Tasting Notes",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "label_tasting_notes",
+          "label": "Tasting Notes label",
+          "default": "Tasting Notes"
         }
       ]
     }

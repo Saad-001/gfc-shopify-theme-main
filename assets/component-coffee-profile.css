@@ -1,0 +1,263 @@
+.coffee-profile-card {
+  --cp-radius: 1.4rem;
+  --cp-row-bg: rgba(255, 255, 255, 0.55);
+
+  position: relative;
+  margin: 2rem 0;
+  padding: 2.4rem 2rem;
+  background-color: var(--cp-bg, #fbf5ec);
+  color: var(--cp-text, #1f1f1f);
+  border: 1px solid var(--cp-border, #e3d6c0);
+  border-radius: var(--cp-radius);
+  overflow: hidden;
+}
+
+.coffee-profile-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0.5rem;
+  height: 100%;
+  background-color: var(--cp-accent, #7a4b1f);
+}
+
+.coffee-profile-card__header {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin: 0 0 1.2rem;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid var(--cp-border, #e3d6c0);
+}
+
+.coffee-profile-card__heading-mark {
+  display: inline-block;
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  background-color: var(--cp-accent, #7a4b1f);
+  flex-shrink: 0;
+}
+
+.coffee-profile-card__title {
+  margin: 0;
+  color: var(--cp-accent, #7a4b1f);
+  font-size: 1.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+.coffee-profile-card__intro {
+  margin: 0 0 1.6rem;
+  color: var(--cp-text, #1f1f1f);
+  font-size: 1.4rem;
+  line-height: 1.5;
+  opacity: 0.85;
+}
+
+.coffee-profile-card__list {
+  margin: 0;
+  padding: 0;
+}
+
+.coffee-profile-card__row {
+  margin: 0;
+}
+
+.coffee-profile-card__label {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cp-accent, #7a4b1f);
+  opacity: 0.85;
+  line-height: 1.3;
+}
+
+.coffee-profile-card__value {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--cp-text, #1f1f1f);
+  word-break: break-word;
+}
+
+/* Cards layout */
+.coffee-profile-card--cards .coffee-profile-card__list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.2rem;
+}
+
+@media screen and (min-width: 750px) {
+  .coffee-profile-card--cards .coffee-profile-card__list {
+    grid-template-columns: repeat(var(--cp-cols-desktop, 2), minmax(0, 1fr));
+  }
+}
+
+.coffee-profile-card--cards .coffee-profile-card__row {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1.4rem 1.6rem 1.4rem 1.8rem;
+  background-color: var(--cp-row-bg);
+  border: 1px solid var(--cp-border, #e3d6c0);
+  border-radius: 0.8rem;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.coffee-profile-card--cards .coffee-profile-card__row::before {
+  content: "";
+  position: absolute;
+  top: 0.8rem;
+  left: 0;
+  width: 0.3rem;
+  height: calc(100% - 1.6rem);
+  background-color: var(--cp-accent, #7a4b1f);
+  border-radius: 0 0.3rem 0.3rem 0;
+}
+
+.coffee-profile-card--cards .coffee-profile-card__row:hover {
+  transform: translateY(-0.2rem);
+  box-shadow: 0 0.6rem 1.6rem rgba(0, 0, 0, 0.06);
+}
+
+/* List layout */
+.coffee-profile-card--list .coffee-profile-card__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  align-items: baseline;
+  gap: 1.6rem;
+  padding: 1.2rem 0;
+  border-bottom: 1px solid var(--cp-border, #e3d6c0);
+}
+
+.coffee-profile-card--list .coffee-profile-card__row:last-child {
+  border-bottom: none;
+}
+
+.coffee-profile-card--list .coffee-profile-card__label {
+  position: relative;
+  padding-left: 1.4rem;
+}
+
+.coffee-profile-card--list .coffee-profile-card__label::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  background-color: var(--cp-accent, #7a4b1f);
+  transform: translateY(-50%);
+}
+
+@media screen and (max-width: 749px) {
+  .coffee-profile-card--list .coffee-profile-card__row {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+    padding: 1.4rem 0;
+  }
+}
+
+/* Table layout */
+.coffee-profile-card--table .coffee-profile-card__list {
+  display: table;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--cp-border, #e3d6c0);
+  border-radius: 0.8rem;
+  overflow: hidden;
+}
+
+.coffee-profile-card--table .coffee-profile-card__row {
+  display: table-row;
+}
+
+.coffee-profile-card--table .coffee-profile-card__label,
+.coffee-profile-card--table .coffee-profile-card__value {
+  display: table-cell;
+  padding: 1.2rem 1.4rem;
+  border-bottom: 1px solid var(--cp-border, #e3d6c0);
+  vertical-align: middle;
+}
+
+.coffee-profile-card--table .coffee-profile-card__label {
+  width: 35%;
+  background-color: rgba(0, 0, 0, 0.025);
+  border-right: 1px solid var(--cp-border, #e3d6c0);
+}
+
+.coffee-profile-card--table
+  .coffee-profile-card__row:last-child
+  .coffee-profile-card__label,
+.coffee-profile-card--table
+  .coffee-profile-card__row:last-child
+  .coffee-profile-card__value {
+  border-bottom: none;
+}
+
+@media screen and (max-width: 749px) {
+  .coffee-profile-card--table .coffee-profile-card__list {
+    display: block;
+    border: none;
+  }
+
+  .coffee-profile-card--table .coffee-profile-card__row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+    padding: 1.2rem 0;
+    border-bottom: 1px solid var(--cp-border, #e3d6c0);
+  }
+
+  .coffee-profile-card--table .coffee-profile-card__row:last-child {
+    border-bottom: none;
+  }
+
+  .coffee-profile-card--table .coffee-profile-card__label,
+  .coffee-profile-card--table .coffee-profile-card__value {
+    display: block;
+    width: auto;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+  }
+}
+
+/* Empty state (theme editor only) */
+.coffee-profile-card--empty {
+  padding: 1.6rem 1.8rem;
+  background-color: rgba(0, 0, 0, 0.03);
+  border: 1px dashed var(--cp-border, #e3d6c0);
+  color: rgba(0, 0, 0, 0.7);
+  font-size: 1.3rem;
+  line-height: 1.5;
+}
+
+.coffee-profile-card--empty::before {
+  display: none;
+}
+
+@media screen and (max-width: 749px) {
+  .coffee-profile-card {
+    padding: 2rem 1.6rem;
+  }
+
+  .coffee-profile-card__title {
+    font-size: 1.6rem;
+  }
+
+  .coffee-profile-card__value {
+    font-size: 1.4rem;
+  }
+}

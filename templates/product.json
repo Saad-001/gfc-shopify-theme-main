@@ -53,6 +53,36 @@
           "type": "description",
           "settings": {}
         },
+        "coffee_profile_dghq4R": {
+          "type": "coffee_profile",
+          "settings": {
+            "metafield_namespace": "custom",
+            "metafield_key": "roast_details",
+            "show_heading": true,
+            "heading": "Roast Details",
+            "intro": "<p>The story behind this brew</p>",
+            "layout": "list",
+            "columns_desktop": 2,
+            "accent_color": "#7a4b1f",
+            "background_color": "#ffffff",
+            "text_color": "#1f1f1f",
+            "border_color": "#e3d6c0",
+            "show_roast_level": true,
+            "label_roast_level": "Roast Level",
+            "show_origin": true,
+            "label_origin": "Origin",
+            "show_apostle": true,
+            "label_apostle": "Apostle",
+            "show_caffeine": true,
+            "label_caffeine": "Caffeine",
+            "show_format": true,
+            "label_format": "Format",
+            "show_processing_method": true,
+            "label_processing_method": "Processing",
+            "show_tasting_notes": true,
+            "label_tasting_notes": "Tasting Notes"
+          }
+        },
         "share": {
           "type": "share",
           "settings": {
@@ -69,6 +99,7 @@
         "appstle_subscription_appstle_subscription_product_page_widget_kVxjwd",
         "buy_buttons",
         "description",
+        "coffee_profile_dghq4R",
         "share"
       ],
       "settings": {
