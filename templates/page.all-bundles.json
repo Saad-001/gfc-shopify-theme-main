@@ -1,0 +1,123 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "gfc_editorial_qcfAmL": {
+      "type": "gfc-editorial",
+      "name": "GFC Editorial",
+      "settings": {
+        "content_source": "page",
+        "source_page": "",
+        "use_page_title": false,
+        "label": "Curated Collections",
+        "heading_prefix": "The Divine",
+        "heading_accent": "Bundles",
+        "tagline": "Handpicked combinations for every kind of soul. Save more when you bundle.",
+        "image": "shopify://shop_images/unnamed_23.png",
+        "hero_height": "md",
+        "overlay_opacity": 65,
+        "show_torn_edge": false,
+        "show_wheels": true,
+        "wheel_text": "GODS FAVORITE ✦ GODS FAVORITE ✦",
+        "lead": "",
+        "drop_cap": false,
+        "body_max_width": "wide",
+        "pull_quote_part_one": "",
+        "pull_quote": "",
+        "pull_quote_part_two": "",
+        "pull_quote_attribution": "",
+        "image_secondary_caption": "",
+        "pledge_text": "",
+        "cta_label": "",
+        "cta_link": ""
+      }
+    },
+    "multirow_apJh9W": {
+      "type": "multirow",
+      "blocks": {
+        "row_BcmwmR": {
+          "type": "row",
+          "settings": {
+            "caption": "Perfect Introduction — 2 Bags + 1 Pod Pack",
+            "heading": "The Starter Revelation",
+            "text": "<p>Two bags plus one pod pack. Your morning ritual at home and your divine brew on the go. The perfect way to start your Gods Favorite Coffee journey — save 13%.</p>",
+            "button_label": "Start My Revelation",
+            "button_link": "https://godsfavoritecoffee.com/apps/bundles/bb/lk9jbqdomw"
+          }
+        },
+        "row_qEUfmA": {
+          "type": "row",
+          "settings": {
+            "caption": "For the Devoted — 3 Dark Roasts",
+            "heading": "The Dark Side",
+            "text": "<p>The Foundation. The Orator. The Companion. Three of our darkest, boldest roasts bundled together for those who take their devotion seriously. No compromises. Save 13%.</p>",
+            "button_label": "Go to the Dark Side",
+            "button_link": "https://godsfavoritecoffee.com/apps/bundles/bb/v6qkpgtgpk"
+          }
+        },
+        "row_CEXMyf": {
+          "type": "row",
+          "settings": {
+            "caption": "Light & Bright — 2 Roasts",
+            "heading": "The Bright Side",
+            "text": "<p>The Traveler and The Beloved together in one order. Two of our brightest, most vibrant roasts for those who like their mornings light, complex, and full of life. Save 10%.</p>",
+            "button_label": "See the Bright Side",
+            "button_link": "https://godsfavoritecoffee.com/apps/bundles/bb/94hu7th0be"
+          }
+        },
+        "row_aw6dwT": {
+          "type": "row",
+          "settings": {
+            "caption": "The Complete Set — All 9 Roasts",
+            "heading": "The Divine Collection",
+            "text": "<p>All 9 roasts. One divine order. From the darkest devotion to the brightest morning — experience the complete Gods Favorite Coffee collection and save 20%. The full revelation.</p>",
+            "button_label": "Get the Full Collection",
+            "button_link": "https://godsfavoritecoffee.com/apps/bundles/bb/ootkscoth9"
+          }
+        }
+      },
+      "block_order": [
+        "row_BcmwmR",
+        "row_qEUfmA",
+        "row_CEXMyf",
+        "row_aw6dwT"
+      ],
+      "name": "t:sections.multirow.presets.name",
+      "settings": {
+        "image_height": "medium",
+        "desktop_image_width": "medium",
+        "image_layout": "alternate-left",
+        "heading_size": "h1",
+        "text_style": "body",
+        "button_style": "secondary",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "scheme-4",
+        "row_color_scheme": "scheme-4",
+        "padding_top": 0,
+        "padding_bottom": 80
+      }
+    }
+  },
+  "order": [
+    "main",
+    "gfc_editorial_qcfAmL",
+    "multirow_apJh9W"
+  ]
+}

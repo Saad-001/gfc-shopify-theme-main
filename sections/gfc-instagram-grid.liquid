@@ -1,127 +1,773 @@
+{%- liquid
+  assign uid = section.id
+  assign handle = section.settings.instagram_handle | remove: '@' | strip
+  assign ig_url = 'https://instagram.com/' | append: handle
+-%}
+
 <style>
+  .gfc-ig-root {
+    --gfc-ig-accent: #B91C1C;
+    --gfc-ig-accent-dark: #7f1d1d;
+    --gfc-ig-ink: #F0EDED;
+    --gfc-ig-muted: #B0B7BC;
+  }
+
+  /* Bento grid — 4 cols desktop, 2 cols mobile */
+  .gfc-ig-root .gfc-ig-bento {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: minmax(140px, auto);
+    gap: 0.75rem;
+  }
+  /* Per-instance column count (only rule that needs the unique ID) */
   @media (min-width: 768px) {
-    #gfc-ig-{{ section.id }} .gfc-ig-grid {
+    #gfc-ig-{{ uid }} .gfc-ig-bento {
       grid-template-columns: repeat({{ section.settings.columns }}, minmax(0, 1fr));
+      grid-auto-rows: minmax(180px, auto);
+      gap: 1rem;
     }
+  }
+
+  /* Bento size variants */
+  .gfc-ig-root .gfc-ig-tile {
+    grid-column: span 1;
+    grid-row: span 1;
+    aspect-ratio: 1 / 1;
+  }
+  @media (min-width: 768px) {
+    .gfc-ig-root .gfc-ig-tile { aspect-ratio: auto; }
+    .gfc-ig-root .gfc-ig-tile--wide { grid-column: span 2; }
+    .gfc-ig-root .gfc-ig-tile--tall { grid-row: span 2; }
+    .gfc-ig-root .gfc-ig-tile--hero { grid-column: span 2; grid-row: span 2; }
+  }
+
+  /* Tile base */
+  .gfc-ig-root .gfc-ig-tile {
+    position: relative;
+    overflow: hidden;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    transition: box-shadow 0.45s, border-color 0.3s;
+    background: #0a0a0a;
+  }
+  .gfc-ig-root .gfc-ig-tile:hover {
+    border-color: #ffffff;
+    box-shadow: 0 0 0 1px #ffffff;
+    z-index: 3;
+  }
+  .gfc-ig-root .gfc-ig-tile img {
+    transition: filter 0.5s;
+  }
+  .gfc-ig-root .gfc-ig-tile:hover img {
+    filter: saturate(1.1) contrast(1.05);
+  }
+
+  /* Overlay gradient + content reveal */
+  .gfc-ig-root .gfc-ig-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 30%, rgba(0,0,0,0.55) 65%, rgba(0,0,0,0.92) 100%);
+    opacity: 0;
+    transition: opacity 0.4s;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.25rem;
+  }
+  .gfc-ig-root .gfc-ig-tile:hover .gfc-ig-overlay {
+    opacity: 1;
+  }
+
+  .gfc-ig-root .gfc-ig-meta {
+    transform: translateY(12px);
+    transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .gfc-ig-root .gfc-ig-tile:hover .gfc-ig-meta {
+    transform: translateY(0);
+  }
+
+  /* Shop pill */
+  .gfc-ig-root .gfc-ig-shop {
+    position: relative;
+    z-index: 2;
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--gfc-ig-accent);
+    color: var(--gfc-ig-ink);
+    font-family: 'HVD Poster', serif;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.85rem;
+    padding: 0.55rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 10px 25px -10px rgba(185, 28, 28, 0.8);
+    transition: background 0.2s, transform 0.2s;
+  }
+  .gfc-ig-root .gfc-ig-shop:hover {
+    background: #991b1b;
+    transform: scale(1.04);
+  }
+
+  /* Featured corner badge */
+  .gfc-ig-root .gfc-ig-badge {
+    position: absolute;
+    top: 0.85rem;
+    left: 0.85rem;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: var(--gfc-ig-ink);
+    font-family: 'HVD Poster', serif;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.7rem;
+    padding: 0.35rem 0.7rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+  }
+  .gfc-ig-root .gfc-ig-badge--accent {
+    background: var(--gfc-ig-accent);
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+
+  /* Live pulse */
+  .gfc-ig-root .gfc-ig-pulse {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: #ef4444;
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+    animation: gfc-ig-pulse 1.6s cubic-bezier(0.66, 0.33, 0.4, 0.94) infinite;
+  }
+  @keyframes gfc-ig-pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+    70%  { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+  }
+
+  /* Video play icon */
+  .gfc-ig-root .gfc-ig-play {
+    position: absolute;
+    top: 0.85rem;
+    right: 0.85rem;
+    z-index: 2;
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: var(--gfc-ig-ink);
+  }
+
+  /* Profile header */
+  .gfc-ig-root .gfc-ig-profile {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    border: 1px solid #ffffff;
+    border-radius: 22px;
+    background: linear-gradient(180deg, rgba(15, 15, 15, 0.6), rgba(5, 5, 5, 0.75));
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+  @media (max-width: 767px) {
+    .gfc-ig-root .gfc-ig-profile {
+      grid-template-columns: auto 1fr;
+      grid-template-areas: 'avatar info' 'cta cta';
+      row-gap: 1.25rem;
+    }
+    .gfc-ig-root .gfc-ig-profile > .gfc-ig-avatar-wrap { grid-area: avatar; }
+    .gfc-ig-root .gfc-ig-profile > .gfc-ig-info { grid-area: info; }
+    .gfc-ig-root .gfc-ig-profile > .gfc-ig-follow-wrap { grid-area: cta; }
+  }
+
+  .gfc-ig-root .gfc-ig-avatar {
+    width: 96px;
+    height: 96px;
+    border-radius: 999px;
+    object-fit: cover;
+    border: 3px solid #000000;
+    box-shadow: 0 0 0 3px var(--gfc-ig-accent), 0 0 0 6px #ffffff;
+  }
+  @media (min-width: 768px) {
+    .gfc-ig-root .gfc-ig-avatar {
+      width: 120px;
+      height: 120px;
+    }
+  }
+
+  .gfc-ig-root .gfc-ig-verified {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 999px;
+    background: var(--gfc-ig-accent);
+    color: var(--gfc-ig-ink);
+    font-size: 14px;
+  }
+
+  /* Follow button */
+  .gfc-ig-root .gfc-ig-follow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: var(--gfc-ig-accent);
+    color: var(--gfc-ig-ink);
+    font-family: 'HVD Poster', serif;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 1rem;
+    padding: 0.95rem 1.6rem;
+    border-radius: 12px;
+    border: 2px solid var(--gfc-ig-muted);
+    box-shadow: 0 18px 40px -14px rgba(185, 28, 28, 0.7), inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+    transition: transform 0.2s, background 0.2s;
+  }
+  .gfc-ig-root .gfc-ig-follow:hover {
+    background: #991b1b;
+    transform: translateY(-2px) scale(1.02);
+  }
+  .gfc-ig-root .gfc-ig-follow:active {
+    transform: scale(0.97);
+  }
+
+  /* Handle marquee */
+  @keyframes gfc-ig-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  .gfc-ig-root .gfc-ig-marquee {
+    animation: gfc-ig-scroll 35s linear infinite;
   }
 </style>
 
-<section class="py-24 border-y border-stone-800" id="gfc-ig-{{ section.id }}">
-  <div class="page-width mx-auto px-12">
+<section class="gfc-ig-root relative overflow-hidden bg-black" id="gfc-ig-{{ uid }}">
+  <div class="page-width mx-auto px-6 md:px-12 py-20 md:py-24 relative">
 
-    <!-- Header -->
-    <div class="text-center mb-16">
-      <h2 class="text-4xl md:text-6xl font-headline mb-4 uppercase text-brand-offwhite">{{ section.settings.heading }}</h2>
-      <p class="text-brand-silver text-xl font-body">{{ section.settings.subheading }}</p>
+    <!-- ============ EYEBROW + HEADING ============ -->
+    <div class="text-center mb-10 md:mb-14">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="inline-flex items-center gap-3 text-red-700 font-headline tracking-widest text-sm md:text-base mb-5 uppercase">
+          <span class="h-px w-10 bg-red-900"></span>
+          {{ section.settings.eyebrow }}
+          <span class="h-px w-10 bg-red-900"></span>
+        </span>
+      {%- endif -%}
+
+      <h2 class="text-5xl md:text-7xl lg:text-8xl font-headline tracking-tighter leading-none uppercase text-brand-offwhite mb-4">
+        {{ section.settings.heading_prefix }}
+        {%- if section.settings.heading_accent != blank -%}
+          <span class="text-red-700 italic">
+            {{ section.settings.heading_accent }}</span>
+        {%- endif -%}
+      </h2>
+
+      {%- if section.settings.subheading != blank -%}
+        <p class="text-brand-silver text-lg md:text-xl font-body italic max-w-2xl mx-auto">{{ section.settings.subheading }}</p>
+      {%- endif -%}
     </div>
 
-    <!-- Grid -->
-    <div class="grid gfc-ig-grid grid-cols-2 gap-4">
+    <!-- ============ PROFILE HEADER ============ -->
+    {%- if section.settings.show_profile -%}
+      <div class="gfc-ig-profile mb-10 md:mb-12">
+        <div class="gfc-ig-avatar-wrap relative shrink-0">
+          {%- if section.settings.avatar != blank -%}
+            <img
+              class="gfc-ig-avatar"
+              src="{{ section.settings.avatar | image_url: width: 240 }}"
+              alt="{{ handle }}"
+              width="120"
+              height="120"
+              loading="lazy">
+          {%- else -%}
+            <div class="gfc-ig-avatar grid place-items-center bg-stone-900 text-brand-offwhite font-headline text-3xl">
+              {{ handle | slice: 0, 1 | upcase }}
+            </div>
+          {%- endif -%}
+          {%- if section.settings.verified -%}
+            <span class="gfc-ig-verified absolute -bottom-1 -right-1 ring-2 ring-black" aria-label="Verified">
+              <span class="material-symbols-outlined" style="font-size:14px; font-variation-settings: 'FILL' 1;">check</span>
+            </span>
+          {%- endif -%}
+        </div>
+
+        <div class="gfc-ig-info min-w-0">
+          <div class="flex items-center gap-3 mb-2 flex-wrap">
+            <a
+              href="{{ ig_url }}"
+              target="_blank"
+              rel="noopener"
+              class="font-headline uppercase text-2xl md:text-3xl text-brand-offwhite hover:text-red-700 transition-colors no-underline tracking-tight">@{{ handle }}</a>
+            {%- if section.settings.show_live -%}
+              <span class="inline-flex items-center gap-2 text-xs font-headline uppercase tracking-widest text-red-500">
+                <span class="gfc-ig-pulse" aria-hidden="true"></span>
+                {{ section.settings.live_label | default: 'LIVE' }}
+              </span>
+            {%- endif -%}
+          </div>
+          {%- if section.settings.bio != blank -%}
+            <p class="font-body text-brand-silver text-sm md:text-base leading-snug mb-3 max-w-xl">{{ section.settings.bio }}</p>
+          {%- endif -%}
+
+          {%- if section.settings.show_stats -%}
+            <div class="flex items-center gap-5 md:gap-8">
+              <div class="text-brand-offwhite">
+                <span class="font-headline text-xl md:text-2xl block leading-none">{{ section.settings.posts_count | default: '248' }}</span>
+                <span class="font-body uppercase tracking-widest text-[10px] md:text-xs text-brand-silver">Posts</span>
+              </div>
+              <div class="h-8 w-px bg-white/40" aria-hidden="true"></div>
+              <div class="text-brand-offwhite">
+                <span class="font-headline text-xl md:text-2xl block leading-none">{{ section.settings.followers_count | default: '12.4K' }}</span>
+                <span class="font-body uppercase tracking-widest text-[10px] md:text-xs text-brand-silver">Followers</span>
+              </div>
+              <div class="h-8 w-px bg-white/40" aria-hidden="true"></div>
+              <div class="text-brand-offwhite">
+                <span class="font-headline text-xl md:text-2xl block leading-none">{{ section.settings.following_count | default: '186' }}</span>
+                <span class="font-body uppercase tracking-widest text-[10px] md:text-xs text-brand-silver">Following</span>
+              </div>
+            </div>
+          {%- endif -%}
+        </div>
+
+        <div class="gfc-ig-follow-wrap shrink-0">
+          <a
+            class="gfc-ig-follow no-underline"
+            href="{{ ig_url }}"
+            target="_blank"
+            rel="noopener">
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add</span>
+            {{ section.settings.follow_label | default: 'Follow' }}
+          </a>
+        </div>
+      </div>
+    {%- endif -%}
+
+    <!-- ============ BENTO GRID ============ -->
+    <div class="gfc-ig-bento">
       {%- for block in section.blocks -%}
         {%- case block.type -%}
           {%- when 'photo' -%}
-            <div class="aspect-square relative overflow-hidden rounded-lg group" {{ block.shopify_attributes }}>
+            {%- liquid
+              assign size = block.settings.size | default: 'small'
+              assign linked_product = block.settings.product
+
+              assign tile_url = block.settings.link
+              if tile_url == blank and linked_product != blank
+                assign tile_url = linked_product.url
+              endif
+            -%}
+
+            <article class="gfc-ig-tile gfc-ig-tile--{{ size }}" {{ block.shopify_attributes }}>
+              {%- if block.settings.featured -%}
+                <span class="gfc-ig-badge gfc-ig-badge--accent">
+                  <span class="material-symbols-outlined" style="font-size:14px; font-variation-settings: 'FILL' 1;">star</span>
+                  Featured
+                </span>
+              {%- elsif block.settings.is_video -%}
+                <span class="gfc-ig-badge">
+                  <span class="gfc-ig-pulse" aria-hidden="true"></span>
+                  Reel
+                </span>
+              {%- endif -%}
+
+              {%- if block.settings.is_video -%}
+                <span class="gfc-ig-play" aria-hidden="true">
+                  <span class="material-symbols-outlined" style="font-size:18px; font-variation-settings: 'FILL' 1;">play_arrow</span>
+                </span>
+              {%- endif -%}
+
               {%- if block.settings.image != blank -%}
                 <img
-                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  src="{{ block.settings.image | image_url: width: 600 }}"
-                  alt="{{ block.settings.image.alt | default: 'Social photo' }}"
-                  width="600"
-                  height="600"
-                  loading="lazy"
-                >
+                  class="w-full h-full object-cover absolute inset-0"
+                  src="{{ block.settings.image | image_url: width: 1200 }}"
+                  srcset="{{ block.settings.image | image_url: width: 600 }} 600w, {{ block.settings.image | image_url: width: 1200 }} 1200w, {{ block.settings.image | image_url: width: 1800 }} 1800w"
+                  sizes="(min-width: 768px) 40vw, 50vw"
+                  alt="{{ block.settings.image.alt | default: block.settings.caption | default: 'Social photo' }}"
+                  width="1200"
+                  height="1200"
+                  loading="lazy">
               {%- else -%}
-                <div class="w-full h-full bg-stone-800 flex items-center justify-center">
+                <div class="w-full h-full bg-stone-800 absolute inset-0 flex items-center justify-center">
                   <span class="material-symbols-outlined text-6xl text-stone-600">photo_camera</span>
                 </div>
               {%- endif -%}
 
-              <div class="absolute inset-0 bg-brand-burgundy/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                <span class="material-symbols-outlined text-4xl text-brand-offwhite">favorite</span>
+              <div class="gfc-ig-overlay">
+                <div class="gfc-ig-meta">
+                  <!-- Like + comment row -->
+                  <div class="flex items-center gap-4 mb-2 text-brand-offwhite font-body text-sm">
+                    <span class="inline-flex items-center gap-1.5">
+                      <span class="material-symbols-outlined text-red-500" style="font-size:18px; font-variation-settings: 'FILL' 1;">favorite</span>
+                      {{ block.settings.likes | default: '1.2k' }}
+                    </span>
+                    <span class="inline-flex items-center gap-1.5">
+                      <span class="material-symbols-outlined" style="font-size:18px;">chat_bubble</span>
+                      {{ block.settings.comments | default: '32' }}
+                    </span>
+                  </div>
+
+                  {%- if block.settings.caption != blank -%}
+                    <p class="font-body text-brand-offwhite text-sm md:text-base leading-snug line-clamp-2 mb-3">{{ block.settings.caption }}</p>
+                  {%- endif -%}
+
+                  {%- if linked_product != blank -%}
+                    <a
+                      class="gfc-ig-shop no-underline"
+                      href="{{ linked_product.url }}"
+                      aria-label="Shop {{ linked_product.title }}">
+                      <span class="material-symbols-outlined" style="font-size:16px;">shopping_bag</span>
+                      Shop {{ linked_product.title | truncate: 22 }}
+                      {%- if linked_product.price_min > 0 -%}
+                        <span class="opacity-80">· {{ linked_product.price_min | money }}</span>
+                      {%- endif -%}
+                    </a>
+                  {%- elsif tile_url != blank -%}
+                    <span class="gfc-ig-shop">
+                      <span class="material-symbols-outlined" style="font-size:16px;">arrow_outward</span>
+                      View Post
+                    </span>
+                  {%- endif -%}
+                </div>
               </div>
 
-              {%- if block.settings.link != blank -%}
-                <a class="absolute inset-0" href="{{ block.settings.link }}" aria-label="View post"></a>
+              {%- if tile_url != blank -%}
+                <a
+                  class="absolute inset-0 z-1"
+                  href="{{ tile_url }}"
+                  aria-label="{{ block.settings.caption | default: 'View social post' }}"
+                  {% if block.settings.link != blank %}
+                  target="_blank"
+                  rel="noopener"
+                  {% endif %}></a>
               {%- endif -%}
-            </div>
+            </article>
         {%- endcase -%}
       {%- endfor -%}
     </div>
 
-    <!-- CTA -->
-    {%- if section.settings.instagram_handle != blank -%}
-      <div class="text-center mt-12">
-        <a class="inline-flex items-center gap-2 text-brand-silver hover:text-brand-offwhite transition-colors font-body text-lg" href="https://instagram.com/{{ section.settings.instagram_handle | remove: '@' }}" target="_blank" rel="noopener">
-          <span class="material-symbols-outlined">photo_camera</span>
-          @{{ section.settings.instagram_handle | remove: '@' }}
-        </a>
+    <!-- ============ BOTTOM TAG CTA ============ -->
+    {%- if section.settings.tag_text != blank or section.settings.show_bottom_cta -%}
+      <div class="mt-12 md:mt-16 border border-white rounded-2xl overflow-hidden">
+        <div class="flex flex-col md:flex-row items-stretch">
+          {%- if section.settings.tag_text != blank -%}
+            <div class="flex-1 p-6 md:p-8 flex items-center gap-4 border-b md:border-b-0 md:border-r border-white">
+              <span class="material-symbols-outlined text-red-700 text-4xl shrink-0" style="font-variation-settings: 'FILL' 1;">tag</span>
+              <div class="min-w-0">
+                <p class="font-headline uppercase text-xl md:text-2xl text-brand-offwhite tracking-tight leading-tight">
+                  {{ section.settings.tag_text }}
+                </p>
+                {%- if section.settings.tag_subtext != blank -%}
+                  <p class="font-body text-brand-silver text-sm mt-1">{{ section.settings.tag_subtext }}</p>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endif -%}
+
+          {%- if section.settings.show_bottom_cta -%}
+            <a
+              class="md:w-auto bg-brand-burgundy hover:bg-brand-oxblood transition-colors p-6 md:p-8 flex items-center justify-center gap-3 font-headline uppercase text-lg md:text-xl text-brand-offwhite tracking-widest no-underline group"
+              href="{{ ig_url }}"
+              target="_blank"
+              rel="noopener">
+              <span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">photo_camera</span>
+              {{ section.settings.bottom_cta_label | default: 'Follow on Instagram' }}
+              <span class="material-symbols-outlined transition-transform group-hover:translate-x-1">arrow_forward</span>
+            </a>
+          {%- endif -%}
+        </div>
       </div>
     {%- endif -%}
-
   </div>
+
+  <!-- ============ HANDLE MARQUEE FOOTER ============ -->
+  {%- if section.settings.show_marquee -%}
+    <div class="border-t-2 border-dashed border-white py-5 overflow-hidden">
+      <div class="flex whitespace-nowrap gfc-ig-marquee" aria-hidden="true">
+        {%- for pass in (1..2) -%}
+          <div class="flex items-center gap-8 px-4">
+            {%- for i in (1..8) -%}
+              <span class="font-headline text-2xl md:text-3xl uppercase text-brand-aluminum/40 tracking-tight">@{{ handle }}</span>
+              <span class="material-symbols-outlined text-red-900" style="font-variation-settings: 'FILL' 1;">star</span>
+            {%- endfor -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
 </section>
 
 {% schema %}
-{
-  "name": "GFC Instagram Grid",
-  "tag": "div",
-  "settings": [
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "THE VIBE CHECK"
-    },
-    {
-      "type": "text",
-      "id": "subheading",
-      "label": "Subheading",
-      "default": "Tag @GODSFAVORITECOFFEE for a chance to be featured in the temple."
-    },
-    {
-      "type": "text",
-      "id": "instagram_handle",
-      "label": "Instagram Handle",
-      "default": "@godsfavoritecoffee"
-    },
-    {
-      "type": "range",
-      "id": "columns",
-      "min": 2,
-      "max": 6,
-      "step": 1,
-      "label": "Columns (desktop)",
-      "default": 4
-    }
-  ],
-  "blocks": [
-    {
-      "type": "photo",
-      "name": "Photo",
-      "settings": [
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Photo"
-        },
-        {
-          "type": "url",
-          "id": "link",
-          "label": "Link (optional)"
-        }
-      ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "GFC Instagram Grid",
-      "blocks": [
-        { "type": "photo" },
-        { "type": "photo" },
-        { "type": "photo" },
-        { "type": "photo" }
-      ]
-    }
-  ]
-}
+  {
+    "name": "GFC Instagram Grid",
+    "tag": "div",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Heading"
+      },
+      {
+        "type": "text",
+        "id": "eyebrow",
+        "label": "Eyebrow Label",
+        "default": "@ THE TEMPLE"
+      },
+      {
+        "type": "text",
+        "id": "heading_prefix",
+        "label": "Heading Prefix",
+        "default": "THE VIBE"
+      },
+      {
+        "type": "text",
+        "id": "heading_accent",
+        "label": "Heading Accent (red italic)",
+        "default": "CHECK"
+      }, {
+        "type": "textarea",
+        "id": "subheading",
+        "label": "Subheading",
+        "default": "Where our community brews. Tag us for a chance to be featured."
+      }, {
+        "type": "header",
+        "content": "Profile Header"
+      }, {
+        "type": "checkbox",
+        "id": "show_profile",
+        "label": "Show Profile Header",
+        "default": true
+      }, {
+        "type": "image_picker",
+        "id": "avatar",
+        "label": "Profile Avatar"
+      }, {
+        "type": "text",
+        "id": "instagram_handle",
+        "label": "Instagram Handle",
+        "default": "@godsfavoritecoffee"
+      }, {
+        "type": "checkbox",
+        "id": "verified",
+        "label": "Show verified checkmark",
+        "default": true
+      }, {
+        "type": "textarea",
+        "id": "bio",
+        "label": "Bio / Tagline",
+        "default": "Born in '94. Roasted daily. Worship in every cup. ☕✦"
+      }, {
+        "type": "checkbox",
+        "id": "show_stats",
+        "label": "Show stats row (posts / followers / following)",
+        "default": true
+      }, {
+        "type": "text",
+        "id": "posts_count",
+        "label": "Posts count",
+        "default": "248"
+      }, {
+        "type": "text",
+        "id": "followers_count",
+        "label": "Followers count",
+        "default": "12.4K"
+      }, {
+        "type": "text",
+        "id": "following_count",
+        "label": "Following count",
+        "default": "186"
+      }, {
+        "type": "checkbox",
+        "id": "show_live",
+        "label": "Show LIVE indicator",
+        "default": true
+      }, {
+        "type": "text",
+        "id": "live_label",
+        "label": "Live label",
+        "default": "ROASTING NOW"
+      }, {
+        "type": "text",
+        "id": "follow_label",
+        "label": "Follow button label",
+        "default": "Follow"
+      }, {
+        "type": "header",
+        "content": "Grid Layout"
+      }, {
+        "type": "paragraph",
+        "content": "Each photo block has its own size — mix Hero / Wide / Tall / Square for a bento mosaic look."
+      }, {
+        "type": "range",
+        "id": "columns",
+        "min": 3,
+        "max": 6,
+        "step": 1,
+        "label": "Desktop columns",
+        "default": 4
+      }, {
+        "type": "header",
+        "content": "Bottom CTA"
+      }, {
+        "type": "text",
+        "id": "tag_text",
+        "label": "Tag CTA Heading",
+        "default": "TAG #GODSFAVORITECOFFEE TO BE FEATURED"
+      }, {
+        "type": "text",
+        "id": "tag_subtext",
+        "label": "Tag CTA Subtext",
+        "default": "We repost our favorite shots every Sunday."
+      }, {
+        "type": "checkbox",
+        "id": "show_bottom_cta",
+        "label": "Show Follow Button",
+        "default": true
+      }, {
+        "type": "text",
+        "id": "bottom_cta_label",
+        "label": "Follow Button Label",
+        "default": "Follow on Instagram"
+      }, {
+        "type": "checkbox",
+        "id": "show_marquee",
+        "label": "Show handle marquee at bottom",
+        "default": true
+      }
+    ],
+    "blocks": [
+      {
+        "type": "photo",
+        "name": "Photo",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Photo"
+          },
+          {
+            "type": "select",
+            "id": "size",
+            "label": "Tile Size",
+            "info": "Mix sizes for a bento mosaic. 'Hero' is largest (2×2).",
+            "options": [
+              {
+                "value": "small",
+                "label": "Square (1×1)"
+              }, {
+                "value": "wide",
+                "label": "Wide (2×1)"
+              }, {
+                "value": "tall",
+                "label": "Tall (1×2)"
+              }, {
+                "value": "hero",
+                "label": "Hero (2×2)"
+              }
+            ],
+            "default": "small"
+          },
+          {
+            "type": "checkbox",
+            "id": "featured",
+            "label": "Show 'Featured' badge",
+            "default": false
+          },
+          {
+            "type": "checkbox",
+            "id": "is_video",
+            "label": "This is a Reel / Video",
+            "default": false
+          }, {
+            "type": "textarea",
+            "id": "caption",
+            "label": "Caption (shown on hover)"
+          }, {
+            "type": "text",
+            "id": "likes",
+            "label": "Likes count",
+            "default": "1.2k"
+          }, {
+            "type": "text",
+            "id": "comments",
+            "label": "Comments count",
+            "default": "32"
+          }, {
+            "type": "product",
+            "id": "product",
+            "label": "Shop This Look (product)",
+            "info": "Adds a 'Shop' pill that links to this product on hover."
+          }, {
+            "type": "url",
+            "id": "link",
+            "label": "External Link (optional)",
+            "info": "Used when no product is set. Opens in new tab."
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "GFC Instagram Grid",
+        "blocks": [
+          {
+            "type": "photo",
+            "settings": {
+              "size": "hero",
+              "featured": true,
+              "caption": "Sunday slow-brew ritual."
+            }
+          },
+          {
+            "type": "photo",
+            "settings": {
+              "size": "small"
+            }
+          },
+          {
+            "type": "photo",
+            "settings": {
+              "size": "small",
+              "is_video": true
+            }
+          },
+          {
+            "type": "photo",
+            "settings": {
+              "size": "wide",
+              "caption": "New drop — fresh from the roaster."
+            }
+          }, {
+            "type": "photo",
+            "settings": {
+              "size": "tall"
+            }
+          }, {
+            "type": "photo",
+            "settings": {
+              "size": "small"
+            }
+          }, {
+            "type": "photo",
+            "settings": {
+              "size": "small"
+            }
+          }
+        ]
+      }
+    ]
+  }
 {% endschema %}

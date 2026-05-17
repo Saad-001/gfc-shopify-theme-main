@@ -101,7 +101,7 @@
         "card_4": {
           "type": "product_card",
           "settings": {
-            "product": "the-first-called",
+            "product": "the-companion",
             "custom_title": "MIDNIGHT VIGIL",
             "custom_price": "$22",
             "custom_desc": "The ultimate espresso blend. Thick crema, heavy body, and soulful depth.",
@@ -148,7 +148,7 @@
           "type": "step",
           "settings": {
             "title": "SAVE & SIP",
-            "description": "Enjoy 15% off every order plus exclusive access to experimental roasts."
+            "description": "Enjoy 13% off every order plus exclusive access to experimental roasts."
           }
         }
       },
@@ -177,7 +177,7 @@
             "cart_btn_color": "#121212",
             "badge": "NEW",
             "custom_title": "Ethiopia Yirgacheffe",
-            "show_rating": true,
+            "show_rating": false,
             "rating_value": 95,
             "rating_color": "#121212",
             "rating_label": "QUALITY SCORE"
@@ -192,7 +192,7 @@
             "cart_btn_color": "#121212",
             "badge": "BEST SELLER",
             "custom_title": "Colombian Supremo",
-            "show_rating": true,
+            "show_rating": false,
             "rating_value": 85,
             "rating_color": "#121212",
             "rating_label": "QUALITY SCORE"
@@ -207,7 +207,7 @@
             "cart_btn_color": "#121212",
             "badge": "BESTSELLER",
             "custom_title": "Sumatra Dark Roast",
-            "show_rating": true,
+            "show_rating": false,
             "rating_value": 90,
             "rating_color": "#121212",
             "rating_label": "QUALITY SCORE"
@@ -241,13 +241,27 @@
           "type": "photo",
           "settings": {
             "image": "shopify://shop_images/unnamed_23.png",
-            "link": ""
+            "size": "hero",
+            "featured": true,
+            "is_video": false,
+            "caption": "",
+            "likes": "1.2k",
+            "comments": "32",
+            "product": "the-first-called",
+            "link": "#"
           }
         },
         "photo_1": {
           "type": "photo",
           "settings": {
             "image": "shopify://shop_images/unnamed_22.png",
+            "size": "small",
+            "featured": false,
+            "is_video": false,
+            "caption": "",
+            "likes": "1k",
+            "comments": "15",
+            "product": "the-beloved",
             "link": ""
           }
         },
@@ -255,20 +269,13 @@
           "type": "photo",
           "settings": {
             "image": "shopify://shop_images/unnamed_23.png",
-            "link": ""
-          }
-        },
-        "photo_c6ATrE": {
-          "type": "photo",
-          "settings": {
-            "image": "shopify://shop_images/unnamed_25.png",
-            "link": ""
-          }
-        },
-        "photo_3": {
-          "type": "photo",
-          "settings": {
-            "image": "shopify://shop_images/unnamed_24.png",
+            "size": "small",
+            "featured": false,
+            "is_video": false,
+            "caption": "",
+            "likes": "300",
+            "comments": "8",
+            "product": "the-betrayer",
             "link": ""
           }
         },
@@ -276,34 +283,41 @@
           "type": "photo",
           "settings": {
             "image": "shopify://shop_images/unnamed_22.png",
+            "size": "small",
+            "featured": false,
+            "is_video": false,
+            "caption": "",
+            "likes": "121",
+            "comments": "4",
+            "product": "the-chronicler",
             "link": ""
           }
         },
-        "photo_tKVGDG": {
+        "photo_3": {
           "type": "photo",
           "settings": {
             "image": "shopify://shop_images/unnamed_24.png",
+            "size": "small",
+            "featured": false,
+            "is_video": false,
+            "caption": "",
+            "likes": "77",
+            "comments": "6",
+            "product": "the-companion",
             "link": ""
           }
         },
-        "photo_4": {
+        "photo_c6ATrE": {
           "type": "photo",
           "settings": {
             "image": "shopify://shop_images/unnamed_25.png",
-            "link": ""
-          }
-        },
-        "photo_3jgHQq": {
-          "type": "photo",
-          "settings": {
-            "image": "shopify://shop_images/unnamed_23.png",
-            "link": ""
-          }
-        },
-        "photo_p88ebm": {
-          "type": "photo",
-          "settings": {
-            "image": "shopify://shop_images/unnamed_25.png",
+            "size": "wide",
+            "featured": false,
+            "is_video": false,
+            "caption": "",
+            "likes": "53",
+            "comments": "2",
+            "product": "the-foundation",
             "link": ""
           }
         }
@@ -312,22 +326,36 @@
         "photo_2",
         "photo_1",
         "photo_L3chgp",
-        "photo_c6ATrE",
-        "photo_3",
         "photo_Wqzerj",
-        "photo_tKVGDG",
-        "photo_4",
-        "photo_3jgHQq",
-        "photo_p88ebm"
+        "photo_3",
+        "photo_c6ATrE"
       ],
       "custom_css": [
         ".grid {display: grid !important;}"
       ],
       "settings": {
-        "heading": "THE VIBE CHECK",
-        "subheading": "Tag @GODSFAVORITECOFFEE for a chance to be featured in the temple.",
-        "instagram_handle": "@godsfavoritecoffee",
-        "columns": 5
+        "eyebrow": "",
+        "heading_prefix": "THE VIBE",
+        "heading_accent": "CHECK",
+        "subheading": "Tag @GODSFAVORITECOFFEE for a chance to be featured in the temple",
+        "show_profile": false,
+        "avatar": "shopify://shop_images/main-logo-without-bg.png",
+        "instagram_handle": "@gods.favoritecoffee",
+        "verified": false,
+        "bio": "Born in '94. Roasted daily. Worship in every cup. ☕✦",
+        "show_stats": false,
+        "posts_count": "248",
+        "followers_count": "12.4K",
+        "following_count": "186",
+        "show_live": true,
+        "live_label": "ROASTING NOW",
+        "follow_label": "Follow",
+        "columns": 5,
+        "tag_text": "TAG #GODSFAVORITECOFFEE TO BE FEATURED",
+        "tag_subtext": "We repost our favorite shots every Sunday.",
+        "show_bottom_cta": true,
+        "bottom_cta_label": "Follow on Instagram",
+        "show_marquee": true
       }
     }
   },

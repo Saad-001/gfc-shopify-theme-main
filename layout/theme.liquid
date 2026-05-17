@@ -291,6 +291,30 @@
       >
     {%- endif -%}
 
+  {%- if template.name == 'product' -%}
+      <style>
+        #judgeme_product_reviews {
+          max-width: var(--page-width) !important;
+        }
+      </style>
+  {%- endif -%}
+
+  {%- if template.name == blank or template.name == 'product' -%}
+      <style>
+        #appstleBundlesPageRoot h3:not(.ab-heading-description), #appstleBundlesPageRoot h1, #dynamic-pricing-bundle-product-page h3:not(.ab-heading-description), #dynamic-pricing-bundle-product-page h1{
+          font-family: 'HVD Poster' !important;
+        }
+
+        #appstleBundlesPageRoot .ab-heading-selling-plan-section, #dynamic-pricing-bundle-product-page .ab-heading-selling-plan-section {
+          padding-top: 20px !important;
+        }
+
+        #appstleBundlesPageRoot h1, #dynamic-pricing-bundle-product-page h1 {
+          color: #ffffff !important
+        }
+      </style>
+  {%- endif -%}
+
     <script>
       if (Shopify.designMode) {
         document.documentElement.classList.add('shopify-design-mode');

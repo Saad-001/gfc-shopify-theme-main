@@ -23,6 +23,10 @@
           "type": "title",
           "settings": {}
         },
+        "judge_me_reviews_preview_badge_deKtgJ": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        },
         "price": {
           "type": "price",
           "settings": {}
@@ -93,6 +97,7 @@
       "block_order": [
         "vendor",
         "title",
+        "judge_me_reviews_preview_badge_deKtgJ",
         "price",
         "variant_picker",
         "quantity_selector",
@@ -159,13 +164,13 @@
     "177752807909575047": {
       "type": "apps",
       "blocks": {
-        "appstle_bundles_appstle_volume_discount_bundle_eKQ7m8": {
-          "type": "shopify://apps/appstle-bundles/blocks/appstle-volume-discount-bundle/8909921b-2d24-4d68-9b12-9d045d3dcb0a",
+        "appstle_bundles_appstle_bundle_product_page_build_a_box_PXEMnp": {
+          "type": "shopify://apps/appstle-bundles/blocks/appstle-bundle-product-page-build-a-box/8909921b-2d24-4d68-9b12-9d045d3dcb0a",
           "settings": {}
         }
       },
       "block_order": [
-        "appstle_bundles_appstle_volume_discount_bundle_eKQ7m8"
+        "appstle_bundles_appstle_bundle_product_page_build_a_box_PXEMnp"
       ],
       "settings": {
         "include_margins": true
@@ -176,7 +181,6 @@
       "blocks": {
         "judge_me_reviews_review_widget_84RjVc": {
           "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "disabled": true,
           "settings": {
             "review_data": "sample_data",
             "max_width": 1200,
@@ -184,11 +188,12 @@
             "empty_state": "empty_widget"
           }
         },
-        "judge_me_reviews_cards_carousel_UjazPW": {
+        "judge_me_reviews_cards_carousel_Kawqid": {
           "type": "shopify://apps/judge-me-reviews/blocks/cards_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "disabled": true,
           "settings": {
             "show_sample_reviews": true,
-            "reviews_selection": "all",
+            "reviews_selection": "current_product",
             "products": [],
             "star_rating": "all",
             "show_review_media": true,
@@ -196,29 +201,29 @@
             "no_image_fallback": "review_text_only",
             "max_reviews": 20,
             "review_length": "medium",
-            "text_size": "medium",
+            "text_size": "small",
             "image_ratio": "1",
             "reviews_shown": 4,
             "show_reviewer_name": true,
             "show_product_name": true,
             "hide_arrows_mobile": true,
             "arrows_position": "sides",
-            "max_width": 1100,
+            "max_width": 1600,
             "corner_styling": "soft",
             "header_text_color": "#ffffff",
-            "text_color": "#ffffff",
-            "card_color": "#121212",
-            "stars_color": "#ffffff",
+            "text_color": "#000000",
+            "card_color": "#f9f9f9",
+            "stars_color": "#121212",
             "arrows_color": "#ffffff",
             "transition_speed": 5,
-            "header_text": "From the Congregation",
+            "header_text": "",
             "show_average_rating": true
           }
         }
       },
       "block_order": [
         "judge_me_reviews_review_widget_84RjVc",
-        "judge_me_reviews_cards_carousel_UjazPW"
+        "judge_me_reviews_cards_carousel_Kawqid"
       ],
       "settings": {
         "include_margins": true
