@@ -7,16 +7,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 60px 50px 0px;
+    padding: 60px 50px 0;
     box-sizing: border-box;
     position: relative;
-    font-family: "Poppins", sans-serif;
+    font-family: "Poppins"
+    , sans-serif;
     flex-direction: column;
   }
 
   /* ---- Optional section heading ---- */
   #gfc-ps-{{ section.id }} .gfc-ps__section-heading {
-    font-family: "HVD Poster", serif;
+    font-family: "HVD Poster"
+    , serif;
     font-size: 6.5rem;
     font-weight: 700;
     letter-spacing: 5px;
@@ -28,7 +30,8 @@
     max-width: 1100px;
   }
 
-  #gfc-ps-{{ section.id }} .gfc-ps__inner {
+  #gfc-ps-{{ section.id }}
+  .gfc-ps__inner {
     width: 100%;
     max-width: 1100px;
     height: 560px;
@@ -40,7 +43,7 @@
   #gfc-ps-{{ section.id }} .gfc-ps__bg-shape {
     height: 100%;
     background: {{ section.settings.bg_shape_color }};
-    box-shadow: 0 30px 100px rgba(0,0,0,.22);
+    box-shadow: 0 30px 100px rgba(0, 0, 0, .22);
     border-radius: 28px;
     width: 48%;
     position: absolute;
@@ -61,7 +64,8 @@
     pointer-events: none;
   }
 
-  #gfc-ps-{{ section.id }} .gfc-ps__product-img-item {
+  #gfc-ps-{{ section.id }}
+  .gfc-ps__product-img-item {
     display: flex;
     align-items: center;
     position: absolute;
@@ -71,18 +75,21 @@
     right: 0;
     transform: translateY(-50%) translateX(-120px);
     opacity: 0;
-    transition: opacity .35s, transform .35s;
+    transition: opacity 0.35s
+    , transform 0.35s;
     width: 100%;
     height: 100%;
   }
 
-  #gfc-ps-{{ section.id }} .gfc-ps__product-img-item.is-active {
+  #gfc-ps-{{ section.id }}
+  .gfc-ps__product-img-item.is-active {
     opacity: 1;
     transform: translateY(-50%) translateX(0);
-    transition-delay: .25s;
+    transition-delay: 0.25s;
   }
 
-  #gfc-ps-{{ section.id }} .gfc-ps__product-img-item img {
+  #gfc-ps-{{ section.id }}
+  .gfc-ps__product-img-item img {
     object-fit: contain;
     object-position: center;
     width: 100%;
@@ -105,28 +112,31 @@
     cursor: pointer;
     background: #fff;
     color: #333;
-    box-shadow: 0 4px 16px rgba(0,0,0,.18);
-    transition: box-shadow .2s;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, .18);
+    transition: box-shadow 0.2s;
     outline: none;
   }
 
   #gfc-ps-{{ section.id }} .gfc-ps__nav-btn:hover {
-    box-shadow: 0 6px 24px rgba(0,0,0,.28);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, .28);
   }
 
-  #gfc-ps-{{ section.id }} .gfc-ps__nav-btn svg {
+  #gfc-ps-{{ section.id }}
+  .gfc-ps__nav-btn svg {
     width: 17px;
     height: 17px;
     fill: currentColor;
     flex-shrink: 0;
   }
 
-  #gfc-ps-{{ section.id }} .gfc-ps__prev {
+  #gfc-ps-{{ section.id }}
+  .gfc-ps__prev {
     left: 0;
     transform: translate(-50%, -50%);
   }
 
-  #gfc-ps-{{ section.id }} .gfc-ps__next {
+  #gfc-ps-{{ section.id }}
+  .gfc-ps__next {
     right: 0;
     transform: translate(50%, -50%);
   }
@@ -137,7 +147,7 @@
     /* height: 88%; */
     height: 100%;
     border-radius: 28px;
-    box-shadow: 0 24px 70px rgba(0,0,0,.3);
+    box-shadow: 0 24px 70px rgba(0, 0, 0, .3);
     position: absolute;
     top: 50%;
     right: 0;
@@ -145,7 +155,8 @@
     overflow: hidden;
   }
 
-  #gfc-ps-{{ section.id }} .gfc-ps__slider .swiper-wrapper {
+  #gfc-ps-{{ section.id }}
+  .gfc-ps__slider .swiper-wrapper {
     height: 100%;
   }
 
@@ -154,7 +165,8 @@
     height: 100%;
   }
 
-  #gfc-ps-{{ section.id }} .gfc-ps__card {
+  #gfc-ps-{{ section.id }}
+  .gfc-ps__card {
     /* --gfc-text is set inline per slide for per-product text colour */
     height: 100%;
     width: 100%;
@@ -178,18 +190,28 @@
   #gfc-ps-{{ section.id }} .gfc-ps__slide .gfc-ps__content > * {
     opacity: 0;
     transform: translateY(36px);
-    transition: opacity .42s, transform .42s;
+    transition: opacity 0.42s
+    , transform 0.42s;
   }
 
-  #gfc-ps-{{ section.id }} .gfc-ps__slide.swiper-slide-active .gfc-ps__content > * {
+  #gfc-ps-{{ section.id }}
+  .gfc-ps__slide.swiper-slide-active .gfc-ps__content > * {
     opacity: 1;
     transform: none;
   }
 
-  #gfc-ps-{{ section.id }} .gfc-ps__slide.swiper-slide-active .gfc-ps__content > *:nth-child(1) { transition-delay: 0s; }
-  #gfc-ps-{{ section.id }} .gfc-ps__slide.swiper-slide-active .gfc-ps__content > *:nth-child(2) { transition-delay: .12s; }
-  #gfc-ps-{{ section.id }} .gfc-ps__slide.swiper-slide-active .gfc-ps__content > *:nth-child(3) { transition-delay: .24s; }
-  #gfc-ps-{{ section.id }} .gfc-ps__slide.swiper-slide-active .gfc-ps__content > *:nth-child(4) { transition-delay: .36s; }
+  #gfc-ps-{{ section.id }} .gfc-ps__slide.swiper-slide-active .gfc-ps__content > *:nth-child(1) {
+    transition-delay: 0s;
+  }
+  #gfc-ps-{{ section.id }} .gfc-ps__slide.swiper-slide-active .gfc-ps__content > *:nth-child(2) {
+    transition-delay: 0.12s;
+  }
+  #gfc-ps-{{ section.id }} .gfc-ps__slide.swiper-slide-active .gfc-ps__content > *:nth-child(3) {
+    transition-delay: 0.24s;
+  }
+  #gfc-ps-{{ section.id }} .gfc-ps__slide.swiper-slide-active .gfc-ps__content > *:nth-child(4) {
+    transition-delay: 0.36s;
+  }
 
   /* ---- Badge ---- */
   #gfc-ps-{{ section.id }} .gfc-ps__badge {
@@ -208,10 +230,11 @@
   /* ---- Title ---- */
   #gfc-ps-{{ section.id }} .gfc-ps__title {
     margin: 0 0 10px;
-    font-family: "HVD Poster", serif;
+    font-family: "HVD Poster"
+    , serif;
     font-size: 38px;
     line-height: 1.15;
-    letter-spacing: .04em;
+    letter-spacing: 0.04em;
     color: var(--gfc-text, #fff);
     text-transform: uppercase;
   }
@@ -219,13 +242,15 @@
   /* ---- Price ---- */
   #gfc-ps-{{ section.id }} .gfc-ps__price {
     display: block;
-    font-family: "HVD Poster", serif;
+    font-family: "HVD Poster"
+    , serif;
     font-size: 36px;
     color: var(--gfc-text, #fff);
   }
 
-  #gfc-ps-{{ section.id }} .gfc-ps__price s {
-    font-size: .55em;
+  #gfc-ps-{{ section.id }}
+  .gfc-ps__price s {
+    font-size: 0.55em;
     opacity: .5;
     margin-left: 8px;
     font-weight: 400;
@@ -238,12 +263,14 @@
     margin-top: 22px;
   }
 
-  #gfc-ps-{{ section.id }} .gfc-ps__labels-wrap {
+  #gfc-ps-{{ section.id }}
+  .gfc-ps__labels-wrap {
     flex: 1;
     min-width: 0;
   }
 
-  #gfc-ps-{{ section.id }} .gfc-ps__labels-title {
+  #gfc-ps-{{ section.id }}
+  .gfc-ps__labels-title {
     font-size: 12px;
     font-weight: 700;
     letter-spacing: 3px;
@@ -253,7 +280,8 @@
     margin-bottom: 8px;
   }
 
-  #gfc-ps-{{ section.id }} .gfc-ps__labels-group {
+  #gfc-ps-{{ section.id }}
+  .gfc-ps__labels-group {
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
@@ -264,18 +292,21 @@
     margin-bottom: 0;
   }
 
-  #gfc-ps-{{ section.id }} .gfc-ps__label-checkbox {
+  #gfc-ps-{{ section.id }}
+  .gfc-ps__label-checkbox {
     display: none;
   }
 
-  #gfc-ps-{{ section.id }} .gfc-ps__label-txt {
+  #gfc-ps-{{ section.id }}
+  .gfc-ps__label-txt {
     display: block;
-    border: 2px solid rgba(255,255,255,.25);
+    border: 2px solid rgba(255, 255, 255, .25);
     font-size: 11px;
     font-weight: 600;
     padding: 6px 13px;
     border-radius: 50px;
-    transition: border-color .2s, background .2s;
+    transition: border-color 0.2s
+    , background 0.2s;
     letter-spacing: 1.5px;
     color: var(--gfc-text, #fff);
     cursor: pointer;
@@ -285,13 +316,13 @@
 
   #gfc-ps-{{ section.id }} .gfc-ps__label-checkbox:checked + .gfc-ps__label-txt {
     border-color: var(--gfc-accent);
-    background: rgba(255,255,255,.1);
+    background: rgba(255, 255, 255, .1);
   }
 
   /* ---- Divider ---- */
   #gfc-ps-{{ section.id }} .gfc-ps__hr-v {
     width: 1px;
-    background: rgba(255,255,255,.2);
+    background: rgba(255, 255, 255, .2);
     align-self: stretch;
     margin: 0 22px;
     flex-shrink: 0;
@@ -303,14 +334,16 @@
     flex-shrink: 0;
   }
 
-  #gfc-ps-{{ section.id }} .gfc-ps__rating-percent {
+  #gfc-ps-{{ section.id }}
+  .gfc-ps__rating-percent {
     position: relative;
     width: 90px;
     height: 90px;
     margin: 0 auto 8px;
   }
 
-  #gfc-ps-{{ section.id }} .gfc-ps__rating-num {
+  #gfc-ps-{{ section.id }}
+  .gfc-ps__rating-num {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -320,7 +353,8 @@
     font-weight: 700;
   }
 
-  #gfc-ps-{{ section.id }} .gfc-ps__rating-label {
+  #gfc-ps-{{ section.id }}
+  .gfc-ps__rating-label {
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 2px;
@@ -335,21 +369,24 @@
     margin-top: 22px;
   }
 
-  #gfc-ps-{{ section.id }} .gfc-ps__cart-btn {
+  #gfc-ps-{{ section.id }}
+  .gfc-ps__cart-btn {
     border: none;
     color: #fff;
     padding: 13px 36px;
     border-radius: 10px;
     min-height: 50px;
     /* font-family: "Poppins", sans-serif; */
-    font-family: "HVD Poster", serif;
+    font-family: "HVD Poster"
+    , serif;
     font-weight: 700;
     font-size: 12px;
     letter-spacing: 2px;
     cursor: pointer;
     text-transform: uppercase;
-    transition: opacity .2s, transform .15s;
-    box-shadow: 0 6px 20px rgba(0,0,0,.2);
+    transition: opacity 0.2s
+    , transform 0.15s;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, .2);
     display: inline-block;
   }
 
@@ -363,32 +400,59 @@
     cursor: not-allowed;
   }
 
-  #gfc-ps-{{ section.id }} .gfc-ps__cart-btn.gfc-loading {
+  #gfc-ps-{{ section.id }}
+  .gfc-ps__cart-btn.gfc-loading {
     opacity: .55;
     cursor: not-allowed;
   }
 
-  #gfc-ps-{{ section.id }} .gfc-ps__cart-btn.gfc-added {
+  #gfc-ps-{{ section.id }}
+  .gfc-ps__cart-btn.gfc-added {
     background: #3d8b5e !important;
   }
 
-  /* ================================================================
-     RESPONSIVE
-  ================================================================ */
+
+  /*
+   ================================================================
+   RESPONSIVE
+   ================================================================
+*/
 
   @media screen and (max-width: 1200px) {
-    #gfc-ps-{{ section.id }} .gfc-ps__inner { max-width: 940px; }
-    #gfc-ps-{{ section.id }} .gfc-ps__content { padding-left: 210px; padding-right: 40px; }
-    #gfc-ps-{{ section.id }} .gfc-ps__title { font-size: 30px; }
-    #gfc-ps-{{ section.id }} .gfc-ps__price { font-size: 30px; }
-    #gfc-ps-{{ section.id }} .gfc-ps__slider { width: 80%; }
-    #gfc-ps-{{ section.id }} .gfc-ps__bg-shape { width: 44%; }
-    #gfc-ps-{{ section.id }} .gfc-ps__product-img { left: 20%; width: 240px; }
+    #gfc-ps-{{ section.id }} .gfc-ps__inner {
+      max-width: 940px;
+    }
+    #gfc-ps-{{ section.id }}
+    .gfc-ps__content {
+      padding-left: 210px;
+      padding-right: 40px;
+    }
+    #gfc-ps-{{ section.id }}
+    .gfc-ps__title {
+      font-size: 30px;
+    }
+    #gfc-ps-{{ section.id }}
+    .gfc-ps__price {
+      font-size: 30px;
+    }
+    #gfc-ps-{{ section.id }}
+    .gfc-ps__slider {
+      width: 80%;
+    }
+    #gfc-ps-{{ section.id }}
+    .gfc-ps__bg-shape {
+      width: 44%;
+    }
+    #gfc-ps-{{ section.id }}
+    .gfc-ps__product-img {
+      left: 20%;
+      width: 240px;
+    }
   }
 
   @media screen and (max-width: 992px) {
     #gfc-ps-{{ section.id }} {
-      padding: 40px 20px 0px;
+      padding: 40px 20px 0;
       min-height: auto;
       align-items: flex-start;
     }
@@ -399,17 +463,18 @@
       font-size: 3.5rem;
     }
 
-    /*
-      CSS Grid layout on inner:
-        Row 1 (150px)  = image zone    — product image lives here
-        Row 2 (auto)   = card zone     — slider card lives here
-        Cols: [52px nav] [1fr card] [52px nav]
 
-      The product image is 290px tall, overflowing row 1 by 140px —
-      it straddles the junction, same visual idea as desktop.
-      Nav buttons go in row 2 col 1/3 so align-self: center puts them
-      exactly in the vertical middle of the card, no guesswork needed.
-    */
+    /*
+   CSS Grid layout on inner:
+   Row 1 (150px) = image zone — product image lives here
+   Row 2 (auto) = card zone — slider card lives here
+   Cols: [52px nav] [1fr card] [52px nav]
+
+   The product image is 290px tall, overflowing row 1 by 140px —
+   it straddles the junction, same visual idea as desktop.
+   Nav buttons go in row 2 col 1/3 so align-self: center puts them
+   exactly in the vertical middle of the card, no guesswork needed.
+*/
     #gfc-ps-{{ section.id }} .gfc-ps__inner {
       display: grid;
       grid-template-rows: 150px auto;
@@ -420,24 +485,32 @@
 
     /* Coloured backdrop stays absolute — only decoration behind row 1 */
     #gfc-ps-{{ section.id }} .gfc-ps__bg-shape {
-      grid-row: 1; grid-column: 1 / -1;
+      grid-row: 1;
+      grid-column: 1 / -1;
       position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 150px;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 150px;
       border-radius: 20px;
       z-index: 0;
     }
 
+
     /*
-      Product image spans all cols in row 1.
-      Height 290px > row height 150px — overflows 140px into the card.
-      align-self: start anchors it to the top of the row.
-    */
+   Product image spans all cols in row 1.
+   Height 290px > row height 150px — overflows 140px into the card.
+   align-self: start anchors it to the top of the row.
+*/
     #gfc-ps-{{ section.id }} .gfc-ps__product-img {
-      grid-row: 1; grid-column: 1 / -1;
+      grid-row: 1;
+      grid-column: 1 / -1;
       position: relative;
-      left: auto; top: auto; transform: none;
-      width: 100%; height: 290px;
+      left: auto;
+      top: auto;
+      transform: none;
+      width: 100%;
+      height: 290px;
       max-height: none;
       z-index: 2;
       align-self: start;
@@ -446,19 +519,28 @@
 
     /* Items fill the container; horizontal slide-in animation */
     #gfc-ps-{{ section.id }} .gfc-ps__product-img-item {
-      top: 0; bottom: 0; left: 0; right: 0;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
       transform: translateX(-50px);
     }
-    #gfc-ps-{{ section.id }} .gfc-ps__product-img-item.is-active {
+    #gfc-ps-{{ section.id }}
+    .gfc-ps__product-img-item.is-active {
       transform: translateX(0);
     }
 
     /* Prev: row 2 col 1 — align-self: center hits the card midpoint exactly */
     #gfc-ps-{{ section.id }} .gfc-ps__prev {
-      grid-row: 2; grid-column: 1;
+      grid-row: 2;
+      grid-column: 1;
       position: relative;
-      left: auto; right: auto; top: auto; bottom: auto;
-      transform: translateX(50%);    /* shift right so centre sits on card left edge */
+      left: auto;
+      right: auto;
+      top: auto;
+      bottom: auto;
+      transform: translateX(50%);
+      /* shift right so centre sits on card left edge */
       align-self: center;
       justify-self: center;
       z-index: 2;
@@ -466,10 +548,15 @@
 
     /* Next: row 2 col 3 */
     #gfc-ps-{{ section.id }} .gfc-ps__next {
-      grid-row: 2; grid-column: 3;
+      grid-row: 2;
+      grid-column: 3;
       position: relative;
-      left: auto; right: auto; top: auto; bottom: auto;
-      transform: translateX(-50%);   /* shift left so centre sits on card right edge */
+      left: auto;
+      right: auto;
+      top: auto;
+      bottom: auto;
+      transform: translateX(-50%);
+      /* shift left so centre sits on card right edge */
       align-self: center;
       justify-self: center;
       z-index: 2;
@@ -477,19 +564,29 @@
 
     /* Slider card: row 2 col 2 */
     #gfc-ps-{{ section.id }} .gfc-ps__slider {
-      grid-row: 2; grid-column: 2;
+      grid-row: 2;
+      grid-column: 2;
       position: relative;
-      top: auto; right: auto; transform: none;
-      width: 100%; height: auto;
+      top: auto;
+      right: auto;
+      transform: none;
+      width: 100%;
+      height: auto;
       border-radius: 20px;
-      box-shadow: 0 12px 40px rgba(0,0,0,.25);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, .25);
     }
 
     /* Swiper must size to content on mobile */
-    #gfc-ps-{{ section.id }} .gfc-ps__slider .swiper-wrapper { height: auto; }
-    #gfc-ps-{{ section.id }} .gfc-ps__slide { height: auto; }
+    #gfc-ps-{{ section.id }} .gfc-ps__slider .swiper-wrapper {
+      height: auto;
+    }
+    #gfc-ps-{{ section.id }}
+    .gfc-ps__slide {
+      height: auto;
+    }
 
-    #gfc-ps-{{ section.id }} .gfc-ps__card {
+    #gfc-ps-{{ section.id }}
+    .gfc-ps__card {
       height: auto;
       min-height: 280px;
       border-radius: 20px;
@@ -502,56 +599,132 @@
       text-align: center;
     }
 
-    #gfc-ps-{{ section.id }} .gfc-ps__ctr { justify-content: center; }
-    #gfc-ps-{{ section.id }} .gfc-ps__labels-group { justify-content: center; }
-    #gfc-ps-{{ section.id }} .gfc-ps__bottom { text-align: center; }
+    #gfc-ps-{{ section.id }}
+    .gfc-ps__ctr {
+      justify-content: center;
+    }
+    #gfc-ps-{{ section.id }}
+    .gfc-ps__labels-group {
+      justify-content: center;
+    }
+    #gfc-ps-{{ section.id }}
+    .gfc-ps__bottom {
+      text-align: center;
+    }
   }
 
   @media screen and (max-width: 767px) {
-    #gfc-ps-{{ section.id }} .gfc-ps__section-heading { font-size: 5rem; }
-    #gfc-ps-{{ section.id }} .gfc-ps__title { font-size: 24px; }
-    #gfc-ps-{{ section.id }} .gfc-ps__price { font-size: 26px; }
-    #gfc-ps-{{ section.id }} .gfc-ps__ctr { flex-wrap: wrap; }
-    #gfc-ps-{{ section.id }} .gfc-ps__hr-v { display: none; }
-    #gfc-ps-{{ section.id }} .gfc-ps__rating { width: 100%; margin-top: 14px; display: none;}
+    #gfc-ps-{{ section.id }} .gfc-ps__section-heading {
+      font-size: 5rem;
+    }
+    #gfc-ps-{{ section.id }}
+    .gfc-ps__title {
+      font-size: 24px;
+    }
+    #gfc-ps-{{ section.id }}
+    .gfc-ps__price {
+      font-size: 26px;
+    }
+    #gfc-ps-{{ section.id }}
+    .gfc-ps__ctr {
+      flex-wrap: wrap;
+    }
+    #gfc-ps-{{ section.id }}
+    .gfc-ps__hr-v {
+      display: none;
+    }
+    #gfc-ps-{{ section.id }}
+    .gfc-ps__rating {
+      width: 100%;
+      margin-top: 14px;
+      display: none;
+    }
     /* Shrink image zone row, keep overflow into card */
-    #gfc-ps-{{ section.id }} .gfc-ps__inner { grid-template-rows: 130px auto; }
-    #gfc-ps-{{ section.id }} .gfc-ps__bg-shape { height: 130px; }
-    #gfc-ps-{{ section.id }} .gfc-ps__product-img { height: 260px; }   /* overflows 130px */
-    #gfc-ps-{{ section.id }} .gfc-ps__content { padding: 140px 22px 44px; }
+    #gfc-ps-{{ section.id }} .gfc-ps__inner {
+      grid-template-rows: 130px auto;
+    }
+    #gfc-ps-{{ section.id }}
+    .gfc-ps__bg-shape {
+      height: 130px;
+    }
+    #gfc-ps-{{ section.id }}
+    .gfc-ps__product-img {
+      height: 260px;
+    } /* overflows 130px */
+    #gfc-ps-{{ section.id }} .gfc-ps__content {
+      padding: 140px 22px 44px;
+    }
   }
 
   @media screen and (max-width: 576px) {
-    #gfc-ps-{{ section.id }} { padding: 30px 14px 0px; }
-    #gfc-ps-{{ section.id }} .gfc-ps__section-heading { font-size: 4rem; letter-spacing: 3px; }
-    #gfc-ps-{{ section.id }} .gfc-ps__title { font-size: 20px; }
-    #gfc-ps-{{ section.id }} .gfc-ps__price { font-size: 22px; }
-    #gfc-ps-{{ section.id }} .gfc-ps__inner {
+    #gfc-ps-{{ section.id }} {
+      padding: 30px 14px 0;
+    }
+    #gfc-ps-{{ section.id }}
+    .gfc-ps__section-heading {
+      font-size: 4rem;
+      letter-spacing: 3px;
+    }
+    #gfc-ps-{{ section.id }}
+    .gfc-ps__title {
+      font-size: 20px;
+    }
+    #gfc-ps-{{ section.id }}
+    .gfc-ps__price {
+      font-size: 22px;
+    }
+    #gfc-ps-{{ section.id }}
+    .gfc-ps__inner {
       grid-template-rows: 110px auto;
       /* grid-template-columns: 44px 1fr 44px; */
       grid-template-columns: 20px 1fr 20px;
     }
-    #gfc-ps-{{ section.id }} .gfc-ps__bg-shape { height: 110px; }
-    #gfc-ps-{{ section.id }} .gfc-ps__product-img { height: 230px; }   /* overflows 120px */
-    #gfc-ps-{{ section.id }} .gfc-ps__content { padding: 130px 16px 40px; }
-    #gfc-ps-{{ section.id }} .gfc-ps__nav-btn { width: 44px; height: 44px; }
-    #gfc-ps-{{ section.id }} .gfc-ps__prev { transform: translateX(25%); }
-    #gfc-ps-{{ section.id }} .gfc-ps__next { transform: translateX(-25%); }
-    #gfc-ps-{{ section.id }} .gfc-ps__cart-btn { width: 100%; max-width: 260px; text-align: center; }
+    #gfc-ps-{{ section.id }}
+    .gfc-ps__bg-shape {
+      height: 110px;
+    }
+    #gfc-ps-{{ section.id }}
+    .gfc-ps__product-img {
+      height: 230px;
+    } /* overflows 120px */
+    #gfc-ps-{{ section.id }} .gfc-ps__content {
+      padding: 130px 16px 40px;
+    }
+    #gfc-ps-{{ section.id }}
+    .gfc-ps__nav-btn {
+      width: 44px;
+      height: 44px;
+    }
+    #gfc-ps-{{ section.id }}
+    .gfc-ps__prev {
+      transform: translateX(25%);
+    }
+    #gfc-ps-{{ section.id }}
+    .gfc-ps__next {
+      transform: translateX(-25%);
+    }
+    #gfc-ps-{{ section.id }}
+    .gfc-ps__cart-btn {
+      width: 100%;
+      max-width: 260px;
+      text-align: center;
+    }
   }
 </style>
 
 {%- comment -%} Variant data per block {%- endcomment -%}
 {%- for block in section.blocks -%}
   {%- if block.settings.product != blank -%}
-    <script type="application/json" id="gfc-ps-data-{{ block.id }}">{{ block.settings.product.variants | json }}</script>
+    <script type="application/json" id="gfc-ps-data-{{ block.id }}">
+      {{ block.settings.product.variants | json }}
+    </script>
   {%- endif -%}
 {%- endfor -%}
 
 <section id="gfc-ps-{{ section.id }}" aria-label="{{ section.settings.section_heading | escape }}">
 
   {%- if section.settings.heading_text != blank -%}
-    <h2 class="gfc-ps__section-heading">{{ section.settings.heading_text | escape }}</h2>
+    <h2 class="gfc-ps__section-heading text-5xl md:text-7xl">{{ section.settings.heading_text | escape }}</h2>
   {%- endif -%}
 
   <div class="gfc-ps__inner">
@@ -562,37 +735,38 @@
     <div class="gfc-ps__product-img" id="gfc-ps-imgs-{{ section.id }}">
       {%- for block in section.blocks -%}
         {%- assign p = block.settings.product -%}
-        <div
-          class="gfc-ps__product-img-item{% if forloop.first %} is-active{% endif %}"
-          data-img-index="{{ forloop.index0 }}"
-        >
+        <div class="gfc-ps__product-img-item{% if forloop.first %} is-active{% endif %}" data-img-index="{{ forloop.index0 }}">
           {%- if block.settings.product_image != blank -%}
             <img
               src="{{ block.settings.product_image | image_url: width: 500 }}"
               alt="{{ block.settings.product_image.alt | default: p.title }}"
               loading="lazy"
               width=""
-              height=""
-            >
+              height="">
           {%- elsif p != blank and p.featured_image != blank -%}
             <img
               src="{{ p.featured_image | image_url: width: 500 }}"
               alt="{{ p.title }}"
               loading="lazy"
               width=""
-              height=""
-            >
+              height="">
           {%- endif -%}
         </div>
       {%- endfor -%}
     </div>
 
     {%- comment -%} Nav buttons — outside swiper, positioned on .gfc-ps__inner {%- endcomment -%}
-    <button class="gfc-ps__nav-btn gfc-ps__prev" id="gfc-ps-prev-{{ section.id }}" aria-label="Previous slide">
-      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M0.704 17.696l9.856 9.856c0.896 0.896 2.432 0.896 3.328 0s0.896-2.432 0-3.328l-5.792-5.856h21.568c1.312 0 2.368-1.056 2.368-2.368s-1.056-2.368-2.368-2.368h-21.568l5.824-5.824c0.896-0.896 0.896-2.432 0-3.328-0.48-0.48-1.088-0.704-1.696-0.704s-1.216 0.224-1.696 0.704l-9.824 9.824c-0.448 0.448-0.704 1.056-0.704 1.696s0.224 1.248 0.704 1.696z"/></svg>
+    <button
+      class="gfc-ps__nav-btn gfc-ps__prev"
+      id="gfc-ps-prev-{{ section.id }}"
+      aria-label="Previous slide">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M0.704 17.696l9.856 9.856c0.896 0.896 2.432 0.896 3.328 0s0.896-2.432 0-3.328l-5.792-5.856h21.568c1.312 0 2.368-1.056 2.368-2.368s-1.056-2.368-2.368-2.368h-21.568l5.824-5.824c0.896-0.896 0.896-2.432 0-3.328-0.48-0.48-1.088-0.704-1.696-0.704s-1.216 0.224-1.696 0.704l-9.824 9.824c-0.448 0.448-0.704 1.056-0.704 1.696s0.224 1.248 0.704 1.696z" /></svg>
     </button>
-    <button class="gfc-ps__nav-btn gfc-ps__next" id="gfc-ps-next-{{ section.id }}" aria-label="Next slide">
-      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M31.296 14.336l-9.888-9.888c-0.896-0.896-2.432-0.896-3.328 0s-0.896 2.432 0 3.328l5.824 5.856h-21.536c-1.312 0-2.368 1.056-2.368 2.368s1.056 2.368 2.368 2.368h21.568l-5.856 5.824c-0.896 0.896-0.896 2.432 0 3.328 0.48 0.48 1.088 0.704 1.696 0.704s1.216-0.224 1.696-0.704l9.824-9.824c0.448-0.448 0.704-1.056 0.704-1.696s-0.224-1.248-0.704-1.664z"/></svg>
+    <button
+      class="gfc-ps__nav-btn gfc-ps__next"
+      id="gfc-ps-next-{{ section.id }}"
+      aria-label="Next slide">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M31.296 14.336l-9.888-9.888c-0.896-0.896-2.432-0.896-3.328 0s-0.896 2.432 0 3.328l5.824 5.856h-21.536c-1.312 0-2.368 1.056-2.368 2.368s1.056 2.368 2.368 2.368h21.568l-5.856 5.824c-0.896 0.896-0.896 2.432 0 3.328 0.48 0.48 1.088 0.704 1.696 0.704s1.216-0.224 1.696-0.704l9.824-9.824c0.448-0.448 0.704-1.056 0.704-1.696s-0.224-1.248-0.704-1.664z" /></svg>
     </button>
 
     {%- comment -%} Swiper {%- endcomment -%}
@@ -604,20 +778,16 @@
           {%- assign first_variant = product.selected_or_first_available_variant -%}
           {%- assign rating_dash = block.settings.rating_value | times: 2.9531 | round: 1 -%}
 
-          <div
+            <div
             class="swiper-slide gfc-ps__slide"
             data-block-id="{{ block.id }}"
             data-slide-index="{{ forloop.index0 }}"
-            {{ block.shopify_attributes }}
-          >
+            {{ block.shopify_attributes }}>
             {%- comment -%}
               --gfc-text is the per-product text colour.
               All text inside .gfc-ps__content inherits via var(--gfc-text, #fff).
             {%- endcomment -%}
-            <div
-              class="gfc-ps__card"
-              style="background-color: {{ block.settings.slide_bg_color }}; --gfc-text: {{ block.settings.text_color }};"
-            >
+            <div class="gfc-ps__card" style="background-color: {{ block.settings.slide_bg_color }}; --gfc-text: {{ block.settings.text_color }};">
               <div class="gfc-ps__content">
 
                 {%- if block.settings.badge != blank -%}
@@ -625,10 +795,13 @@
                 {%- endif -%}
 
                 <h2 class="gfc-ps__title">
-                  {%- if product != blank -%}{{ product.title }}{%- else -%}{{ block.settings.custom_title | default: 'Select a Product' }}{%- endif -%}
+                  {%- if product != blank -%}
+                    {{ product.title }}
+                  {%- else -%}
+                    {{ block.settings.custom_title | default: 'Select a Product' }}{%- endif -%}
                 </h2>
 
-                <span class="gfc-ps__price" id="gfc-ps-price-{{ block.id }}">
+                <span class="gfc-ps__price" id="gfc-ps-price-{{ block.id }}" data-block-id="{{ block.id }}">
                   {%- if product != blank -%}
                     {{ first_variant.price | money }}
                     {%- if first_variant.compare_at_price > first_variant.price -%}
@@ -653,8 +826,8 @@
                                 value="{{ value | escape }}"
                                 data-block-id="{{ block.id }}"
                                 data-option-position="{{ option.position }}"
-                                {% if forloop.first %}checked{% endif %}
-                              >
+                                {% if forloop.first %}
+                                checked{% endif %}>
                               <span class="gfc-ps__label-txt">{{ value }}</span>
                             </label>
                           {%- endfor -%}
@@ -669,19 +842,31 @@
                     {%- endif -%}
                     <div class="gfc-ps__rating">
                       <div class="gfc-ps__rating-percent">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" viewBox="0 0 100 100" aria-hidden="true">
-                          <circle cx="50" cy="50" r="47" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="5"/>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="90"
+                          height="90"
+                          viewBox="0 0 100 100"
+                          aria-hidden="true">
+                          <circle
+                            cx="50"
+                            cy="50"
+                            r="47"
+                            fill="none"
+                            stroke="rgba(255,255,255,0.15)"
+                            stroke-width="5" />
                           <circle
                             class="gfc-ps__rating-arc"
-                            cx="50" cy="50" r="47"
+                            cx="50"
+                            cy="50"
+                            r="47"
                             fill="none"
                             stroke="{{ block.settings.rating_color }}"
                             stroke-width="5"
                             stroke-linecap="round"
                             stroke-dasharray="0 295"
                             data-target-dash="{{ rating_dash }}"
-                            style="transform: rotate(-90deg); transform-origin: 50% 50%;"
-                          />
+                            style="transform: rotate(-90deg); transform-origin: 50% 50%;" />
                         </svg>
                         <div class="gfc-ps__rating-num">{{ block.settings.rating_value }}%</div>
                       </div>
@@ -694,19 +879,29 @@
                 {%- if section.settings.show_add_to_cart -%}
                   <div class="gfc-ps__bottom">
                     {%- if product != blank -%}
-                      <form class="gfc-ps__atc-form" id="gfc-ps-form-{{ block.id }}" data-block-id="{{ block.id }}">
-                        <input type="hidden" class="gfc-ps__variant-id" value="{{ first_variant.id }}">
+                      <form
+                        class="gfc-ps__atc-form"
+                        id="gfc-ps-form-{{ block.id }}"
+                        data-block-id="{{ block.id }}">
+                        <input
+                          type="hidden"
+                          class="gfc-ps__variant-id"
+                          value="{{ first_variant.id }}">
                         <button
                           type="submit"
                           class="gfc-ps__cart-btn"
                           style="background-color: {{ block.settings.cart_btn_color }};"
-                          {% unless product.available %}disabled{% endunless %}
-                        >
-                          {%- if product.available -%}{{ section.settings.cart_button_text }}{%- else -%}Sold Out{%- endif -%}
+                          {% unless product.available %}
+                          disabled{% endunless %}>
+                          {%- if product.available -%}
+                            {{ section.settings.cart_button_text }}{%- else -%}Sold Out{%- endif -%}
                         </button>
                       </form>
                     {%- else -%}
-                      <button class="gfc-ps__cart-btn" style="background-color: {{ block.settings.cart_btn_color }};" disabled>
+                      <button
+                        class="gfc-ps__cart-btn"
+                        style="background-color: {{ block.settings.cart_btn_color }};"
+                        disabled>
                         {{ section.settings.cart_button_text }}
                       </button>
                     {%- endif -%}
@@ -725,7 +920,7 @@
 </section>
 
 <script>
-(function () {
+  (function () {
   var SECTION_ID = '{{ section.id }}';
   var CART_TEXT  = '{{ section.settings.cart_button_text | escape }}';
   var MONEY_FMT  = '{{ shop.money_format }}';
@@ -765,6 +960,24 @@
     if (target) target.classList.add('is-active');
   }
 
+  /* Swiper loop clones slides — the clones share radio `name` with the
+     originals, so the browser merges them into one group and only the LAST
+     :checked radio (in DOM order) renders the visual border. Give cloned
+     slides unique names, then re-assert defaultChecked on every radio so the
+     initially-selected variant shows a border on both originals and clones. */
+  function isolateClonedRadios(sectionEl) {
+    sectionEl.querySelectorAll('.swiper-slide-duplicate').forEach(function (slide, idx) {
+      slide.querySelectorAll('input.gfc-ps__label-checkbox').forEach(function (r) {
+        if (r.name.indexOf('--dup') === -1) {
+          r.name = r.name + '--dup' + idx;
+        }
+      });
+    });
+    sectionEl.querySelectorAll('input.gfc-ps__label-checkbox').forEach(function (r) {
+      r.checked = r.defaultChecked;
+    });
+  }
+
   function init() {
     var sliderEl  = document.getElementById('gfc-ps-slider-' + SECTION_ID);
     var sectionEl = document.getElementById('gfc-ps-' + SECTION_ID);
@@ -788,6 +1001,7 @@
       {% endif %}
       on: {
         afterInit: function () {
+          isolateClonedRadios(sectionEl);
           switchImg(this.realIndex);
           var self = this;
           setTimeout(function () {
@@ -813,14 +1027,26 @@
       var radio = e.target;
       if (!radio.classList.contains('gfc-ps__label-checkbox')) return;
 
-      var blockId = radio.dataset.blockId;
-      var dataEl  = document.getElementById('gfc-ps-data-' + blockId);
+      var blockId        = radio.dataset.blockId;
+      var optionPosition = radio.dataset.optionPosition;
+      var dataEl         = document.getElementById('gfc-ps-data-' + blockId);
       if (!dataEl) return;
 
       var variants = JSON.parse(dataEl.textContent);
 
-      var selected = {};
+      /* Swiper's loop mode duplicates slides, so each radio/form/price element
+         can exist multiple times in the DOM. Sync state across all of them. */
       sectionEl.querySelectorAll(
+        '.gfc-ps__label-checkbox[data-block-id="' + blockId + '"][data-option-position="' + optionPosition + '"]'
+      ).forEach(function (r) {
+        r.checked = (r.value === radio.value);
+      });
+
+      /* Read the current selection from the slide the user actually clicked in,
+         so we don't double-read values from clones. */
+      var selected = {};
+      var slide    = radio.closest('.gfc-ps__slide') || sectionEl;
+      slide.querySelectorAll(
         '.gfc-ps__label-checkbox[data-block-id="' + blockId + '"]:checked'
       ).forEach(function (r) {
         selected[parseInt(r.dataset.optionPosition, 10)] = r.value;
@@ -833,24 +1059,27 @@
       });
       if (!matched) return;
 
-      var form = document.getElementById('gfc-ps-form-' + blockId);
-      if (form) {
-        form.querySelector('.gfc-ps__variant-id').value = matched.id;
+      sectionEl.querySelectorAll(
+        '.gfc-ps__atc-form[data-block-id="' + blockId + '"]'
+      ).forEach(function (form) {
+        var hidden = form.querySelector('.gfc-ps__variant-id');
+        if (hidden) hidden.value = matched.id;
         var btn = form.querySelector('.gfc-ps__cart-btn');
         if (btn) {
           btn.disabled    = !matched.available;
           btn.textContent = matched.available ? CART_TEXT : 'Sold Out';
         }
-      }
+      });
 
-      var priceEl = document.getElementById('gfc-ps-price-' + blockId);
-      if (priceEl) {
-        var html = fmtMoney(matched.price);
-        if (matched.compare_at_price && matched.compare_at_price > matched.price) {
-          html += ' <s>' + fmtMoney(matched.compare_at_price) + '</s>';
-        }
-        priceEl.innerHTML = html;
+      var html = fmtMoney(matched.price);
+      if (matched.compare_at_price && matched.compare_at_price > matched.price) {
+        html += ' <s>' + fmtMoney(matched.compare_at_price) + '</s>';
       }
+      sectionEl.querySelectorAll(
+        '.gfc-ps__price[data-block-id="' + blockId + '"]'
+      ).forEach(function (priceEl) {
+        priceEl.innerHTML = html;
+      });
     });
 
     /* ---- AJAX Add to Cart ---- */
@@ -905,10 +1134,10 @@
   function fmtMoney(cents) {
     var val = (cents / 100).toFixed(2);
     return MONEY_FMT
-      .replace('{{amount}}',                     val)
-      .replace('{{amount_no_decimals}}',          Math.round(cents / 100))
-      .replace('{{amount_with_comma_separator}}', val.replace('.', ','))
-      .replace(/\{\{[^}]+\}\}/g,                 val);
+      .replace({% raw %}'{{amount}}'{% endraw %},                     val)
+      .replace({% raw %}'{{amount_no_decimals}}'{% endraw %},          Math.round(cents / 100))
+      .replace({% raw %}'{{amount_with_comma_separator}}'{% endraw %}, val.replace('.', ','))
+      .replace({% raw %}/\{\{[^}]+\}\}/g{% endraw %},                  val);
   }
 
   if (typeof Swiper === 'undefined') {
@@ -923,242 +1152,218 @@
       init();
     }
   }
-})();
+  })();
 </script>
 
 {% schema %}
-{
-  "name": "GFC Product Slider",
-  "tag": "div",
-  "class": "gfc-product-slider-wrapper",
-  "settings": [
-    {
-      "type": "header",
-      "content": "Section Heading"
-    },
-    {
-      "type": "text",
-      "id": "heading_text",
-      "label": "Heading Text",
-      "info": "Leave blank to hide"
-    },
-    {
-      "type": "color",
-      "id": "heading_color",
-      "label": "Heading Color",
-      "default": "#ffffff"
-    },
-    {
-      "type": "text",
-      "id": "section_heading",
-      "label": "Aria Label (accessibility)",
-      "default": "Featured Products"
-    },
-    {
-      "type": "header",
-      "content": "Colors"
-    },
-    {
-      "type": "color",
-      "id": "section_bg_color",
-      "label": "Section Background",
-      "default": "#1a1614"
-    },
-    {
-      "type": "color",
-      "id": "bg_shape_color",
-      "label": "Left Accent Panel",
-      "default": "#857f75"
-    },
-    {
-      "type": "color",
-      "id": "accent_color",
-      "label": "Accent Color (badge, selected option border)",
-      "default": "#cc3342"
-    },
-    {
-      "type": "header",
-      "content": "Slider"
-    },
-    {
-      "type": "checkbox",
-      "id": "autoplay",
-      "label": "Autoplay",
-      "default": true
-    },
-    {
-      "type": "range",
-      "id": "autoplay_delay",
-      "min": 2000,
-      "max": 9000,
-      "step": 500,
-      "unit": "ms",
-      "label": "Autoplay Delay",
-      "default": 5000
-    },
-    {
-      "type": "checkbox",
-      "id": "loop",
-      "label": "Loop",
-      "default": true
-    },
-    {
-      "type": "header",
-      "content": "Cart Button"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_add_to_cart",
-      "label": "Show Add to Cart",
-      "default": true
-    },
-    {
-      "type": "text",
-      "id": "cart_button_text",
-      "label": "Button Text",
-      "default": "ADD TO CART"
-    }
-  ],
-  "blocks": [
-    {
-      "type": "slide",
-      "name": "Product Slide",
-      "settings": [
-        {
-          "type": "header",
-          "content": "Product"
-        },
-        {
-          "type": "product",
-          "id": "product",
-          "label": "Product"
-        },
-        {
-          "type": "image_picker",
-          "id": "product_image",
-          "label": "Floating Product Image",
-          "info": "Overrides the product's featured image"
-        },
-        {
-          "type": "header",
-          "content": "Slide Colors"
-        },
-        {
-          "type": "color",
-          "id": "slide_bg_color",
-          "label": "Slide Background Color",
-          "default": "#2c1810"
-        },
-        {
-          "type": "color",
-          "id": "text_color",
-          "label": "Text Color (title, price, options, rating)",
-          "default": "#ffffff",
-          "info": "Applies to all text on this slide"
-        },
-        {
-          "type": "color",
-          "id": "cart_btn_color",
-          "label": "Add to Cart Button Color",
-          "default": "#857f75"
-        },
-        {
-          "type": "header",
-          "content": "Badge & Fallback"
-        },
-        {
-          "type": "text",
-          "id": "badge",
-          "label": "Badge Text",
-          "info": "e.g. NEW · SALE · BESTSELLER — leave blank to hide"
-        },
-        {
-          "type": "text",
-          "id": "custom_title",
-          "label": "Fallback Title",
-          "info": "Shown only when no product is selected",
-          "default": "Product Name"
-        },
-        {
-          "type": "header",
-          "content": "Rating Circle"
-        },
-        {
-          "type": "checkbox",
-          "id": "show_rating",
-          "label": "Show Rating",
-          "default": true
-        },
-        {
-          "type": "range",
-          "id": "rating_value",
-          "min": 0,
-          "max": 100,
-          "step": 5,
-          "unit": "%",
-          "label": "Rating Value",
-          "default": 80
-        },
-        {
-          "type": "color",
-          "id": "rating_color",
-          "label": "Rating Progress Color",
-          "default": "#cc3342"
-        },
-        {
-          "type": "text",
-          "id": "rating_label",
-          "label": "Rating Label",
-          "default": "QUALITY SCORE"
-        }
-      ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "GFC Product Slider",
-      "blocks": [
-        {
-          "type": "slide",
-          "settings": {
-            "custom_title": "Ethiopia Yirgacheffe",
-            "slide_bg_color": "#2c1810",
-            "text_color": "#ffffff",
-            "cart_btn_color": "#857f75",
-            "rating_value": 95,
-            "rating_color": "#e8a030",
-            "rating_label": "QUALITY SCORE",
-            "badge": "NEW"
+  {
+    "name": "GFC Product Slider",
+    "tag": "div",
+    "class": "gfc-product-slider-wrapper",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Section Heading"
+      },
+      {
+        "type": "text",
+        "id": "heading_text",
+        "label": "Heading Text",
+        "info": "Leave blank to hide"
+      },
+      {
+        "type": "color",
+        "id": "heading_color",
+        "label": "Heading Color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "text",
+        "id": "section_heading",
+        "label": "Aria Label (accessibility)",
+        "default": "Featured Products"
+      }, {
+        "type": "header",
+        "content": "Colors"
+      }, {
+        "type": "color",
+        "id": "section_bg_color",
+        "label": "Section Background",
+        "default": "#1a1614"
+      }, {
+        "type": "color",
+        "id": "bg_shape_color",
+        "label": "Left Accent Panel",
+        "default": "#857f75"
+      }, {
+        "type": "color",
+        "id": "accent_color",
+        "label": "Accent Color (badge, selected option border)",
+        "default": "#cc3342"
+      }, {
+        "type": "header",
+        "content": "Slider"
+      }, {
+        "type": "checkbox",
+        "id": "autoplay",
+        "label": "Autoplay",
+        "default": true
+      }, {
+        "type": "range",
+        "id": "autoplay_delay",
+        "min": 2000,
+        "max": 9000,
+        "step": 500,
+        "unit": "ms",
+        "label": "Autoplay Delay",
+        "default": 5000
+      }, {
+        "type": "checkbox",
+        "id": "loop",
+        "label": "Loop",
+        "default": true
+      }, {
+        "type": "header",
+        "content": "Cart Button"
+      }, {
+        "type": "checkbox",
+        "id": "show_add_to_cart",
+        "label": "Show Add to Cart",
+        "default": true
+      }, {
+        "type": "text",
+        "id": "cart_button_text",
+        "label": "Button Text",
+        "default": "ADD TO CART"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "slide",
+        "name": "Product Slide",
+        "settings": [
+          {
+            "type": "header",
+            "content": "Product"
+          },
+          {
+            "type": "product",
+            "id": "product",
+            "label": "Product"
+          },
+          {
+            "type": "image_picker",
+            "id": "product_image",
+            "label": "Floating Product Image",
+            "info": "Overrides the product's featured image"
+          },
+          {
+            "type": "header",
+            "content": "Slide Colors"
+          }, {
+            "type": "color",
+            "id": "slide_bg_color",
+            "label": "Slide Background Color",
+            "default": "#2c1810"
+          }, {
+            "type": "color",
+            "id": "text_color",
+            "label": "Text Color (title, price, options, rating)",
+            "default": "#ffffff",
+            "info": "Applies to all text on this slide"
+          }, {
+            "type": "color",
+            "id": "cart_btn_color",
+            "label": "Add to Cart Button Color",
+            "default": "#857f75"
+          }, {
+            "type": "header",
+            "content": "Badge & Fallback"
+          }, {
+            "type": "text",
+            "id": "badge",
+            "label": "Badge Text",
+            "info": "e.g. NEW · SALE · BESTSELLER — leave blank to hide"
+          }, {
+            "type": "text",
+            "id": "custom_title",
+            "label": "Fallback Title",
+            "info": "Shown only when no product is selected",
+            "default": "Product Name"
+          }, {
+            "type": "header",
+            "content": "Rating Circle"
+          }, {
+            "type": "checkbox",
+            "id": "show_rating",
+            "label": "Show Rating",
+            "default": true
+          }, {
+            "type": "range",
+            "id": "rating_value",
+            "min": 0,
+            "max": 100,
+            "step": 5,
+            "unit": "%",
+            "label": "Rating Value",
+            "default": 80
+          }, {
+            "type": "color",
+            "id": "rating_color",
+            "label": "Rating Progress Color",
+            "default": "#cc3342"
+          }, {
+            "type": "text",
+            "id": "rating_label",
+            "label": "Rating Label",
+            "default": "QUALITY SCORE"
           }
-        },
-        {
-          "type": "slide",
-          "settings": {
-            "custom_title": "Colombian Supremo",
-            "slide_bg_color": "#1a2c18",
-            "text_color": "#ffffff",
-            "cart_btn_color": "#4a7c59",
-            "rating_value": 85,
-            "rating_color": "#5db87a",
-            "rating_label": "QUALITY SCORE"
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "GFC Product Slider",
+        "blocks": [
+          {
+            "type": "slide",
+            "settings": {
+              "custom_title": "Ethiopia Yirgacheffe",
+              "slide_bg_color": "#2c1810",
+              "text_color": "#ffffff",
+              "cart_btn_color": "#857f75",
+              "rating_value": 95,
+              "rating_color": "#e8a030",
+              "rating_label": "QUALITY SCORE",
+              "badge": "NEW"
+            }
+          }, {
+            "type": "slide",
+            "settings": {
+              "custom_title": "Colombian Supremo",
+              "slide_bg_color": "#1a2c18",
+              "text_color": "#ffffff",
+              "cart_btn_color": "#4a7c59",
+              "rating_value": 85,
+              "rating_color": "#5db87a",
+              "rating_label": "QUALITY SCORE"
+            }
+          }, {
+            "type": "slide",
+            "settings": {
+              "custom_title": "Sumatra Dark Roast",
+              "slide_bg_color": "#18202c",
+              "text_color": "#ffffff",
+              "cart_btn_color": "#3d5a80",
+              "rating_value": 90,
+              "rating_color": "#6b9fd4",
+              "rating_label": "QUALITY SCORE",
+              "badge": "BESTSELLER"
+            }
           }
-        },
-        {
-          "type": "slide",
-          "settings": {
-            "custom_title": "Sumatra Dark Roast",
-            "slide_bg_color": "#18202c",
-            "text_color": "#ffffff",
-            "cart_btn_color": "#3d5a80",
-            "rating_value": 90,
-            "rating_color": "#6b9fd4",
-            "rating_label": "QUALITY SCORE",
-            "badge": "BESTSELLER"
-          }
-        }
-      ]
-    }
-  ],
-  "max_blocks": 10
-}
+        ]
+      }
+    ],
+    "max_blocks": 10
+  }
 {% endschema %}

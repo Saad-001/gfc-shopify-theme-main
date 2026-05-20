@@ -60,6 +60,16 @@
             "button_link": "https://godsfavoritecoffee.com/apps/bundles/bb/lk9jbqdomw"
           }
         },
+        "row_k7CMap": {
+          "type": "row",
+          "settings": {
+            "caption": "Mix & Match — Any 3 Roasts",
+            "heading": "The Holy Trinity",
+            "text": "<p>Choose any 3 roasts and save 10%. Build your own divine collection — mix and match any roast, any grind, any format. Your ritual, your way.</p>",
+            "button_label": "Get the Full Collection",
+            "button_link": "https://godsfavoritecoffee.com/apps/bundles/bb/ugnjciiyes"
+          }
+        },
         "row_qEUfmA": {
           "type": "row",
           "settings": {
@@ -93,6 +103,7 @@
       },
       "block_order": [
         "row_BcmwmR",
+        "row_k7CMap",
         "row_qEUfmA",
         "row_CEXMyf",
         "row_aw6dwT"

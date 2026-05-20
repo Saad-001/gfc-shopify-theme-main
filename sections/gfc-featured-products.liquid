@@ -9,15 +9,15 @@
     border-radius: 35px;
     z-index: -1;
     border: 3px solid #ffffff;
-    box-shadow: 0 0 0px 0px #ffffff;
-    transition: border-color 0.4s ease, box-shadow 0.4s ease;
+    box-shadow: 0 0 0 0 #ffffff;
+    transition: border-color 0.4s ease
+    , box-shadow 0.4s ease;
   }
 
   .gfc__product-card:hover:before {
     border-color: var(--gfc-card-glow, #ffffff);
-    box-shadow:
-      0 0 14px 3px var(--gfc-card-glow, #ffffff),
-      0 0 40px 8px color-mix(in srgb, var(--gfc-card-glow, #ffffff) 35%, transparent);
+    box-shadow: 0 0 14px 3px var(--gfc-card-glow, #ffffff)
+    , 0 0 40px 8px color-mix(in srgb, var(--gfc-card-glow, #ffffff) 35%, transparent);
   }
 
   .gfc__product-image-wrapper img {
@@ -32,16 +32,17 @@
 
 <section class="py-24 px-12 page-width mx-auto" id="gfc-fp-{{ section.id }}">
   <!-- Header -->
-  <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
-    <div class="max-w-2xl">
+  <div class="flex flex-col md:flex-row justify-between items-end md:items-center mb-16 gap-8">
+    <div class="max-w-6xl">
       <h2 class="text-5xl md:text-7xl font-headline leading-none mb-4 uppercase text-brand-offwhite">
         {{ section.settings.heading_prefix }}
         <span class="text-stone-500">{{ section.settings.heading_accent }}</span>
       </h2>
       <p class="text-brand-silver text-xl font-body">{{ section.settings.subheading }}</p>
     </div>
-    <a class="text-brand-silver hover:text-red-600 transition-colors flex items-center gap-2 text-xl font-medium font-body" href="{{ section.settings.collection_link }}">
-      VIEW ALL ROASTS <span class="material-symbols-outlined">arrow_forward</span>
+    <a class="text-brand-silver hover:opacity-80 transition-colors flex items-center gap-2 text-md md:text-xl font-body" href="{{ section.settings.collection_link }}">
+      VIEW ALL ROASTS
+      <span class="material-symbols-outlined">arrow_forward</span>
     </a>
   </div>
 
@@ -50,7 +51,10 @@
     {%- for block in section.blocks -%}
       {%- case block.type -%}
         {%- when 'product_card' -%}
-          <div class="relative p-4 rounded-lg group transition-all duration-300 flex flex-col items-center text-center gfc__product-card" style="--gfc-card-glow: {{ block.settings.glow_color }};" {{ block.shopify_attributes }}>
+          <div
+            class="relative p-4 rounded-lg group transition-all duration-300 flex flex-col items-center text-center gfc__product-card"
+            style="--gfc-card-glow: {{ block.settings.glow_color }};"
+            {{ block.shopify_attributes }}>
 
             <!-- Image -->
             <div class="relative mb-6 px-[10%] gfc__product-image-wrapper w-full">
@@ -63,8 +67,7 @@
                     alt="{{ product.featured_image.alt | default: product.title }}"
                     width="600"
                     height="750"
-                    loading="lazy"
-                  >
+                    loading="lazy">
                 </a>
               {%- else -%}
                 <div class="w-full h-full bg-stone-800 flex items-center justify-center">
@@ -103,18 +106,24 @@
             </div>
 
             {% comment %} <p class="text-brand-silver text-sm mb-6 font-body line-clamp-2">
-              {%- if block.settings.product != blank -%}
-                {{ block.settings.product.description | strip_html | truncate: 100 }}
-              {%- else -%}
-                {{ block.settings.custom_desc }}
-              {%- endif -%}
-            </p> {% endcomment %}
+                                                                                                                                                          {%- if block.settings.product != blank -%}
+                                                                                                                                                            {{ block.settings.product.description | strip_html | truncate: 100 }}
+                                                                                                                                                          {%- else -%}
+                                                                                                                                                            {{ block.settings.custom_desc }}
+                                                                                                                                                          {%- endif -%}
+                                                                                                                                    </p> {% endcomment %}
 
             <div class="space-y-3 w-full px-5 pb-5">
               {%- if block.settings.product != blank -%}
                 <form action="/cart/add" method="post">
-                  <input type="hidden" name="id" value="{{ block.settings.product.selected_or_first_available_variant.id }}">
-                  <input type="hidden" name="quantity" value="1">
+                  <input
+                    type="hidden"
+                    name="id"
+                    value="{{ block.settings.product.selected_or_first_available_variant.id }}">
+                  <input
+                    type="hidden"
+                    name="quantity"
+                    value="1">
                   {% comment %} <button type="submit" class="w-full bg-white text-black py-3 rounded-lg font-headline uppercase transition-colors">ADD TO CART</button> {% endcomment %}
                   <div class="overflow-hidden">
                     <button type="submit" class="block w-full border border-[#888] bg-white cursor-pointer p-0 group">
@@ -149,7 +158,7 @@
                   </button>
                 </div>
               {%- endif -%}
-              <a href="{{ product.url }}" class="block w-full border border-2 border-white text-brand-silver py-4 rounded-2xl font-headline text-xs uppercase transition-colors tracking-widest">SUBSCRIBE &amp; SAVE 15%</a>
+              <a href="{{ product.url }}" class="block w-full border border-2 border-white text-brand-silver py-4 rounded-2xl font-headline text-xs uppercase transition-colors tracking-widest">SUBSCRIBE &amp; SAVE 13%</a>
             </div>
           </div>
       {%- endcase -%}
@@ -158,131 +167,129 @@
 </section>
 
 {% schema %}
-{
-  "name": "GFC Featured Products",
-  "tag": "div",
-  "settings": [
-    {
-      "type": "text",
-      "id": "heading_prefix",
-      "label": "Heading Prefix",
-      "default": "THE DIVINE"
-    },
-    {
-      "type": "text",
-      "id": "heading_accent",
-      "label": "Heading Accent",
-      "default": "COLLECTION"
-    },
-    {
-      "type": "text",
-      "id": "subheading",
-      "label": "Subheading",
-      "default": "Our small-batch roasts are carefully curated for depth, character, and spirit."
-    },
-    {
-      "type": "url",
-      "id": "collection_link",
-      "label": "View All Link"
-    }
-  ],
-  "blocks": [
-    {
-      "type": "product_card",
-      "name": "Product Card",
-      "settings": [
-        {
-          "type": "product",
-          "id": "product",
-          "label": "Product"
-        },
-        {
-          "type": "text",
-          "id": "custom_title",
-          "label": "Custom Title (if no product)",
-          "default": "MORNING MASS"
-        },
-        {
-          "type": "text",
-          "id": "custom_price",
-          "label": "Custom Price (if no product)",
-          "default": "$19"
-        },
-        {
-          "type": "textarea",
-          "id": "custom_desc",
-          "label": "Custom Description (if no product)",
-          "default": "Dark roast with notes of smoked cocoa, toasted oak, and morning clarity."
-        },
-        {
-          "type": "color",
-          "id": "glow_color",
-          "label": "Hover Border & Glow Color",
-          "default": "#ffffff"
-        },
-        {
-          "type": "text",
-          "id": "badge",
-          "label": "Badge Label (e.g. BEST SELLER)"
-        },
-        {
-          "type": "select",
-          "id": "badge_style",
-          "label": "Badge Style",
-          "options": [
-            { "value": "primary", "label": "Burgundy" },
-            { "value": "secondary", "label": "Stone" },
-            { "value": "danger", "label": "Dark Red" }
-          ],
-          "default": "primary"
-        }
-      ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "GFC Featured Products",
-      "blocks": [
-        {
-          "type": "product_card",
-          "settings": {
-            "custom_title": "MORNING MASS",
-            "custom_price": "$19",
-            "custom_desc": "Dark roast with notes of smoked cocoa, toasted oak, and morning clarity.",
-            "badge": "BEST SELLER",
-            "badge_style": "primary"
+  {
+    "name": "GFC Featured Products",
+    "tag": "div",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading_prefix",
+        "label": "Heading Prefix",
+        "default": "THE DIVINE"
+      }, {
+        "type": "text",
+        "id": "heading_accent",
+        "label": "Heading Accent",
+        "default": "COLLECTION"
+      }, {
+        "type": "text",
+        "id": "subheading",
+        "label": "Subheading",
+        "default": "Our small-batch roasts are carefully curated for depth, character, and spirit."
+      }, {
+        "type": "url",
+        "id": "collection_link",
+        "label": "View All Link"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "product_card",
+        "name": "Product Card",
+        "settings": [
+          {
+            "type": "product",
+            "id": "product",
+            "label": "Product"
+          },
+          {
+            "type": "text",
+            "id": "custom_title",
+            "label": "Custom Title (if no product)",
+            "default": "MORNING MASS"
+          },
+          {
+            "type": "text",
+            "id": "custom_price",
+            "label": "Custom Price (if no product)",
+            "default": "$19"
+          },
+          {
+            "type": "textarea",
+            "id": "custom_desc",
+            "label": "Custom Description (if no product)",
+            "default": "Dark roast with notes of smoked cocoa, toasted oak, and morning clarity."
+          }, {
+            "type": "color",
+            "id": "glow_color",
+            "label": "Hover Border & Glow Color",
+            "default": "#ffffff"
+          }, {
+            "type": "text",
+            "id": "badge",
+            "label": "Badge Label (e.g. BEST SELLER)"
+          }, {
+            "type": "select",
+            "id": "badge_style",
+            "label": "Badge Style",
+            "options": [
+              {
+                "value": "primary",
+                "label": "Burgundy"
+              }, {
+                "value": "secondary",
+                "label": "Stone"
+              }, {
+                "value": "danger",
+                "label": "Dark Red"
+              }
+            ],
+            "default": "primary"
           }
-        },
-        {
-          "type": "product_card",
-          "settings": {
-            "custom_title": "ALMOST HOLY",
-            "custom_price": "$21",
-            "custom_desc": "Medium roast featuring a balanced profile of honey-crisp apple and walnut."
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "GFC Featured Products",
+        "blocks": [
+          {
+            "type": "product_card",
+            "settings": {
+              "custom_title": "MORNING MASS",
+              "custom_price": "$19",
+              "custom_desc": "Dark roast with notes of smoked cocoa, toasted oak, and morning clarity.",
+              "badge": "BEST SELLER",
+              "badge_style": "primary"
+            }
+          }, {
+            "type": "product_card",
+            "settings": {
+              "custom_title": "ALMOST HOLY",
+              "custom_price": "$21",
+              "custom_desc": "Medium roast featuring a balanced profile of honey-crisp apple and walnut."
+            }
+          }, {
+            "type": "product_card",
+            "settings": {
+              "custom_title": "SOUL AWAKENING",
+              "custom_price": "$24",
+              "custom_desc": "Bright light roast with vibrant floral notes and a smooth citrus finish.",
+              "badge": "NEW ARRIVAL",
+              "badge_style": "secondary"
+            }
+          }, {
+            "type": "product_card",
+            "settings": {
+              "custom_title": "MIDNIGHT VIGIL",
+              "custom_price": "$22",
+              "custom_desc": "The ultimate espresso blend. Thick crema, heavy body, and soulful depth.",
+              "badge": "LIMITED",
+              "badge_style": "danger"
+            }
           }
-        },
-        {
-          "type": "product_card",
-          "settings": {
-            "custom_title": "SOUL AWAKENING",
-            "custom_price": "$24",
-            "custom_desc": "Bright light roast with vibrant floral notes and a smooth citrus finish.",
-            "badge": "NEW ARRIVAL",
-            "badge_style": "secondary"
-          }
-        },
-        {
-          "type": "product_card",
-          "settings": {
-            "custom_title": "MIDNIGHT VIGIL",
-            "custom_price": "$22",
-            "custom_desc": "The ultimate espresso blend. Thick crema, heavy body, and soulful depth.",
-            "badge": "LIMITED",
-            "badge_style": "danger"
-          }
-        }
-      ]
-    }
-  ]
-}
+        ]
+      }
+    ]
+  }
 {% endschema %}
